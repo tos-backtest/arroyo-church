@@ -167,6 +167,21 @@ body.menu-open #mobile-menu .mm-meta{opacity:1}
   will-change:transform;
 }
 @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09) translateY(-1.5%)}}
+.hero-video{
+  position:absolute;inset:0;z-index:-3;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1.2s ease;
+}
+.hero-video.playing{opacity:1}
+@media (prefers-reduced-motion:reduce){.hero-video{display:none}}
+.video-toggle{
+  position:absolute;right:1.4rem;bottom:1.6rem;z-index:5;
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid rgba(238,246,247,.4);color:rgba(238,246,247,.85);
+  background:rgba(10,22,28,.45);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:border-color .3s,background .3s;
+}
+.video-toggle:hover{border-color:var(--river-lt);background:rgba(10,22,28,.7)}
+.video-toggle[hidden]{display:none}
 .hero-tint{
   position:absolute;inset:0;z-index:-2;
   background:
@@ -535,19 +550,65 @@ section{position:relative}
 /* ════════════════════════ VISIT ════════════════════════ */
 #visit{background:var(--paper);color:var(--text-dk);padding:clamp(5rem,11vh,9rem) 0}
 #visit .eyebrow{color:var(--river)}
-.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;margin-top:1rem}
-.visit-info .lead{color:var(--muted-dk);margin-top:1.2rem;max-width:50ch}
-.visit-meta{display:grid;gap:1rem;margin-top:2rem}
+.visit-intro .lead{color:var(--muted-dk);margin-top:1.2rem;max-width:54ch}
+.visit-intro{padding-bottom:clamp(2.5rem,6vh,4rem)}
+.visit-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:clamp(2.5rem,6vh,4rem)}
 .vm{display:flex;gap:1rem;align-items:flex-start}
 .vm .ic{flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.14));color:var(--river)}
 .vm h3{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dk);font-family:var(--body);font-weight:600}
 .vm p{font-weight:700;font-size:1.02rem}
 .vm p a:hover{color:var(--river)}
-.visit-map{
-  border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);
-  aspect-ratio:4/3;background:#dfd7c6;position:relative;
+.btn-ghost-dark{border:1.5px solid rgba(22,36,43,.3);color:var(--text-dk)}
+.btn-ghost-dark:hover{border-color:var(--river);background:rgba(46,143,163,.08)}
+
+/* ── The Descent: fly from the Bay Area into your seat ── */
+#descent{position:relative;height:600vh;background:var(--ink)}
+.descent-sticky{
+  position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden;
+  background:var(--ink);isolation:isolate;
 }
-.visit-map iframe{width:100%;height:100%;border:0;filter:saturate(.9)}
+.d-frame{position:absolute;inset:0;opacity:0;will-change:transform,opacity}
+.d-frame img{width:100%;height:100%;object-fit:cover}
+.d-vignette{position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:
+    linear-gradient(to top,rgba(10,22,28,.74),rgba(10,22,28,.32) 24%,rgba(10,22,28,0) 40%),
+    radial-gradient(120% 95% at 50% 45%,transparent 55%,rgba(10,22,28,.55) 100%)}
+.d-cap{
+  position:absolute;left:50%;bottom:clamp(3.2rem,10vh,6rem);transform:translateX(-50%);
+  text-align:center;color:#fff;z-index:5;width:min(92vw,760px);
+  opacity:0;visibility:hidden;transition:opacity .45s ease,visibility 0s .45s;pointer-events:none;
+}
+.d-cap.on{opacity:1;visibility:visible;transition:opacity .45s ease,visibility 0s 0s}
+.d-cap .big{font-family:var(--display);font-weight:400;line-height:1.12;
+  font-size:clamp(1.7rem,4.6vw,3.1rem);text-shadow:0 2px 26px rgba(10,22,28,.75)}
+.d-cap .small{font-size:.88rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(255,255,255,.88);margin-top:.6rem;text-shadow:0 1px 12px rgba(10,22,28,.85)}
+.d-cap .btn{pointer-events:auto;margin-top:1.5rem}
+.d-pin{position:absolute;top:50%;left:50%;z-index:4;margin:-7px 0 0 -7px;opacity:0;transition:opacity .4s;pointer-events:none}
+.d-pin.on{opacity:1}
+.d-pin::before{content:'';display:block;width:14px;height:14px;border-radius:50%;background:var(--gold-lt);box-shadow:0 0 0 3px rgba(10,22,28,.4)}
+.d-pin::after{content:'';position:absolute;inset:-13px;border-radius:50%;border:2px solid rgba(227,189,106,.85);animation:pinpulse 1.8s ease-out infinite}
+@keyframes pinpulse{from{transform:scale(.35);opacity:1}to{transform:scale(1.55);opacity:0}}
+.d-attrib{position:absolute;right:.7rem;bottom:.5rem;z-index:5;font-size:.62rem;
+  color:rgba(255,255,255,.6);text-shadow:0 1px 4px rgba(0,0,0,.7);transition:opacity .5s}
+/* static fallback (no JS, or reduced motion): show the seat view only */
+html:not(.js) #descent{height:auto}
+html:not(.js) .descent-sticky{position:relative;height:72vh}
+html:not(.js) .d-frame{display:none}
+html:not(.js) .d-frame.seat{display:block;opacity:1}
+html:not(.js) .d-cap.final{opacity:1;visibility:visible}
+html:not(.js) .d-attrib{display:none}
+@media (prefers-reduced-motion:reduce){
+  #descent{height:auto}
+  .descent-sticky{position:relative;height:72vh}
+  .d-frame{display:none}
+  .d-frame.seat{display:block;opacity:1!important}
+  .d-cap{opacity:0;visibility:hidden}
+  .d-cap.final{opacity:1;visibility:visible}
+  .d-pin{display:none}
+  .d-pin::after{animation:none}
+  .d-attrib{display:none}
+}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:4.2rem}
 .step{
   background:#fff;border-radius:20px;padding:1.9rem 1.7rem;border:1px solid rgba(22,36,43,.08);
@@ -570,7 +631,7 @@ section{position:relative}
 .faq-item .f-body{max-height:0;overflow:hidden;visibility:hidden;transition:max-height .5s var(--ease-out),visibility 0s .5s}
 .faq-item.open .f-body{visibility:visible;transition:max-height .5s var(--ease-out),visibility 0s 0s}
 .faq-item .f-body-pad{padding:0 .2rem 1.4rem;color:var(--muted-dk);max-width:72ch}
-@media (max-width:920px){.visit-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}}
+@media (max-width:920px){.visit-meta{grid-template-columns:1fr}.steps{grid-template-columns:1fr}}
 
 /* ════════════════════════ FINAL CTA + FOOTER ════════════════════════ */
 #final-cta{
@@ -652,6 +713,12 @@ footer ul a:hover{color:var(--text-lt)}
 <!-- ═══════════════ HERO ═══════════════ -->
 <section id="hero">
   <div class="hero-bg" role="img" aria-label="Worship gathering at Arroyo Church"></div>
+  <video id="hero-video" class="hero-video" muted loop playsinline autoplay preload="metadata"
+    aria-hidden="true" tabindex="-1"></video>
+  <button id="video-toggle" class="video-toggle" aria-label="Pause background video" hidden>
+    <svg id="vt-pause" width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><rect x="2" y="1.5" width="3.4" height="11" rx="1"/><rect x="8.6" y="1.5" width="3.4" height="11" rx="1"/></svg>
+    <svg id="vt-play" width="14" height="14" viewBox="0 0 14 14" fill="currentColor" style="display:none"><path d="M3.5 1.8v10.4c0 .8.9 1.3 1.6.9l8-5.2c.6-.4.6-1.4 0-1.8l-8-5.2c-.7-.4-1.6.1-1.6.9z"/></svg>
+  </button>
   <div class="hero-tint"></div>
   <canvas id="water" aria-hidden="true"></canvas>
   <div class="hero-inner">
@@ -1049,13 +1116,36 @@ footer ul a:hover{color:var(--text-lt)}
 
 <!-- ═══════════════ PLAN YOUR VISIT ═══════════════ -->
 <section id="visit">
-  <div class="wrap">
+  <div class="wrap visit-intro">
     <p class="eyebrow reveal">Plan your visit</p>
-    <div class="visit-grid">
-      <div class="visit-info">
-        <h2 class="h2 reveal" style="--d:.06s">This Sunday.<br><em>Save you a seat?</em></h2>
-        <p class="lead reveal" style="--d:.12s">Join us for our 10:00 AM worship service this Sunday. Gatherings run about 55 minutes — come as you are, dress is casual, and your kids will love it here.</p>
-        <div class="visit-meta">
+    <h2 class="h2 reveal" style="--d:.06s">This Sunday.<br><em>Save you a seat?</em></h2>
+    <p class="lead reveal" style="--d:.12s">Join us for our 10:00 AM worship service this Sunday. Gatherings run about 55 minutes — come as you are, dress is casual, and your kids will love it here. Keep scrolling — we'll fly you in.</p>
+  </div>
+
+  <div id="descent" aria-label="A flight from the Bay Area down to your seat at Arroyo Church">
+    <div class="descent-sticky">
+      <div class="d-frame" data-f="0"><img src="assets/descent/aerial_1.jpg" alt="" loading="lazy" decoding="async"></div>
+      <div class="d-frame" data-f="1"><img src="assets/descent/aerial_2.jpg" alt="" loading="lazy" decoding="async"></div>
+      <div class="d-frame" data-f="2"><img src="assets/descent/aerial_3.jpg" alt="" loading="lazy" decoding="async"></div>
+      <div class="d-frame" data-f="3"><img src="assets/descent/aerial_4.jpg" alt="Aerial view of the blocks around 945 Concannon Blvd, Livermore" loading="lazy" decoding="async"></div>
+      <div class="d-frame" data-f="4"><img src="assets/descent/aerial_5.jpg" alt="Aerial view of the round worship center at Arroyo Church" loading="lazy" decoding="async"></div>
+      <div class="d-frame" data-f="5"><img src="assets/descent/interior_wide.jpg" alt="Inside the round worship center during a Sunday gathering" loading="lazy" decoding="async"></div>
+      <div class="d-frame seat" data-f="6"><img src="assets/descent/seat_view.jpg" alt="The view from a seat at Arroyo Church, looking at the worship team on stage" loading="lazy" decoding="async"></div>
+      <div class="d-vignette"></div>
+      <div class="d-pin" id="d-pin"></div>
+      <div class="d-cap" data-c="0"><div class="big">Wherever you're coming from&hellip;</div><div class="small">The Bay Area</div></div>
+      <div class="d-cap" data-c="1"><div class="big">&hellip;find your way to Livermore.</div><div class="small">The Tri-Valley · California</div></div>
+      <div class="d-cap" data-c="2"><div class="big">Head to the south side of town.</div><div class="small">Concannon Blvd &amp; Holmes St</div></div>
+      <div class="d-cap" data-c="3"><div class="big">945 Concannon Blvd.</div><div class="small">Plenty of parking on site</div></div>
+      <div class="d-cap" data-c="4"><div class="big">Look for the round building.</div><div class="small">You can't miss it</div></div>
+      <div class="d-cap" data-c="5"><div class="big">Step inside.</div><div class="small">Sundays · 10:00 AM</div></div>
+      <div class="d-cap final" data-c="6"><div class="big">We saved you a seat.</div><div class="small">Sundays · 10:00 AM · 55 minutes</div><a class="btn btn-gold magnet" href="mailto:josh@arroyochurch.com?subject=I%27m%20planning%20to%20visit%20this%20Sunday!&body=Hi%20Arroyo%20Church%2C%0A%0AI%27m%20planning%20to%20join%20you%20this%20Sunday%20at%2010am.%0A%0AName%3A%20%0ANumber%20of%20people%20coming%3A%20%0AKids%20joining%3F%20%0A%0ASee%20you%20soon!">Let Us Know You're Coming</a></div>
+      <div class="d-attrib" id="d-attrib">Imagery &copy; Esri &middot; Maxar &middot; Earthstar Geographics</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="visit-meta">
           <div class="vm reveal" style="--d:.16s">
             <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-5.6-7-11a7 7 0 1114 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
             <div><h3>Location</h3><p>945 Concannon Blvd, Livermore, CA 94550<br><span style="font-weight:500;color:var(--muted-dk);font-size:.9rem">The worship center is the round building.</span></p></div>
@@ -1068,14 +1158,10 @@ footer ul a:hover{color:var(--text-lt)}
             <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div>
             <div><h3>Contact</h3><p><a href="mailto:josh@arroyochurch.com">josh@arroyochurch.com</a><br><a href="tel:+19256940426">(925) 694-0426</a></p></div>
           </div>
-        </div>
-        <div class="hero-ctas reveal" style="--d:.34s;opacity:1;transform:none;margin-top:2.2rem">
-          <a class="btn btn-gold magnet" href="mailto:josh@arroyochurch.com?subject=I%27m%20planning%20to%20visit%20this%20Sunday!&body=Hi%20Arroyo%20Church%2C%0A%0AI%27m%20planning%20to%20join%20you%20this%20Sunday%20at%2010am.%0A%0AName%3A%20%0ANumber%20of%20people%20coming%3A%20%0AKids%20joining%3F%20%0A%0ASee%20you%20soon!">Let Us Know You're Coming</a>
-        </div>
-      </div>
-      <div class="visit-map reveal" style="--d:.15s">
-        <iframe title="Map to Arroyo Church — 945 Concannon Blvd, Livermore, CA" src="https://www.google.com/maps?q=945+Concannon+Blvd,+Livermore,+CA+94550&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-      </div>
+    </div>
+    <div class="hero-ctas reveal" style="--d:.2s;opacity:1;transform:none;margin-top:2.6rem">
+      <a class="btn btn-gold magnet" href="mailto:josh@arroyochurch.com?subject=I%27m%20planning%20to%20visit%20this%20Sunday!&body=Hi%20Arroyo%20Church%2C%0A%0AI%27m%20planning%20to%20join%20you%20this%20Sunday%20at%2010am.%0A%0AName%3A%20%0ANumber%20of%20people%20coming%3A%20%0AKids%20joining%3F%20%0A%0ASee%20you%20soon!">Let Us Know You're Coming</a>
+      <a class="btn btn-ghost-dark magnet" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a>
     </div>
 
     <div class="steps">
@@ -1182,7 +1268,8 @@ footer ul a:hover{color:var(--text-lt)}
 <script>
 (function(){
 'use strict';
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const rmQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reduceMotion = rmQuery.matches;
 const finePointer = window.matchMedia('(pointer: fine)').matches;
 
 /* ── Hero headline word split ─────────────────────────── */
@@ -1391,6 +1478,22 @@ if(riverPath){
   riverPath.style.strokeDasharray = pathLen;
   riverPath.style.strokeDashoffset = pathLen;
 }
+/* descent (Plan Your Visit fly-in) */
+const descent = document.getElementById('descent');
+const dFrames = descent ? Array.from(descent.querySelectorAll('.d-frame')) : [];
+const dCaps = descent ? Array.from(descent.querySelectorAll('.d-cap')) : [];
+const dPin = document.getElementById('d-pin');
+const dAttrib = document.getElementById('d-attrib');
+/* per-transition zoom: outgoing frame scales to kOut, incoming starts at scale inFrom */
+const D_T = [
+  {kOut:5,    inFrom:1/5},    // Bay Area -> Tri-Valley
+  {kOut:5,    inFrom:1/5},    // Tri-Valley -> south Livermore
+  {kOut:4.8,  inFrom:1/4.8},  // south Livermore -> the block
+  {kOut:4.17, inFrom:1/4.17}, // the block -> the round building
+  {kOut:2.4,  inFrom:1.10},   // through the roof -> inside
+  {kOut:1.06, inFrom:1.10},   // walk to your seat
+];
+
 let ticking = false;
 function onScroll(){
   if(ticking) return; ticking = true;
@@ -1422,12 +1525,55 @@ function onScroll(){
         inner.style.opacity = Math.max(0, 1 - sy / (vhCache * 0.85));
       }
     }
+
+    if(descent && !reduceMotion && dFrames.length === D_T.length + 1){
+      const dr = descent.getBoundingClientRect();
+      if(dr.bottom > 0 && dr.top < vhCache){
+        const span = dr.height - vhCache;
+        const p = span > 0 ? Math.min(1, Math.max(0, -dr.top / span)) : 0;
+        const N = D_T.length;
+        const s = Math.min(N - 1e-6, p * N);
+        const idx = Math.floor(s);
+        const t = s - idx;
+        const tr = D_T[idx];
+        for(let i = 0; i < dFrames.length; i++){
+          const f = dFrames[i];
+          if(i === idx){
+            f.style.opacity = 1;
+            f.style.transform = 'scale(' + Math.pow(tr.kOut, t) + ')';
+          } else if(i === idx + 1){
+            f.style.opacity = Math.min(1, Math.max(0, (t - 0.25) / 0.5));
+            f.style.transform = 'scale(' + Math.pow(tr.inFrom, 1 - t) + ')';
+          } else {
+            f.style.opacity = 0;
+          }
+        }
+        const capIdx = (t < 0.55) ? idx : idx + 1;
+        dCaps.forEach(c => c.classList.toggle('on', +c.dataset.c === capIdx));
+        if(dPin) dPin.classList.toggle('on', capIdx === 3 || capIdx === 4);
+        if(dAttrib) dAttrib.style.opacity = capIdx <= 4 ? 1 : 0;
+      }
+    }
   });
 }
 let vhCache = window.innerHeight;
-window.addEventListener('resize', () => { vhCache = window.innerHeight; }, {passive:true});
+window.addEventListener('resize', () => { vhCache = window.innerHeight; onScroll(); }, {passive:true});
 window.addEventListener('scroll', onScroll, {passive:true});
 onScroll();
+/* react to a mid-session reduced-motion toggle: clear descent inline state
+   so the static CSS fallback (or the scrub) takes over cleanly */
+if(rmQuery.addEventListener){
+  rmQuery.addEventListener('change', e => {
+    reduceMotion = e.matches;
+    if(reduceMotion){
+      dFrames.forEach(f => { f.style.opacity = ''; f.style.transform = ''; });
+      dCaps.forEach(c => c.classList.remove('on'));
+      if(dPin) dPin.classList.remove('on');
+      if(dAttrib) dAttrib.style.opacity = '';
+    }
+    onScroll();
+  });
+}
 
 /* ── Hero water particle canvas ───────────────────────── */
 (function(){
@@ -1495,6 +1641,60 @@ onScroll();
   });
   document.getElementById('hero').addEventListener('mouseleave', () => { mx = my = -9999; });
   init();
+})();
+
+/* ── Hero background video (Squarespace HLS stream) ───── */
+(function(){
+  const v = document.getElementById('hero-video');
+  if(!v) return;
+  if(reduceMotion){ v.remove(); return; }
+  const src = 'https://video.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/37960feb-4784-46c1-901c-1b90df95ed74/playlist.m3u8';
+  const toggle = document.getElementById('video-toggle');
+  const vtPause = document.getElementById('vt-pause');
+  const vtPlay = document.getElementById('vt-play');
+  let userPaused = false;
+  function wire(){
+    v.muted = true;
+    v.addEventListener('playing', () => v.classList.add('playing'));
+    v.addEventListener('error', () => v.classList.remove('playing'));
+    const vio = new IntersectionObserver(es => es.forEach(e => {
+      if(e.isIntersecting && !userPaused){ const pr = v.play(); if(pr) pr.catch(() => {}); }
+      else v.pause();
+    }));
+    vio.observe(v);
+    if(toggle){
+      toggle.hidden = false;
+      toggle.addEventListener('click', () => {
+        userPaused = !userPaused;
+        if(userPaused){ v.pause(); } else { const pr = v.play(); if(pr) pr.catch(() => {}); }
+        toggle.setAttribute('aria-label', userPaused ? 'Play background video' : 'Pause background video');
+        vtPause.style.display = userPaused ? 'none' : '';
+        vtPlay.style.display = userPaused ? '' : 'none';
+      });
+    }
+  }
+  if(window.MediaSource || window.ManagedMediaSource){
+    // hls.js adapts quality to player size (Chrome native HLS sticks to 360p)
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.6.16/dist/hls.min.js';
+    s.integrity = 'sha384-5E8B0pTlZZJMabWpC0fyYf6OUpe15jJij34BqBAh4NXoHAlLNOjCPRrwtOXOQFAn';
+    s.crossOrigin = 'anonymous';
+    s.onload = () => {
+      if(window.Hls && Hls.isSupported()){
+        const h = new Hls({capLevelToPlayerSize: true});
+        h.on(Hls.Events.ERROR, (ev, data) => {
+          if(data && data.fatal){ h.destroy(); v.classList.remove('playing'); if(toggle) toggle.hidden = true; }
+        });
+        h.loadSource(src); h.attachMedia(v); wire();
+      } else if(v.canPlayType('application/vnd.apple.mpegurl')){
+        v.src = src; wire();
+      }
+    };
+    s.onerror = () => { if(v.canPlayType('application/vnd.apple.mpegurl')){ v.src = src; wire(); } };
+    document.head.appendChild(s);
+  } else if(v.canPlayType('application/vnd.apple.mpegurl')){
+    v.src = src; wire();  // iOS Safari: native HLS
+  }
 })();
 
 /* ── Custom cursor ────────────────────────────────────── */

@@ -1,11 +1,16 @@
 # Arroyo Church — Website Redesign
 
-**"A River in the Desert"** — a single-file redesign of [arroyochurch.com](https://www.arroyochurch.com/) built around the church's Isaiah 43:18–19 name story.
+**"A River in the Desert"** — a redesign of [arroyochurch.com](https://www.arroyochurch.com/) built around the church's Isaiah 43:18–19 name story.
 
 ## What's here
 
-- `index.html` — the entire site. One self-contained file: all CSS and JavaScript inline, no frameworks, no build step. Images load from the existing Squarespace CDN; sermon videos lazy-embed from YouTube.
+- `index.html` — the site. All CSS and JavaScript inline, no frameworks, no build step. Images load from the existing Squarespace CDN; sermon videos lazy-embed from YouTube; the hero video streams from the church's existing Squarespace video CDN (HLS via hls.js).
+- `assets/descent/` — imagery for the "fly-in" in Plan Your Visit: 5 aerial frames (Esri World Imagery, attribution shown in the UI) + 2 stills extracted from the church's own banner video.
 - `.source_pages/` — archived HTML of the original Squarespace pages (content source of truth used for the rebuild).
+
+## To share it with someone
+
+Zip this whole folder (`index.html` + `assets/`) and send it — they open `index.html` in any browser. Or deploy it (below) and send a URL.
 
 ## To view it
 
@@ -23,6 +28,8 @@ Any static host works — Netlify / Vercel / Cloudflare Pages / GitHub Pages: dr
 ## Design / feature notes
 
 - **Scroll narrative**: the "Why Arroyo?" section transitions desert sand → deep river water while Isaiah 43:18–19 lights up word-by-word and an SVG river draws itself down the page.
+- **Hero video**: the church's existing `ArroyoChurch_WebsiteBanner.mp4` streams behind the headline (muted/looped, pauses offscreen, photo fallback, hidden under reduced-motion).
+- **The Descent** (Plan Your Visit): a scroll-scrubbed fly-in — Bay Area → Livermore → 945 Concannon → the round building roof → inside the dome → the view from your seat, ending on "We saved you a seat" + CTA. Aerial imagery © Esri/Maxar/Earthstar (attributed on screen); interior stills come from the church's own banner video. With JS off or reduced-motion on, it collapses to the seat-view photo + CTA.
 - **Live countdown** to the next Sunday 10:00 AM service (Pacific, DST-safe); shows "We're gathered right now" during the service hour.
 - **Animations**: water-particle hero canvas (mouse-reactive), magnetic buttons, 3D tilt cards, sticky-stacking value cards, staggered scroll reveals, custom cursor, river scroll-progress bar. All effects respect `prefers-reduced-motion`, and all content is visible with JavaScript disabled.
 - **Same information tabs** as the current site: About, Team, Beliefs, Sermons, Connect, Give, Plan Your Visit — all original text preserved verbatim (beliefs, values, FAQs, staff bios, elder board).
