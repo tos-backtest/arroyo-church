@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arroyo Church | A River in the Desert — Livermore, CA</title>
+<meta name="description" content="Arroyo Church exists to know and show the love of Jesus in the Bay Area and beyond. Join us Sundays at 10 AM — 945 Concannon Blvd, Livermore, CA.">
+<link rel="icon" href="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/020591a5-a8b3-4193-bce6-9a4641de3e7a/favicon.ico">
+<link rel="preconnect" href="https://images.squarespace-cdn.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js');</script>
+<style>
+/* ════════════════════════ DESIGN TOKENS ════════════════════════ */
+:root{
+  --ink:        #0a161c;   /* deep water night */
+  --deep:       #0d2530;   /* river deep */
+  --deep-2:     #11303d;
+  --river:      #2e8fa3;   /* river teal */
+  --river-lt:   #5fc2d4;
+  --foam:       #bfe7ee;
+  --sand:       #ece1cb;   /* desert sand */
+  --sand-2:     #f6f1e6;
+  --paper:      #faf7f0;
+  --gold:       #c89a3e;   /* desert gold */
+  --gold-lt:    #e3bd6a;
+  --text-dk:    #16242b;
+  --text-lt:    #eef6f7;
+  --muted-lt:   rgba(238,246,247,.66);
+  --muted-dk:   rgba(22,36,43,.66);
+  --display:    'Fraunces', Georgia, serif;
+  --body:       'Manrope', -apple-system, sans-serif;
+  --nav-h:      76px;
+  --ease-out:   cubic-bezier(.16,1,.3,1);
+  --shadow-lg:  0 30px 60px -20px rgba(10,22,28,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+html:focus-within{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  background:var(--ink);
+  color:var(--text-lt);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+::selection{background:var(--river);color:#fff}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--gold);color:var(--ink);padding:.7rem 1.2rem;z-index:200;font-weight:700;border-radius:0 0 8px 0}
+.skip-link:focus{left:0}
+:focus-visible{outline:2px solid var(--river);outline-offset:3px;box-shadow:0 0 0 5px rgba(95,194,212,.85)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ════════════════════════ SCROLL PROGRESS RIVER ════════════════════════ */
+#river-progress{
+  position:fixed;top:0;left:0;height:4px;width:0%;z-index:120;
+  background:linear-gradient(90deg,var(--gold) 0%,var(--river) 55%,var(--river-lt) 100%);
+  box-shadow:0 0 12px rgba(95,194,212,.6);
+  transition:width .08s linear;
+}
+
+/* ════════════════════════ CUSTOM CURSOR ════════════════════════ */
+#cursor-dot,#cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:150;border-radius:50%;display:none}
+@media (pointer:fine){
+  #cursor-dot,#cursor-ring{display:block}
+  #cursor-dot{width:7px;height:7px;background:var(--river-lt);transform:translate(-50%,-50%)}
+  #cursor-ring{
+    width:38px;height:38px;border:1.5px solid rgba(95,194,212,.55);
+    transform:translate(-50%,-50%);
+    transition:width .25s var(--ease-out),height .25s var(--ease-out),border-color .25s,background-color .25s;
+  }
+  #cursor-ring.hovering{width:58px;height:58px;border-color:var(--gold-lt);background:rgba(200,154,62,.08)}
+}
+@media (prefers-reduced-motion:reduce){
+  #cursor-dot,#cursor-ring{display:none!important}
+}
+
+/* ════════════════════════ NAVIGATION ════════════════════════ */
+#site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(1.2rem,4vw,3rem);
+  transition:background .4s,backdrop-filter .4s,box-shadow .4s,height .4s;
+}
+#site-nav.scrolled{
+  height:62px;
+  background:rgba(10,22,28,.78);
+  backdrop-filter:blur(18px) saturate(1.4);
+  -webkit-backdrop-filter:blur(18px) saturate(1.4);
+  box-shadow:0 1px 0 rgba(255,255,255,.07);
+}
+.nav-logo{display:flex;align-items:center;gap:.7rem;font-weight:800;letter-spacing:.04em}
+.nav-logo img{height:40px;width:auto;filter:invert(1) brightness(1.6);transition:height .4s}
+#site-nav.scrolled .nav-logo img{height:32px}
+.nav-links{display:flex;align-items:center;gap:clamp(.8rem,1.8vw,1.8rem);list-style:none}
+.nav-links a{
+  font-size:.92rem;font-weight:600;letter-spacing:.02em;color:var(--muted-lt);
+  position:relative;padding:.4rem 0;transition:color .25s;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:0;height:2px;width:100%;
+  background:linear-gradient(90deg,var(--gold),var(--river-lt));
+  transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-out);
+}
+.nav-links a:hover,.nav-links a[aria-current="true"]{color:var(--text-lt)}
+.nav-links a:hover::after,.nav-links a[aria-current="true"]::after{transform:scaleX(1)}
+.btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-weight:700;font-size:.95rem;letter-spacing:.02em;
+  padding:.85rem 1.7rem;border-radius:999px;
+  transition:transform .3s var(--ease-out),box-shadow .3s,background .3s,color .3s;
+  will-change:transform;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold-lt),var(--gold));color:var(--ink);box-shadow:0 8px 24px -8px rgba(200,154,62,.55)}
+.btn-gold:hover{box-shadow:0 14px 34px -8px rgba(200,154,62,.7)}
+.btn-ghost{border:1.5px solid rgba(238,246,247,.35);color:var(--text-lt)}
+.btn-ghost:hover{border-color:var(--river-lt);background:rgba(95,194,212,.1)}
+.btn-river{background:linear-gradient(135deg,var(--river-lt),var(--river));color:var(--ink);box-shadow:0 8px 24px -8px rgba(46,143,163,.6)}
+.nav-cta{display:inline-flex}
+#hamburger{display:none;flex-direction:column;gap:5px;padding:.6rem;z-index:130}
+#hamburger span{display:block;width:24px;height:2px;background:var(--text-lt);transition:transform .35s var(--ease-out),opacity .25s}
+body.menu-open #hamburger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.menu-open #hamburger span:nth-child(2){opacity:0}
+body.menu-open #hamburger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+#mobile-menu{
+  position:fixed;inset:0;z-index:110;background:rgba(10,22,28,.97);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  display:flex;flex-direction:column;justify-content:center;padding:0 9vw;
+  overflow-y:auto;
+  opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
+}
+body.menu-open{overflow:hidden}
+@media (max-height:580px){
+  #mobile-menu{justify-content:flex-start;padding-top:84px;padding-bottom:40px}
+  #mobile-menu a{font-size:1.6rem;padding:.3rem 0}
+}
+body.menu-open #mobile-menu{opacity:1;visibility:visible}
+#mobile-menu a{
+  font-family:var(--display);font-size:clamp(2rem,8vw,3rem);font-weight:400;
+  padding:.45rem 0;color:var(--text-lt);
+  opacity:0;transform:translateY(24px);
+  transition:opacity .5s var(--ease-out),transform .5s var(--ease-out),color .25s;
+}
+#mobile-menu a:hover{color:var(--river-lt)}
+body.menu-open #mobile-menu a{opacity:1;transform:none}
+#mobile-menu .mm-meta{margin-top:2rem;color:var(--muted-lt);font-size:.95rem;opacity:0;transition:opacity .6s .35s}
+body.menu-open #mobile-menu .mm-meta{opacity:1}
+@media (max-width:920px){
+  .nav-links,.nav-cta{display:none}
+  #hamburger{display:flex}
+}
+
+/* ════════════════════════ HERO ════════════════════════ */
+#hero{
+  position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;
+  overflow:hidden;isolation:isolate;
+}
+.hero-bg{
+  position:absolute;inset:-6%;z-index:-3;
+  background:url('https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/f957ea93-9c19-46da-87b8-06145dfac63b/R6II5797.jpg?format=2500w') center 30%/cover no-repeat;
+  animation:kenburns 26s ease-in-out infinite alternate;
+  will-change:transform;
+}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09) translateY(-1.5%)}}
+.hero-tint{
+  position:absolute;inset:0;z-index:-2;
+  background:
+    radial-gradient(120% 90% at 25% 85%,rgba(13,37,48,.55) 0%,transparent 55%),
+    linear-gradient(180deg,rgba(10,22,28,.62) 0%,rgba(10,22,28,.42) 45%,rgba(10,22,28,.88) 100%);
+}
+#water{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
+.hero-inner{
+  width:min(1200px,92vw);margin:0 auto;padding:calc(var(--nav-h) + 4vh) 0 14vh;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.82rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--gold-lt);margin-bottom:1.4rem;
+}
+.hero-eyebrow::before{content:'';width:42px;height:1.5px;background:var(--gold-lt)}
+#hero h1{
+  font-family:var(--display);font-weight:330;
+  font-size:clamp(2.9rem,8.6vw,7.2rem);
+  line-height:1.02;letter-spacing:-.015em;max-width:13ch;
+}
+#hero h1 em{font-style:italic;color:var(--river-lt)}
+#hero h1 .w{display:inline-block;overflow:hidden;vertical-align:bottom}
+#hero h1 .w>span{display:inline-block;transform:translateY(110%);transition:transform 1s var(--ease-out)}
+body.loaded #hero h1 .w>span{transform:none}
+.hero-sub{
+  max-width:46ch;margin-top:1.6rem;font-size:clamp(1rem,1.4vw,1.2rem);
+  color:var(--muted-lt);
+}
+.js .hero-sub{opacity:0;transform:translateY(18px);transition:opacity .9s .5s,transform .9s .5s var(--ease-out)}
+.js body.loaded .hero-sub{opacity:1;transform:none}
+.hero-ctas{
+  display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.4rem;
+}
+.js .hero-ctas{opacity:0;transform:translateY(18px);transition:opacity .9s .7s,transform .9s .7s var(--ease-out)}
+.js body.loaded .hero-ctas{opacity:1;transform:none}
+.hero-service{
+  margin-top:3.2rem;display:flex;flex-wrap:wrap;gap:.6rem 2.2rem;align-items:center;
+  font-size:.95rem;font-weight:600;color:var(--muted-lt);
+}
+.js .hero-service{opacity:0;transition:opacity .9s .95s}
+.js body.loaded .hero-service{opacity:1}
+.hero-service strong{color:var(--text-lt);font-weight:800}
+.hero-service .dot{width:5px;height:5px;border-radius:50%;background:var(--gold-lt);flex:none}
+.scroll-cue{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted-lt);
+}
+.js .scroll-cue{opacity:0;transition:opacity 1s 1.3s}
+.js body.loaded .scroll-cue{opacity:1}
+.scroll-cue .line{width:1.5px;height:46px;background:linear-gradient(var(--river-lt),transparent);position:relative;overflow:hidden}
+.scroll-cue .line::after{
+  content:'';position:absolute;top:-50%;left:0;width:100%;height:50%;
+  background:var(--foam);animation:drip 2.1s ease-in-out infinite;
+}
+@keyframes drip{to{top:110%}}
+@media (max-width:700px){.scroll-cue{display:none}}
+
+/* ════════════════════════ COUNTDOWN STRIP ════════════════════════ */
+#countdown{
+  position:relative;background:linear-gradient(135deg,var(--deep) 0%,var(--deep-2) 100%);
+  border-top:1px solid rgba(95,194,212,.15);border-bottom:1px solid rgba(95,194,212,.15);
+  padding:2.2rem clamp(1.2rem,5vw,4rem);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.4rem 3.5rem;
+  overflow:hidden;
+}
+#countdown::before{
+  content:'';position:absolute;inset:0;opacity:.5;pointer-events:none;
+  background:radial-gradient(60% 130% at 80% 50%,rgba(46,143,163,.25),transparent 70%);
+}
+.cd-label{font-size:.8rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--river-lt)}
+.cd-units{display:flex;gap:clamp(.9rem,3vw,2.2rem)}
+.cd-unit{text-align:center;min-width:62px}
+.cd-num{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.9rem);font-weight:430;line-height:1;font-variant-numeric:tabular-nums}
+.cd-word{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-lt);margin-top:.35rem}
+#cd-live{display:none;font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);color:var(--gold-lt)}
+.cd-where{font-size:.92rem;color:var(--muted-lt)}
+.cd-where strong{color:var(--text-lt)}
+
+/* ════════════════════════ SHARED SECTION CHROME ════════════════════════ */
+section{position:relative}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.7rem;
+  font-size:.8rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;
+  margin-bottom:1.2rem;
+}
+.eyebrow::before{content:'';width:36px;height:1.5px;background:currentColor;opacity:.6}
+/* darker accents on light sections for WCAG AA contrast */
+#about .eyebrow,#team .eyebrow,#visit .eyebrow,#connect .eyebrow{color:#1f6b7c}
+.ecard .role{color:#1f6b7c}
+.h2{
+  font-family:var(--display);font-weight:360;letter-spacing:-.01em;
+  font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.08;
+}
+.h2 em{font-style:italic;color:var(--river)}
+.lead{font-size:clamp(1.02rem,1.4vw,1.18rem);line-height:1.75}
+
+/* reveal-on-scroll (hidden state only applies when JS is running — html.js) */
+.js .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out);transition-delay:var(--d,0s)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+  .hero-bg{animation:none}
+  .scroll-cue .line::after{animation:none}
+  #hero h1 .w>span,.hero-sub,.hero-ctas,.hero-service,.scroll-cue{transition:none!important;transform:none!important;opacity:1!important}
+  *{scroll-behavior:auto!important}
+}
+
+/* ════════════════════════ ABOUT / MISSION ════════════════════════ */
+#about{background:var(--paper);color:var(--text-dk);padding:clamp(5rem,11vh,9rem) 0}
+#about .eyebrow{color:var(--river)}
+.mission-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.mission-copy p{margin-top:1.3rem;color:var(--muted-dk)}
+.mission-cards{display:grid;gap:1rem;margin-top:.4rem}
+.mcard{
+  background:#fff;border:1px solid rgba(22,36,43,.08);border-radius:18px;
+  padding:1.5rem 1.7rem;display:flex;gap:1.1rem;align-items:flex-start;
+  box-shadow:0 6px 18px -12px rgba(22,36,43,.18);
+  transition:transform .35s var(--ease-out),box-shadow .35s;
+}
+.mcard:hover{transform:translateY(-4px);box-shadow:0 18px 34px -16px rgba(22,36,43,.28)}
+.mcard .ic{
+  flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.14));color:var(--river);
+}
+.mcard h3{font-family:var(--display);font-weight:520;font-size:1.18rem;margin-bottom:.2rem;color:var(--text-dk)}
+.mcard p{font-size:.95rem;color:var(--muted-dk)}
+
+/* ════════════════════════ STORY: DESERT → RIVER ════════════════════════ */
+#story{
+  color:var(--text-dk);
+  background:linear-gradient(180deg,var(--paper) 0%,var(--sand) 14%,var(--sand) 30%, #cdbf9f 46%, #6c9aa0 62%, var(--river) 74%, var(--deep-2) 88%, var(--deep) 100%);
+  padding:clamp(6rem,14vh,11rem) 0 clamp(7rem,16vh,12rem);
+  overflow:clip;
+}
+.story-inner{position:relative;width:min(900px,92vw);margin:0 auto;text-align:center}
+#river-svg{
+  position:absolute;top:-4%;left:50%;transform:translateX(-50%);height:108%;width:auto;
+  z-index:0;pointer-events:none;opacity:.85;
+}
+#river-svg path{stroke-linecap:round;fill:none}
+.story-z{position:relative;z-index:1}
+.story-kicker{font-size:.8rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:#6b5420}
+.story-verse{
+  font-family:var(--display);font-weight:350;font-style:italic;
+  font-size:clamp(1.7rem,4.4vw,3.3rem);line-height:1.3;margin:1.6rem 0 .9rem;
+}
+.story-verse .vw{opacity:.45;transition:opacity .35s linear}
+.story-verse .vw.lit{opacity:1}
+.story-ref{font-size:.92rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#6b5420}
+.story-body{
+  max-width:62ch;margin:4.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.85;
+}
+.story-body strong{color:inherit}
+.story-stat{
+  margin-top:3.6rem;display:inline-flex;flex-direction:column;gap:.3rem;align-items:center;
+  padding:1.6rem 2.6rem;border-radius:20px;
+  background:rgba(10,22,28,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border:1px solid rgba(191,231,238,.22);color:var(--text-lt);
+}
+.story-stat .big{font-family:var(--display);font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:400;line-height:1.2}
+.story-stat .big em{color:var(--river-lt);font-style:italic}
+.story-stat .small{font-size:.85rem;color:var(--muted-lt);max-width:42ch}
+
+/* ════════════════════════ BELIEFS ════════════════════════ */
+#beliefs{background:var(--deep);padding:clamp(5rem,11vh,9rem) 0}
+#beliefs .eyebrow{color:var(--river-lt)}
+.beliefs-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+.beliefs-head p{max-width:48ch;color:var(--muted-lt)}
+.belief-list{display:grid;gap:.9rem}
+.belief{
+  border:1px solid rgba(191,231,238,.14);border-radius:18px;overflow:hidden;
+  background:rgba(17,48,61,.5);transition:border-color .3s,background .3s;
+}
+.belief.open{border-color:rgba(200,154,62,.45);background:rgba(17,48,61,.85)}
+.belief .b-h{margin:0}
+.belief button{
+  width:100%;display:flex;align-items:center;justify-content:space-between;gap:1.2rem;
+  padding:1.45rem clamp(1.2rem,3vw,2rem);text-align:left;
+}
+.belief .b-title{display:flex;align-items:baseline;gap:1.1rem}
+.belief .b-num{font-size:.78rem;font-weight:800;letter-spacing:.18em;color:var(--gold-lt)}
+.belief .b-name{font-family:var(--display);font-weight:430;font-size:clamp(1.2rem,2.4vw,1.65rem)}
+.belief .chev{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(191,231,238,.3);display:grid;place-items:center;transition:transform .45s var(--ease-out),background .3s,border-color .3s}
+.belief.open .chev{transform:rotate(45deg);background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.belief .b-body{max-height:0;overflow:hidden;visibility:hidden;transition:max-height .6s var(--ease-out),visibility 0s .6s}
+.belief.open .b-body{visibility:visible;transition:max-height .6s var(--ease-out),visibility 0s 0s}
+.belief .b-body-pad{padding:0 clamp(1.2rem,3vw,2rem) 1.7rem;color:var(--muted-lt);max-width:75ch;line-height:1.8}
+
+/* ════════════════════════ VALUES (sticky stack) ════════════════════════ */
+#values{background:var(--deep);padding:0 0 clamp(5rem,11vh,9rem)}
+#values .wrap>.eyebrow{color:var(--gold-lt)}
+.vstack{margin-top:2.6rem;display:grid;gap:1.2rem}
+.vcard{
+  position:sticky;border-radius:24px;padding:clamp(1.8rem,4vw,3rem);
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(1.2rem,3vw,2.6rem);align-items:center;
+  box-shadow:var(--shadow-lg);border:1px solid rgba(255,255,255,.09);
+  min-height:200px;
+}
+.vcard .v-num{
+  font-family:var(--display);font-size:clamp(2.6rem,6vw,4.6rem);font-weight:300;line-height:1;opacity:.32;
+}
+.vcard h3{font-family:var(--display);font-weight:480;font-size:clamp(1.4rem,3vw,2.1rem);margin-bottom:.5rem}
+.vcard .v-tag{font-size:1.02rem;font-weight:600;margin-bottom:.8rem}
+.vcard blockquote{font-style:italic;font-size:.95rem;opacity:.78;border-left:2.5px solid currentColor;padding-left:1rem;line-height:1.7}
+.vcard:nth-child(1){background:linear-gradient(135deg,#15394a,#0e2a37);top:calc(var(--nav-h) + 12px)}
+.vcard:nth-child(2){background:linear-gradient(135deg,#7d6228,#5d4a20);top:calc(var(--nav-h) + 26px)}
+.vcard:nth-child(3){background:linear-gradient(135deg,#1d5a6b,#123c48);top:calc(var(--nav-h) + 40px)}
+.vcard:nth-child(4){background:linear-gradient(135deg,#274b3b,#16332a);top:calc(var(--nav-h) + 54px)}
+.vcard:nth-child(5){background:linear-gradient(135deg,#23445e,#152c3f);top:calc(var(--nav-h) + 68px)}
+
+/* ════════════════════════ TEAM ════════════════════════ */
+#team{background:var(--paper);color:var(--text-dk);padding:clamp(5rem,11vh,9rem) 0}
+#team .eyebrow{color:var(--river)}
+.team-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+.team-head p{max-width:46ch;color:var(--muted-dk)}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+.tcard{
+  position:relative;border-radius:20px;overflow:hidden;background:#dfd7c6;
+  aspect-ratio:4/4.7;cursor:pointer;
+  transform-style:preserve-3d;transition:transform .4s var(--ease-out),box-shadow .4s;
+  box-shadow:0 10px 26px -16px rgba(22,36,43,.35);
+}
+.tcard:hover{box-shadow:0 26px 50px -20px rgba(22,36,43,.45)}
+.tcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;transition:transform .6s var(--ease-out)}
+.tcard:hover img{transform:scale(1.05)}
+.tcard .t-scrim{
+  position:absolute;inset:0;
+  background:linear-gradient(185deg,transparent 42%,rgba(10,22,28,.88) 78%);
+  transition:background .4s;
+}
+.tcard .t-toggle{
+  position:absolute;inset:0;z-index:2;cursor:pointer;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;
+  padding:1.15rem 1.3rem;text-align:left;color:#fff;
+}
+.tcard .t-toggle .t-name{font-family:var(--display);font-weight:480;font-size:1.3rem;line-height:1.15}
+.tcard .t-toggle .role{font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--gold-lt);margin-top:.25rem}
+.tcard .t-facts{
+  position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:flex-end;gap:.7rem;
+  padding:1.5rem;color:var(--text-lt);pointer-events:none;
+  background:linear-gradient(180deg,rgba(13,37,48,.55),rgba(10,22,28,.94));
+  opacity:0;transform:translateY(12px);visibility:hidden;
+  transition:opacity .4s var(--ease-out),transform .4s var(--ease-out),visibility 0s .4s;
+}
+.tcard:hover .t-facts,.tcard.flipped .t-facts,.tcard:focus-within .t-facts{
+  opacity:1;transform:none;visibility:visible;
+  transition:opacity .4s var(--ease-out),transform .4s var(--ease-out),visibility 0s 0s;
+}
+.tcard .t-facts h3{font-family:var(--display);font-size:1.25rem;font-weight:480}
+.tcard .t-facts .role{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--gold-lt)}
+.tcard .t-facts p{font-size:.88rem;line-height:1.6;color:var(--muted-lt)}
+.tcard .t-facts p strong{color:var(--foam);font-weight:700}
+.elders{margin-top:4.5rem}
+.elders .lead{max-width:72ch;color:var(--muted-dk);margin-top:1rem}
+.elder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:2.2rem}
+.ecard{text-align:center}
+.ecard .e-img{
+  border-radius:18px;overflow:hidden;aspect-ratio:1/1.05;background:#dfd7c6;
+  box-shadow:0 10px 24px -16px rgba(22,36,43,.35);
+  transition:transform .35s var(--ease-out),box-shadow .35s;
+}
+.ecard:hover .e-img{transform:translateY(-5px);box-shadow:0 22px 40px -18px rgba(22,36,43,.4)}
+.ecard img{width:100%;height:100%;object-fit:cover;object-position:center 25%}
+.ecard h3{font-family:var(--display);font-weight:500;font-size:1.12rem;margin-top:.9rem}
+.ecard .role{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#1f6b7c}
+@media (max-width:920px){.team-grid{grid-template-columns:repeat(2,1fr)}.elder-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.team-grid{grid-template-columns:1fr}}
+
+/* ════════════════════════ SERMONS ════════════════════════ */
+#sermons{background:var(--ink);padding:clamp(5rem,11vh,9rem) 0}
+#sermons .eyebrow{color:var(--river-lt)}
+.sermon-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+.sermon-head p{max-width:46ch;color:var(--muted-lt)}
+.sermon-grid{display:grid;grid-template-columns:1.7fr 1fr;gap:1.3rem;align-items:stretch}
+.yt{
+  position:relative;border-radius:20px;overflow:hidden;background:#000;cursor:pointer;
+  aspect-ratio:16/9;border:1px solid rgba(191,231,238,.12);
+  transition:transform .35s var(--ease-out),box-shadow .35s;
+}
+.sermon-grid>.yt{aspect-ratio:auto;height:100%;min-height:380px}
+.yt:hover{transform:translateY(-4px);box-shadow:0 24px 48px -20px rgba(46,143,163,.45)}
+.yt .thumb{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;transition:opacity .3s,transform .6s var(--ease-out)}
+.yt:hover .thumb{opacity:1;transform:scale(1.04)}
+.yt .play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:74px;height:53px;border-radius:14px;background:rgba(10,22,28,.72);
+  display:grid;place-items:center;transition:background .3s,transform .3s var(--ease-out);
+  backdrop-filter:blur(4px);
+}
+.yt:hover .play{background:var(--river);transform:translate(-50%,-50%) scale(1.08)}
+.yt .play::after{content:'';border-style:solid;border-width:11px 0 11px 19px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.yt-side{display:grid;gap:1.3rem;grid-template-rows:repeat(3,1fr)}
+.yt-side .yt .play{width:52px;height:38px;border-radius:10px}
+.yt-side .yt .play::after{border-width:7px 0 7px 12px}
+.sermons-cta{margin-top:2.6rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+@media (max-width:920px){.sermon-grid{grid-template-columns:1fr}.sermon-grid>.yt{aspect-ratio:16/9;height:auto;min-height:0}.yt-side{grid-template-rows:none;grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.yt-side{grid-template-columns:1fr}}
+
+/* ════════════════════════ CONNECT ════════════════════════ */
+#connect{background:var(--sand-2);color:var(--text-dk);padding:clamp(5rem,11vh,9rem) 0}
+#connect .eyebrow{color:var(--river)}
+.connect-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+.connect-photo{
+  border-radius:24px;overflow:hidden;box-shadow:var(--shadow-lg);
+  aspect-ratio:4/3.4;position:relative;
+}
+.connect-photo img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease-out)}
+.connect-photo:hover img{transform:scale(1.045)}
+.connect-copy p{margin:1.2rem 0 1.8rem;color:var(--muted-dk)}
+.ministries{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:4.5rem}
+.min-card{
+  background:#fff;border-radius:20px;padding:1.9rem 1.7rem;
+  border:1px solid rgba(22,36,43,.08);box-shadow:0 8px 20px -14px rgba(22,36,43,.2);
+  transition:transform .35s var(--ease-out),box-shadow .35s;
+}
+.min-card:hover{transform:translateY(-5px);box-shadow:0 22px 40px -18px rgba(22,36,43,.3)}
+.min-card .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.16));color:var(--river);margin-bottom:1.1rem}
+.min-card h3{font-family:var(--display);font-weight:520;font-size:1.25rem;margin-bottom:.45rem}
+.min-card p{font-size:.93rem;color:var(--muted-dk)}
+.prayer-band{
+  margin-top:4.5rem;border-radius:26px;overflow:hidden;position:relative;
+  background:linear-gradient(120deg,var(--deep) 0%,var(--deep-2) 60%,#1d5a6b 100%);
+  color:var(--text-lt);padding:clamp(2.4rem,5vw,4rem);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.6rem;
+}
+.prayer-band::before{
+  content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:radial-gradient(70% 140% at 85% 20%,rgba(95,194,212,.28),transparent 60%);
+}
+.prayer-band h3{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,3.4vw,2.3rem);position:relative}
+.prayer-band p{color:var(--muted-lt);max-width:46ch;margin-top:.5rem;position:relative}
+.prayer-band .btn{position:relative}
+@media (max-width:920px){.connect-grid{grid-template-columns:1fr}.ministries{grid-template-columns:1fr}}
+
+/* ════════════════════════ GIVE ════════════════════════ */
+#give{background:var(--deep);padding:clamp(5rem,11vh,9rem) 0;overflow:hidden}
+#give .eyebrow{color:var(--gold-lt)}
+.give-head{text-align:center;max-width:62ch;margin:0 auto 3.4rem}
+.give-head p{color:var(--muted-lt);margin-top:1.2rem}
+.give-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.gcard{
+  position:relative;border-radius:22px;padding:2.2rem 1.9rem;overflow:hidden;
+  background:rgba(17,48,61,.6);border:1px solid rgba(191,231,238,.13);
+  transition:transform .35s var(--ease-out),border-color .35s,background .35s;
+  display:flex;flex-direction:column;gap:.7rem;
+}
+.gcard::before{
+  content:'';position:absolute;inset:0;opacity:0;transition:opacity .4s;pointer-events:none;
+  background:radial-gradient(80% 100% at 50% 0%,rgba(200,154,62,.16),transparent 70%);
+}
+.gcard:hover{transform:translateY(-6px);border-color:rgba(200,154,62,.5)}
+.gcard:hover::before{opacity:1}
+.gcard .ic{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:rgba(200,154,62,.14);color:var(--gold-lt);margin-bottom:.5rem}
+.gcard h3{font-family:var(--display);font-weight:480;font-size:1.4rem}
+.gcard p{font-size:.93rem;color:var(--muted-lt);flex:1}
+.gcard .g-link{font-weight:800;font-size:.9rem;letter-spacing:.06em;color:var(--gold-lt);display:inline-flex;align-items:center;gap:.5rem}
+.gcard .g-link svg{transition:transform .3s var(--ease-out)}
+.gcard:hover .g-link svg{transform:translateX(5px)}
+.give-verse{text-align:center;margin-top:3rem;color:var(--muted-lt);font-style:italic;font-family:var(--display);font-size:1.1rem}
+@media (max-width:920px){.give-grid{grid-template-columns:1fr}}
+
+/* ════════════════════════ VISIT ════════════════════════ */
+#visit{background:var(--paper);color:var(--text-dk);padding:clamp(5rem,11vh,9rem) 0}
+#visit .eyebrow{color:var(--river)}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4.5rem);align-items:start;margin-top:1rem}
+.visit-info .lead{color:var(--muted-dk);margin-top:1.2rem;max-width:50ch}
+.visit-meta{display:grid;gap:1rem;margin-top:2rem}
+.vm{display:flex;gap:1rem;align-items:flex-start}
+.vm .ic{flex:none;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.14));color:var(--river)}
+.vm h3{font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted-dk);font-family:var(--body);font-weight:600}
+.vm p{font-weight:700;font-size:1.02rem}
+.vm p a:hover{color:var(--river)}
+.visit-map{
+  border-radius:22px;overflow:hidden;box-shadow:var(--shadow-lg);
+  aspect-ratio:4/3;background:#dfd7c6;position:relative;
+}
+.visit-map iframe{width:100%;height:100%;border:0;filter:saturate(.9)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:4.2rem}
+.step{
+  background:#fff;border-radius:20px;padding:1.9rem 1.7rem;border:1px solid rgba(22,36,43,.08);
+  box-shadow:0 8px 20px -14px rgba(22,36,43,.18);position:relative;
+  transition:transform .35s var(--ease-out),box-shadow .35s;
+}
+.step:hover{transform:translateY(-5px);box-shadow:0 20px 38px -18px rgba(22,36,43,.28)}
+.step .s-num{font-family:var(--display);font-size:2.6rem;font-weight:300;color:var(--river);opacity:.45;line-height:1}
+.step h3{font-family:var(--display);font-weight:520;font-size:1.2rem;margin:.7rem 0 .4rem}
+.step p{font-size:.92rem;color:var(--muted-dk)}
+.faq{margin-top:4.2rem}
+.faq .h3{font-family:var(--display);font-weight:420;font-size:clamp(1.6rem,3.4vw,2.4rem);margin-bottom:1.8rem}
+.faq-item{border-bottom:1px solid rgba(22,36,43,.12)}
+.faq-item>button{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:1.2rem;
+  padding:1.3rem .2rem;text-align:left;font-weight:700;font-size:1.05rem;color:var(--text-dk);
+}
+.faq-item .chev{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(22,36,43,.25);display:grid;place-items:center;transition:transform .45s var(--ease-out),background .3s,border-color .3s,color .3s}
+.faq-item.open .chev{transform:rotate(45deg);background:var(--river);border-color:var(--river);color:#fff}
+.faq-item .f-body{max-height:0;overflow:hidden;visibility:hidden;transition:max-height .5s var(--ease-out),visibility 0s .5s}
+.faq-item.open .f-body{visibility:visible;transition:max-height .5s var(--ease-out),visibility 0s 0s}
+.faq-item .f-body-pad{padding:0 .2rem 1.4rem;color:var(--muted-dk);max-width:72ch}
+@media (max-width:920px){.visit-grid{grid-template-columns:1fr}.steps{grid-template-columns:1fr}}
+
+/* ════════════════════════ FINAL CTA + FOOTER ════════════════════════ */
+#final-cta{
+  position:relative;background:var(--deep);padding:clamp(6rem,14vh,10rem) 0;text-align:center;overflow:hidden;
+}
+#final-cta::before{
+  content:'';position:absolute;inset:0;opacity:.35;pointer-events:none;
+  background:
+    radial-gradient(50% 90% at 20% 100%,rgba(46,143,163,.5),transparent 60%),
+    radial-gradient(50% 90% at 85% 0%,rgba(200,154,62,.3),transparent 60%);
+}
+#final-cta .h2{position:relative}
+#final-cta p{position:relative;color:var(--muted-lt);margin:1.2rem auto 2.4rem;max-width:46ch}
+#final-cta .hero-ctas{justify-content:center;opacity:1;transform:none;position:relative}
+footer{background:var(--ink);padding:4rem 0 2.5rem;border-top:1px solid rgba(191,231,238,.1)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem}
+.foot-brand img{height:44px;filter:invert(1) brightness(1.6);margin-bottom:1.1rem}
+.foot-brand p{font-size:.92rem;color:var(--muted-lt);max-width:30ch}
+footer h3{font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-lt);margin-bottom:1rem;font-family:var(--body);font-weight:700}
+footer ul{list-style:none;display:grid;gap:.55rem}
+footer ul a{font-size:.94rem;color:var(--muted-lt);transition:color .25s}
+footer ul a:hover{color:var(--text-lt)}
+.socials{display:flex;gap:.8rem;margin-top:1.4rem}
+.socials a{
+  width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(191,231,238,.22);
+  display:grid;place-items:center;color:var(--muted-lt);
+  transition:border-color .3s,color .3s,transform .3s var(--ease-out);
+}
+.socials a:hover{border-color:var(--river-lt);color:var(--river-lt);transform:translateY(-3px)}
+.foot-bottom{
+  margin-top:3.5rem;padding-top:1.6rem;border-top:1px solid rgba(191,231,238,.09);
+  display:flex;flex-wrap:wrap;justify-content:space-between;gap:.8rem;
+  font-size:.82rem;color:var(--muted-lt);
+}
+@media (max-width:920px){.foot-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.foot-grid{grid-template-columns:1fr}}
+@media (max-width:920px){.mission-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div id="river-progress" aria-hidden="true"></div>
+<div id="cursor-dot" aria-hidden="true"></div>
+<div id="cursor-ring" aria-hidden="true"></div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<header id="site-nav">
+  <a class="nav-logo" href="#hero" aria-label="Arroyo Church home">
+    <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/d0643920-775c-4c1f-945b-9a8771e757cf/logo-black.png?format=500w" alt="Arroyo Church logo">
+  </a>
+  <nav aria-label="Primary">
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#beliefs">Beliefs</a></li>
+      <li><a href="#sermons">Sermons</a></li>
+      <li><a href="#connect">Connect</a></li>
+      <li><a href="#give">Give</a></li>
+    </ul>
+  </nav>
+  <a href="#visit" class="btn btn-gold nav-cta magnet">Plan Your Visit</a>
+  <button id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+  <a href="#about" style="transition-delay:.06s">About</a>
+  <a href="#team" style="transition-delay:.11s">Team</a>
+  <a href="#beliefs" style="transition-delay:.16s">Beliefs</a>
+  <a href="#sermons" style="transition-delay:.21s">Sermons</a>
+  <a href="#connect" style="transition-delay:.26s">Connect</a>
+  <a href="#give" style="transition-delay:.31s">Give</a>
+  <a href="#visit" style="transition-delay:.36s">Plan Your Visit</a>
+  <div class="mm-meta">Sundays 10:00 AM · 945 Concannon Blvd, Livermore, CA</div>
+</div>
+
+<main id="main" tabindex="-1">
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-bg" role="img" aria-label="Worship gathering at Arroyo Church"></div>
+  <div class="hero-tint"></div>
+  <canvas id="water" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Arroyo Church · Livermore, CA</p>
+    <h1 id="hero-title">A river in&nbsp;the <em>desert.</em></h1>
+    <p class="hero-sub">Arroyo Church exists to <strong>know and show the love of Jesus</strong> in the Bay Area and beyond. No matter where you are on your journey, you are welcome here.</p>
+    <div class="hero-ctas">
+      <a href="#visit" class="btn btn-gold magnet">Plan Your Visit</a>
+      <a href="#sermons" class="btn btn-ghost magnet">Watch a Sermon</a>
+    </div>
+    <div class="hero-service">
+      <span><strong>Sundays · 10:00 AM</strong></span>
+      <span class="dot"></span>
+      <span>945 Concannon Blvd, Livermore, CA 94550</span>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<!-- ═══════════════ COUNTDOWN ═══════════════ -->
+<section id="countdown" aria-label="Countdown to the next worship gathering">
+  <span class="cd-label">Next worship gathering</span>
+  <div class="cd-units" id="cd-units">
+    <div class="cd-unit"><div class="cd-num" id="cd-d">–</div><div class="cd-word">Days</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-h">–</div><div class="cd-word">Hours</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-m">–</div><div class="cd-word">Minutes</div></div>
+    <div class="cd-unit"><div class="cd-num" id="cd-s">–</div><div class="cd-word">Seconds</div></div>
+  </div>
+  <div id="cd-live">We're gathered right now — come join us!</div>
+  <span class="cd-where">Sundays <strong>10:00 AM</strong> · the round building at <strong>945 Concannon Blvd</strong></span>
+</section>
+
+<!-- ═══════════════ ABOUT / MISSION ═══════════════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="mission-grid">
+      <div class="mission-copy">
+        <p class="eyebrow reveal">Who we are</p>
+        <h2 class="h2 reveal" style="--d:.08s">We exist to <em>know</em> and <em>show</em> the love of Jesus in the Bay Area and beyond.</h2>
+        <p class="lead reveal" style="--d:.16s">Love is not a feeling, but a sacrificial action done for the benefit of another. The most powerful demonstration of love in the history of humanity is when Jesus died on the cross in our place for our sins.</p>
+        <p class="reveal" style="--d:.22s"><em>"This is love, not that we loved God but that God loved us by sending His Son as the atoning sacrifice for our sins." — 1 John 4:10</em></p>
+      </div>
+      <div class="mission-cards">
+        <div class="mcard reveal tilt" style="--d:.05s">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C10.9 4 12 4.8 12 4.8C12 4.8 13.1 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg></div>
+          <div><h3>The Love of Jesus</h3><p>The cross is the most powerful demonstration of love in history — Jesus died in our place, for our sins.</p></div>
+        </div>
+        <div class="mcard reveal tilt" style="--d:.12s">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2.5"/></svg></div>
+          <div><h3>Knowing</h3><p>Jesus does not want you to merely know about His love intellectually but to experience His love personally.</p></div>
+        </div>
+        <div class="mcard reveal tilt" style="--d:.19s">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 11L12 6L17 11M12 7V18"/><path d="M5 21H19"/></svg></div>
+          <div><h3>Showing</h3><p>We seek to love others with both our words and works, just like Jesus.</p></div>
+        </div>
+        <div class="mcard reveal tilt" style="--d:.26s">
+          <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.7 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.7-4-9s1.5-6.4 4-9z"/></svg></div>
+          <div><h3>The Bay Area &amp; Beyond</h3><p>We are rooted in Livermore and reach people all over the Bay Area — with a heart for reaching the nations too.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STORY: WHY "ARROYO"? ═══════════════ -->
+<section id="story" aria-label="Why the church is named Arroyo">
+  <div class="story-inner">
+    <svg id="river-svg" viewBox="0 0 120 900" width="120" height="900" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+      <defs>
+        <linearGradient id="riverGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#c89a3e" stop-opacity=".0"/>
+          <stop offset=".25" stop-color="#c89a3e" stop-opacity=".55"/>
+          <stop offset=".6" stop-color="#5fc2d4"/>
+          <stop offset="1" stop-color="#bfe7ee"/>
+        </linearGradient>
+      </defs>
+      <path id="river-path" d="M60,0 C30,90 92,160 60,250 C30,335 88,400 60,490 C34,572 90,640 62,730 C40,800 76,850 60,900" stroke="url(#riverGrad)" stroke-width="3.5"/>
+    </svg>
+    <div class="story-z">
+      <p class="story-kicker reveal">Why is the church named Arroyo?</p>
+      <blockquote class="story-verse" id="verse">
+        “Remember not the former things, nor consider the things of old. Behold, I am doing a new thing; now it springs forth, do you not perceive it? I will make a way in the wilderness and rivers in the desert.”
+      </blockquote>
+      <p class="story-ref reveal">— Isaiah 43:18–19</p>
+      <p class="story-body reveal">An <strong>arroyo</strong> is a river in the desert. The Bay Area in many ways is a spiritual desert — it is the most unchurched area in the United States. We believe that God has called our church to be a river in the middle of this spiritual desert. <strong>We bring life into the desert by knowing and showing the love of Jesus to the Bay Area and beyond.</strong></p>
+      <div class="story-stat reveal" style="--d:.1s">
+        <span class="big">Life flows where the <em>river</em> runs.</span>
+        <span class="small">A church rooted in Livermore, bringing living water to the most unchurched region in America.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BELIEFS ═══════════════ -->
+<section id="beliefs">
+  <div class="wrap">
+    <div class="beliefs-head">
+      <div>
+        <p class="eyebrow reveal">Our beliefs</p>
+        <h2 class="h2 reveal" style="--d:.08s">What anchors <em>everything</em> we do.</h2>
+      </div>
+      <p class="reveal" style="--d:.16s">Six convictions, rooted in Scripture, that shape who we are. Tap any one to read more.</p>
+    </div>
+    <div class="belief-list">
+      <div class="belief reveal">
+        <h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">01</span><span class="b-name">The Gospel</span></span><span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button></h3>
+        <div class="b-body"><div class="b-body-pad">We believe that the gospel is the good news that, “God so loved the world that He gave His one and only Son, so that whoever believes in Him will not perish but have everlasting life.” (John 3:16) All human beings have sinned against God, and the result is that we are separated from Him and are not a part of the family of God. The good news is that God did not want to stay separate from us. The Father sent Jesus Christ to die the death that we deserved on the cross and rose again three days later so that if we place our faith in Him we can be forgiven forever, and be adopted into the family of God. We are not saved from our sins by our good works, but by simply trusting in the good work that Christ did on the cross for us as our substitutionary sacrifice. We believe that Christ died for us because God “SO” loves us. This good news is meant to be believed, and then to be shared so that others may experience the free gift of God's forgiveness in their life. (Ephesians 2:8–10, John 3:16, 1 John 4:10, Romans 3:23)</div></div>
+      </div>
+      <div class="belief reveal" style="--d:.05s">
+        <h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">02</span><span class="b-name">The Trinity</span></span><span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button></h3>
+        <div class="b-body"><div class="b-body-pad">We believe there is only one true God, who eternally exists as a Trinity of equally divine persons: Father, Son, and Holy Spirit. Each member of the Trinity thinks, acts, feels, speaks, and relates, because each is a person and not an impersonal force. Each member of the Trinity is equally God, sharing all the divine attributes. Because love and community flow from the Trinity to us through the Holy Spirit, we seek to live in loving community with God and others. (Genesis 1:26, Matthew 28:19, Luke 3:22, 1 Peter 1:2)</div></div>
+      </div>
+      <div class="belief reveal" style="--d:.1s">
+        <h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">03</span><span class="b-name">The Bible</span></span><span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button></h3>
+        <div class="b-body"><div class="b-body-pad">We believe that God has supremely revealed Himself through Jesus Christ, who Himself was the Word that was made flesh. We believe that all sixty-six books of the Bible are divinely Holy Spirit inspired, inerrant, and authoritative. The Bible exists to reveal Jesus Christ to us so we can have a relationship with Him. Because God is a loving Father who speaks through His word, we seek to read, memorize, meditate on, and apply the truths found in the Bible. (John 1, 2 Timothy 3:16–17, John 17:17, Isaiah 40:8)</div></div>
+      </div>
+      <div class="belief reveal" style="--d:.15s">
+        <h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">04</span><span class="b-name">Humanity</span></span><span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button></h3>
+        <div class="b-body"><div class="b-body-pad">We believe that all human beings are created in the image of God, and therefore, have intrinsic value. God created us in His image because we were created to be in His family as His children. We are also all sinners by both nature and choice. Because we have all sinned, we have all become separated from God. The result is that all people are spiritual orphans, unless we place our faith in Jesus. Once we place our faith in Jesus, we receive forgiveness and become a part of the family of God, just as it was originally intended. (Genesis 1:27, Romans 3:23, Isaiah 59:2)</div></div>
+      </div>
+      <div class="belief reveal" style="--d:.2s">
+        <h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">05</span><span class="b-name">Eternity</span></span><span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button></h3>
+        <div class="b-body"><div class="b-body-pad">We believe that all people are created to exist forever. We will either exist eternally separated from God by sin in hell, or be eternally united with God through forgiveness and salvation in heaven. Hell is a place of conscious and eternal torment. God does not want anyone to go to hell, but people go there when they decide to decline His offer of love and relationship. Heaven is a perfect place where we get to be united forever with God, who is perfect. (Revelation 21:8, Revelation 21:1–27, Luke 16:1–31, John 14:2–3)</div></div>
+      </div>
+      <div class="belief reveal" style="--d:.25s">
+        <h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">06</span><span class="b-name">The Church</span></span><span class="chev"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button></h3>
+        <div class="b-body"><div class="b-body-pad">We believe that the local church is a community of people who confess Jesus Christ as Lord, and that the universal church is comprised of all God's people in all times and places. In obedience to Scripture, Christians organize under qualified leadership, gather regularly for preaching and worship, practice believer's baptism, regularly remember the cross through Communion, are unified by the Spirit in love, are corrected for holiness, and scatter to fulfill the great commandment and the great commission as missionaries to the world. Because we are members of God's universal church, we partner with other Christian local churches and ministries for Kingdom ministry and are devoted to building up our local church family. (Acts 2:36–41, Matthew 16:18, Acts 2:42, Matthew 2:11, Romans 13:1–7, Matthew 28)</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ VALUES (sticky stack) ═══════════════ -->
+<section id="values" aria-label="Our values">
+  <div class="wrap">
+    <p class="eyebrow reveal">Our values</p>
+    <h2 class="h2 reveal" style="--d:.08s">Five things we refuse<br>to compromise on.</h2>
+    <div class="vstack">
+      <div class="vcard">
+        <div class="v-num">01</div>
+        <div>
+          <h3>Gospel Centered</h3>
+          <p class="v-tag">It is all about who Jesus is and what He has done!</p>
+          <blockquote>"For what I received I passed on to you as of first importance: that Christ died for our sins according to the Scriptures." — 1 Corinthians 15:3</blockquote>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="v-num">02</div>
+        <div>
+          <h3>Grace &amp; Truth Together</h3>
+          <p class="v-tag">Grace without truth is weak and truth without grace is harsh.</p>
+          <blockquote>"The Word became flesh and made his dwelling among us... full of grace and truth." — John 1:14</blockquote>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="v-num">03</div>
+        <div>
+          <h3>Bridging the Word to the World</h3>
+          <p class="v-tag">We help others see how God's word is applicable to their daily lives.</p>
+          <blockquote>"I have become all things to all people so that by all possible means I might save some." — 1 Corinthians 9:22b</blockquote>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="v-num">04</div>
+        <div>
+          <h3>Real Community</h3>
+          <p class="v-tag">Come as you are but refuse to stay as you are.</p>
+          <blockquote>"Confess your sins to each other and pray for each other so that you may be healed." — James 5:16</blockquote>
+        </div>
+      </div>
+      <div class="vcard">
+        <div class="v-num">05</div>
+        <div>
+          <h3>Sacrificial Service</h3>
+          <p class="v-tag">We refuse to be spectators in the stands so we strive to sacrificially serve God and others.</p>
+          <blockquote>"Therefore, brothers and sisters, in view of God's mercies, offer your bodies as a living sacrifice, holy and pleasing to God — this is your true and proper worship." — Romans 12:1</blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ TEAM ═══════════════ -->
+<section id="team">
+  <div class="wrap">
+    <div class="team-head">
+      <div>
+        <p class="eyebrow reveal">Our team</p>
+        <h2 class="h2 reveal" style="--d:.08s">The people who<br><em>serve</em> you on Sundays.</h2>
+      </div>
+      <p class="reveal" style="--d:.16s">Hover (or tap) a photo to get to know each person — family facts, fun facts and all.</p>
+    </div>
+    <div class="team-grid">
+      <div class="tcard reveal">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/6a2c5fd0-7b7a-4f65-aa91-f6ab83dc18b9/R6II2038.jpg?format=900w" alt="Josh Smith" loading="lazy" decoding="async">
+        <div class="t-scrim"></div>
+        <button class="t-toggle" aria-expanded="false"><span class="t-name">Josh Smith</span><span class="role">Lead Pastor</span><span class="sr-only">— show family and fun facts</span></button>
+        <div class="t-facts">
+          <h3>Josh Smith</h3><div class="role">Lead Pastor</div>
+          <p><strong>Family fact:</strong> I met my wife, Jamie, in elementary school. We now have three daughters that I adore!</p>
+          <p><strong>Fun fact:</strong> I'm a diehard 49ers and Warriors fan.</p>
+        </div>
+      </div>
+      <div class="tcard reveal" style="--d:.07s">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/86c9ec5e-e920-4661-8b59-412f8e5f502b/R6II2019.jpg?format=900w" alt="Cristian Ayquipa" loading="lazy" decoding="async">
+        <div class="t-scrim"></div>
+        <button class="t-toggle" aria-expanded="false"><span class="t-name">Cristian Ayquipa</span><span class="role">Associate Pastor</span><span class="sr-only">— show family and fun facts</span></button>
+        <div class="t-facts">
+          <h3>Cristian Ayquipa</h3><div class="role">Associate Pastor</div>
+          <p><strong>Family fact:</strong> I met my wife at Bible college. We have two amazing sons!</p>
+          <p><strong>Fun fact:</strong> I love making coffee!</p>
+        </div>
+      </div>
+      <div class="tcard reveal" style="--d:.14s">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/42167adb-77e9-41a3-b891-10cf2cf087c9/R6II2021.jpg?format=900w" alt="Chris Rogers" loading="lazy" decoding="async">
+        <div class="t-scrim"></div>
+        <button class="t-toggle" aria-expanded="false"><span class="t-name">Chris Rogers</span><span class="role">Worship Pastor</span><span class="sr-only">— show family and fun facts</span></button>
+        <div class="t-facts">
+          <h3>Chris Rogers</h3><div class="role">Worship Pastor</div>
+          <p><strong>Family fact:</strong> My wife &amp; kids love the Tri-Valley!</p>
+          <p><strong>Fun fact:</strong> Music has always been my passion!</p>
+        </div>
+      </div>
+      <div class="tcard reveal">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/65d6fbc4-f15f-4783-bda1-9b46ca00a7b4/R6II2014.jpg?format=900w" alt="Emily Fountain" loading="lazy" decoding="async">
+        <div class="t-scrim"></div>
+        <button class="t-toggle" aria-expanded="false"><span class="t-name">Emily Fountain</span><span class="role">Interim Children's Ministry Director</span><span class="sr-only">— show family and fun facts</span></button>
+        <div class="t-facts">
+          <h3>Emily Fountain</h3><div class="role">Interim Children's Ministry Director</div>
+          <p><strong>Family fact:</strong> I love being a mom!</p>
+          <p><strong>Fun fact:</strong> I am the youngest of four sisters.</p>
+        </div>
+      </div>
+      <div class="tcard reveal" style="--d:.07s">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/bbb854a4-37f6-475b-bf03-3436a3fe9a2b/R6II2030.jpg?format=900w" alt="Elijah Merrell" loading="lazy" decoding="async">
+        <div class="t-scrim"></div>
+        <button class="t-toggle" aria-expanded="false"><span class="t-name">Elijah Merrell</span><span class="role">Media Coordinator</span><span class="sr-only">— show family and fun facts</span></button>
+        <div class="t-facts">
+          <h3>Elijah Merrell</h3><div class="role">Media Coordinator</div>
+          <p><strong>Family fact:</strong> I am a pastor's kid.</p>
+          <p><strong>Fun fact:</strong> I enjoy being creative with content and music!</p>
+        </div>
+      </div>
+      <div class="tcard reveal" style="--d:.14s">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/d26f2702-88a5-4707-8a64-2d3f2bf8a9e0/201225612_10225910144448549_5580392780219787886_n.jpg?format=900w" alt="Janna Chestnut" loading="lazy" decoding="async">
+        <div class="t-scrim"></div>
+        <button class="t-toggle" aria-expanded="false"><span class="t-name">Janna Chestnut</span><span class="role">Women's Ministry Director</span><span class="sr-only">— show family and fun facts</span></button>
+        <div class="t-facts">
+          <h3>Janna Chestnut</h3><div class="role">Women's Ministry Director</div>
+          <p><strong>Family fact:</strong> I have five grown up children!</p>
+          <p><strong>Fun fact:</strong> I have lived in the East Bay my whole life.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="elders">
+      <p class="eyebrow reveal" style="color:#7d6228">Elder board</p>
+      <h2 class="h2 reveal" style="--d:.06s;font-size:clamp(1.7rem,3.6vw,2.6rem)">Shepherds &amp; stewards.</h2>
+      <p class="lead reveal" style="--d:.12s">Each member of our elder board meets the qualifications for elders found in Titus 1:5–9 and 1 Timothy 3:1–7. The elders shepherd the church body, steward its resources, and provide support and accountability for our Lead Pastor. Our elders also serve as the board of directors for Arroyo Church since every non-profit corporation is required by law to have a board of directors.</p>
+      <div class="elder-grid">
+        <div class="ecard reveal">
+          <div class="e-img"><img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/01dd48be-491c-4b6b-801d-cd1c431cc6c5/IMG_0585.jpg?format=600w" alt="Josh Smith" loading="lazy" decoding="async"></div>
+          <h3>Josh Smith</h3><div class="role">Elder · President</div>
+        </div>
+        <div class="ecard reveal" style="--d:.07s">
+          <div class="e-img"><img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/93b90642-39cb-4a5d-8d74-8b80b51be354/6.jpg?format=600w" alt="Dakota Yates" loading="lazy" decoding="async"></div>
+          <h3>Dakota Yates</h3><div class="role">Elder · Vice President</div>
+        </div>
+        <div class="ecard reveal" style="--d:.14s">
+          <div class="e-img"><img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/cf71979c-c760-4657-b8ec-b7b491cbf4cf/7.jpg?format=600w" alt="Kelly Patchin" loading="lazy" decoding="async"></div>
+          <h3>Kelly Patchin</h3><div class="role">Elder · Secretary</div>
+        </div>
+        <div class="ecard reveal" style="--d:.21s">
+          <div class="e-img"><img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/d14d2d39-716e-4b74-a068-d6177126c1b9/IMG_9F380B7F72B9-1.jpeg?format=600w" alt="Mason Fountain" loading="lazy" decoding="async"></div>
+          <h3>Mason Fountain</h3><div class="role">Elder · Treasurer</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERMONS ═══════════════ -->
+<section id="sermons">
+  <div class="wrap">
+    <div class="sermon-head">
+      <div>
+        <p class="eyebrow reveal">Sermons</p>
+        <h2 class="h2 reveal" style="--d:.08s">Missed a Sunday?<br><em>Catch up</em> anytime.</h2>
+      </div>
+      <p class="reveal" style="--d:.16s">Stay connected with our latest sermons and podcasts — streamed every week on YouTube.</p>
+    </div>
+    <div class="sermon-grid">
+      <div class="yt reveal" data-id="1casv_QOmrc" data-title="Answering Hard Questions Part Two" role="button" tabindex="0" aria-label="Play sermon: Answering Hard Questions Part Two">
+        <img class="thumb" src="https://i.ytimg.com/vi/1casv_QOmrc/maxresdefault.jpg" onerror="this.src='https://i.ytimg.com/vi/1casv_QOmrc/hqdefault.jpg'" alt="" loading="lazy">
+        <span class="play" aria-hidden="true"></span>
+      </div>
+      <div class="yt-side">
+        <div class="yt reveal" style="--d:.08s" data-id="__oATaYVfpY" data-title="Is the Resurrection Real and Relevant?" role="button" tabindex="0" aria-label="Play sermon: Is the Resurrection Real and Relevant?">
+          <img class="thumb" src="https://i.ytimg.com/vi/__oATaYVfpY/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="yt reveal" style="--d:.16s" data-id="d-7hW6V50NE" data-title="Answering Hard Questions Part One" role="button" tabindex="0" aria-label="Play sermon: Answering Hard Questions Part One">
+          <img class="thumb" src="https://i.ytimg.com/vi/d-7hW6V50NE/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play" aria-hidden="true"></span>
+        </div>
+        <div class="yt reveal" style="--d:.24s" data-id="w9tAcNkSqFw" data-title="Do All Religions Lead to the Same God?" role="button" tabindex="0" aria-label="Play sermon: Do All Religions Lead to the Same God?">
+          <img class="thumb" src="https://i.ytimg.com/vi/w9tAcNkSqFw/hqdefault.jpg" alt="" loading="lazy">
+          <span class="play" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+    <div class="sermons-cta reveal">
+      <a class="btn btn-river magnet" href="https://www.youtube.com/@arroyochurch" target="_blank" rel="noopener">Watch on YouTube
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12L12 3M5 3h7v7"/></svg>
+      </a>
+      <span style="color:var(--muted-lt);font-size:.92rem">New messages every week · youtube.com/@arroyochurch</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CONNECT ═══════════════ -->
+<section id="connect">
+  <div class="wrap">
+    <div class="connect-grid">
+      <div class="connect-photo reveal tilt">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/f52a08fb-45fd-4b58-bfb0-064a4acad7ca/503251240_17970029975899813_3744320071993253638_n.jpg?format=1500w" alt="A connect group gathering at Arroyo Church" loading="lazy" decoding="async">
+      </div>
+      <div class="connect-copy">
+        <p class="eyebrow reveal">Connect groups</p>
+        <h2 class="h2 reveal" style="--d:.08s">You were created<br>for <em>community.</em></h2>
+        <p class="lead reveal" style="--d:.16s">At Arroyo we offer a variety of connect groups during the week so you can continue to stay connected with others and grow in your faith. We take time to discuss how Sunday's message applies to our lives, pray for one another, and have a lot of fun — and sometimes eat a lot of food too.</p>
+        <a class="btn btn-river magnet reveal" style="--d:.24s" href="https://arroyo-church-434989.churchcenter.com/people/forms/1206123" target="_blank" rel="noopener">Join a Group</a>
+      </div>
+    </div>
+
+    <div class="ministries">
+      <div class="min-card reveal">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.9-4.6 5.5-4.6S13.9 16 14.5 19"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.6 14.1c2.7-.4 4.7 1.3 5.1 4"/></svg></div>
+        <h3>Connect Groups</h3>
+        <p>Weeknight groups across the Tri-Valley to discuss Sunday's message, pray together, and do life together.</p>
+      </div>
+      <div class="min-card reveal" style="--d:.08s">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.9 4.4L18.5 8l-3.3 3.1.8 4.6L12 13.6l-4 2.1.8-4.6L5.5 8l4.6-.6z"/></svg></div>
+        <h3>Children's Ministry</h3>
+        <p>Every Sunday, nursery through 5th grade — a safe and fun environment for your kids to learn about Jesus.</p>
+      </div>
+      <div class="min-card reveal" style="--d:.16s">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C10.9 4 12 4.8 12 4.8C12 4.8 13.1 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg></div>
+        <h3>Women's Ministry</h3>
+        <p>Gatherings and community for women in every season of life, led by our Women's Ministry team.</p>
+      </div>
+    </div>
+
+    <div class="prayer-band reveal">
+      <div>
+        <h3>Got questions or need prayer?</h3>
+        <p>If you have any questions about the church or have any prayer requests, we would love to hear from you.</p>
+      </div>
+      <a class="btn btn-gold magnet" href="mailto:josh@arroyochurch.com?subject=Question%20%2F%20Prayer%20Request">Send a Message</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ GIVE ═══════════════ -->
+<section id="give">
+  <div class="wrap">
+    <div class="give-head">
+      <p class="eyebrow reveal" style="justify-content:center">Generosity</p>
+      <h2 class="h2 reveal" style="--d:.08s">We give because <em>He</em> gave.</h2>
+      <p class="lead reveal" style="--d:.16s">Your generosity empowers our mission to keep moving forward. We truly appreciate your donation!</p>
+    </div>
+    <div class="give-grid">
+      <a class="gcard reveal tilt" href="https://donate.overflow.co/arroyochurch/cash" target="_blank" rel="noopener">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/></svg></div>
+        <h3>Cash Donation</h3>
+        <p>Give a one-time or recurring gift securely online — the simplest way to support the mission.</p>
+        <span class="g-link">Give now <svg width="14" height="14" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7.5h11M8.5 3L13 7.5 8.5 12"/></svg></span>
+      </a>
+      <a class="gcard reveal tilt" style="--d:.08s" href="https://donate.overflow.co/arroyochurch/stock/select-flow" target="_blank" rel="noopener">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5M4 19h16"/><path d="M7 14l4-4 3 3 5-6"/></svg></div>
+        <h3>Stock Donation</h3>
+        <p>Donate appreciated stock directly — often the most tax-efficient way to give.</p>
+        <span class="g-link">Give stock <svg width="14" height="14" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7.5h11M8.5 3L13 7.5 8.5 12"/></svg></span>
+      </a>
+      <a class="gcard reveal tilt" style="--d:.16s" href="https://donate.overflow.co/arroyochurch/crypto" target="_blank" rel="noopener">
+        <div class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 7.5h3.2a2 2 0 110 4H9.5h3.7a2 2 0 110 4H9.5M11 5.8v1.7M11 15.5v1.7"/></svg></div>
+        <h3>Crypto Donation</h3>
+        <p>Give Bitcoin, Ethereum, and other digital assets securely through our giving partner.</p>
+        <span class="g-link">Give crypto <svg width="14" height="14" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7.5h11M8.5 3L13 7.5 8.5 12"/></svg></span>
+      </a>
+    </div>
+    <p class="give-verse reveal">"Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver." — 2 Corinthians 9:7</p>
+  </div>
+</section>
+
+<!-- ═══════════════ PLAN YOUR VISIT ═══════════════ -->
+<section id="visit">
+  <div class="wrap">
+    <p class="eyebrow reveal">Plan your visit</p>
+    <div class="visit-grid">
+      <div class="visit-info">
+        <h2 class="h2 reveal" style="--d:.06s">This Sunday.<br><em>Save you a seat?</em></h2>
+        <p class="lead reveal" style="--d:.12s">Join us for our 10:00 AM worship service this Sunday. Gatherings run about 55 minutes — come as you are, dress is casual, and your kids will love it here.</p>
+        <div class="visit-meta">
+          <div class="vm reveal" style="--d:.16s">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-5.6-7-11a7 7 0 1114 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div>
+            <div><h3>Location</h3><p>945 Concannon Blvd, Livermore, CA 94550<br><span style="font-weight:500;color:var(--muted-dk);font-size:.9rem">The worship center is the round building.</span></p></div>
+          </div>
+          <div class="vm reveal" style="--d:.22s">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2.5"/></svg></div>
+            <div><h3>Service time</h3><p>Sundays · 10:00 AM</p></div>
+          </div>
+          <div class="vm reveal" style="--d:.28s">
+            <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></div>
+            <div><h3>Contact</h3><p><a href="mailto:josh@arroyochurch.com">josh@arroyochurch.com</a><br><a href="tel:+19256940426">(925) 694-0426</a></p></div>
+          </div>
+        </div>
+        <div class="hero-ctas reveal" style="--d:.34s;opacity:1;transform:none;margin-top:2.2rem">
+          <a class="btn btn-gold magnet" href="mailto:josh@arroyochurch.com?subject=I%27m%20planning%20to%20visit%20this%20Sunday!&body=Hi%20Arroyo%20Church%2C%0A%0AI%27m%20planning%20to%20join%20you%20this%20Sunday%20at%2010am.%0A%0AName%3A%20%0ANumber%20of%20people%20coming%3A%20%0AKids%20joining%3F%20%0A%0ASee%20you%20soon!">Let Us Know You're Coming</a>
+        </div>
+      </div>
+      <div class="visit-map reveal" style="--d:.15s">
+        <iframe title="Map to Arroyo Church — 945 Concannon Blvd, Livermore, CA" src="https://www.google.com/maps?q=945+Concannon+Blvd,+Livermore,+CA+94550&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal"><div class="s-num">01</div><h3>Worship</h3><p>We start each gathering with a few songs of worship together.</p></div>
+      <div class="step reveal" style="--d:.08s"><div class="s-num">02</div><h3>Message</h3><p>A Bible-centered sermon that bridges God's word to your everyday life.</p></div>
+      <div class="step reveal" style="--d:.16s"><div class="s-num">03</div><h3>Prayer</h3><p>We close with a few more songs, and our pastoral team is available to pray with anyone who needs it.</p></div>
+    </div>
+
+    <div class="faq">
+      <h3 class="h3 reveal">Frequently asked questions</h3>
+      <div class="faq-item reveal">
+        <button aria-expanded="false">Do you have child care during the worship service?<span class="chev"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button>
+        <div class="f-body"><div class="f-body-pad">Yes, we provide children's ministry for kids from nursery age to 5th grade. We prioritize creating a safe and fun environment for your kids to learn about Jesus!</div></div>
+      </div>
+      <div class="faq-item reveal" style="--d:.04s">
+        <button aria-expanded="false">What is the address for the church?<span class="chev"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button>
+        <div class="f-body"><div class="f-body-pad">945 Concannon Blvd, Livermore, CA 94550. The worship center is the round building.</div></div>
+      </div>
+      <div class="faq-item reveal" style="--d:.08s">
+        <button aria-expanded="false">What should I wear?<span class="chev"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button>
+        <div class="f-body"><div class="f-body-pad">Most people in our church dress casual but feel free to come dressed however you want!</div></div>
+      </div>
+      <div class="faq-item reveal" style="--d:.12s">
+        <button aria-expanded="false">What does a typical Sunday morning look like?<span class="chev"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button>
+        <div class="f-body"><div class="f-body-pad">We start each worship gathering with a few songs, followed by a sermon, and then close with a few more songs. We often offer times for those that need prayer to come forward to receive it from someone on our pastoral team.</div></div>
+      </div>
+      <div class="faq-item reveal" style="--d:.16s">
+        <button aria-expanded="false">How long are the worship gatherings?<span class="chev"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button>
+        <div class="f-body"><div class="f-body-pad">Our worship gatherings are normally around 55 minutes long.</div></div>
+      </div>
+      <div class="faq-item reveal" style="--d:.2s">
+        <button aria-expanded="false">What type of church is Arroyo?<span class="chev"><svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg></span></button>
+        <div class="f-body"><div class="f-body-pad">We are a church dedicated to knowing and showing the love of Jesus in the Bay Area and beyond. No matter where you are on your journey, you are welcome to join us!</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FINAL CTA ═══════════════ -->
+<section id="final-cta">
+  <div class="wrap">
+    <h2 class="h2 reveal">Come find life<br>at the <em>river.</em></h2>
+    <p class="reveal" style="--d:.08s">No matter where you are on your journey, you are welcome to join us this Sunday at 10 AM.</p>
+    <div class="hero-ctas reveal" style="--d:.16s">
+      <a href="#visit" class="btn btn-gold magnet">Plan Your Visit</a>
+      <a href="https://www.youtube.com/@arroyochurch" target="_blank" rel="noopener" class="btn btn-ghost magnet">Watch Online</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="https://images.squarespace-cdn.com/content/v1/68532fdd269d6a05dbb80b84/d0643920-775c-4c1f-945b-9a8771e757cf/logo-black.png?format=500w" alt="Arroyo Church logo">
+        <p>Knowing and showing the love of Jesus in the Bay Area and beyond.</p>
+        <div class="socials">
+          <a href="https://www.facebook.com/ArroyoChurch" target="_blank" rel="noopener" aria-label="Arroyo Church on Facebook">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.6l.4-3h-3V9.1c0-.9.3-1.6 1.7-1.6h1.4V4.8c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8v3h2.5v7h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com/arroyochurch/" target="_blank" rel="noopener" aria-label="Arroyo Church on Instagram">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.youtube.com/@arroyochurch" target="_blank" rel="noopener" aria-label="Arroyo Church on YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 00-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 002.4 7.2 26.3 26.3 0 002 12c0 1.6.1 3.2.4 4.8a2.5 2.5 0 001.8 1.8c1.5.4 7.8.4 7.8.4s6.3 0 7.8-.4a2.5 2.5 0 001.8-1.8c.3-1.6.4-3.2.4-4.8s-.1-3.2-.4-4.8zM10 15.2V8.8L15.6 12 10 15.2z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <h3>Visit</h3>
+        <ul>
+          <li><a href="#visit">945 Concannon Blvd<br>Livermore, CA 94550</a></li>
+          <li><a href="#countdown">Sundays · 10:00 AM</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#team">Team</a></li>
+          <li><a href="#beliefs">Beliefs</a></li>
+          <li><a href="#sermons">Sermons</a></li>
+          <li><a href="#connect">Connect</a></li>
+          <li><a href="#give">Give</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="mailto:josh@arroyochurch.com">josh@arroyochurch.com</a></li>
+          <li><a href="tel:+19256940426">(925) 694-0426</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Arroyo Church · Livermore, CA</span>
+      <span>"I will make a way in the wilderness and rivers in the desert." — Isaiah 43:19</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer = window.matchMedia('(pointer: fine)').matches;
+
+/* ── Hero headline word split ─────────────────────────── */
+(function(){
+  const h1 = document.getElementById('hero-title');
+  if(!h1) return;
+  const nodes = Array.from(h1.childNodes);
+  h1.innerHTML = '';
+  let i = 0;
+  nodes.forEach(node => {
+    if(node.nodeType === 3){
+      node.textContent.split(/[^\S\u00A0]+/).forEach(word => {
+        if(!word) return;
+        const w = document.createElement('span'); w.className = 'w';
+        const inner = document.createElement('span');
+        inner.textContent = word;
+        inner.style.transitionDelay = (0.12 + i * 0.09) + 's';
+        w.appendChild(inner); h1.appendChild(w);
+        h1.appendChild(document.createTextNode(' '));
+        i++;
+      });
+    } else {
+      const w = document.createElement('span'); w.className = 'w';
+      const inner = document.createElement('span');
+      inner.appendChild(node.cloneNode(true));
+      inner.style.transitionDelay = (0.12 + i * 0.09) + 's';
+      w.appendChild(inner); h1.appendChild(w);
+      i++;
+    }
+  });
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('loaded')));
+})();
+
+/* ── Isaiah verse word split ──────────────────────────── */
+const verseEl = document.getElementById('verse');
+let verseWords = [];
+if(verseEl){
+  const words = verseEl.textContent.trim().split(/\s+/);
+  verseEl.innerHTML = words.map(w => '<span class="vw">' + w + '</span>').join(' ');
+  verseWords = Array.from(verseEl.querySelectorAll('.vw'));
+}
+
+/* ── Reveal on scroll ─────────────────────────────────── */
+const pendingReveals = Array.from(document.querySelectorAll('.reveal'));
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold: 0.12, rootMargin: '0px 0px -6% 0px'});
+pendingReveals.forEach(el => io.observe(el));
+/* Fallback sweep: fast scrolls and anchor jumps can outrun the observer.
+   Reveal anything whose top has already crossed the fold. */
+function sweepReveals(){
+  for(let i = pendingReveals.length - 1; i >= 0; i--){
+    const el = pendingReveals[i];
+    if(el.classList.contains('in')){ pendingReveals.splice(i, 1); continue; }
+    if(el.getBoundingClientRect().top < window.innerHeight * 0.96){
+      el.classList.add('in'); io.unobserve(el); pendingReveals.splice(i, 1);
+    }
+  }
+}
+
+/* ── Nav state + section spy ──────────────────────────── */
+const nav = document.getElementById('site-nav');
+const navLinks = Array.from(document.querySelectorAll('.nav-links a'));
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      const id = '#' + e.target.id;
+      navLinks.forEach(a => a.setAttribute('aria-current', a.getAttribute('href') === id ? 'true' : 'false'));
+    }
+  });
+}, {rootMargin: '-40% 0px -55% 0px'});
+['about','team','beliefs','sermons','connect','give','visit'].forEach(id => {
+  const el = document.getElementById(id); if(el) spy.observe(el);
+});
+
+/* ── Mobile menu (modal dialog: Escape, focus trap) ───── */
+const burger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+function setMenu(open){
+  document.body.classList.toggle('menu-open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  if(open){
+    // small delay: the menu is visibility:hidden until its transition starts
+    setTimeout(() => {
+      const first = mobileMenu.querySelector('a');
+      if(first && document.body.classList.contains('menu-open')) first.focus();
+    }, 60);
+  } else {
+    burger.focus();
+  }
+}
+burger.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+document.querySelectorAll('#mobile-menu a').forEach(a => a.addEventListener('click', () => {
+  document.body.classList.remove('menu-open');
+  burger.setAttribute('aria-expanded','false');
+}));
+document.addEventListener('keydown', e => {
+  if(!document.body.classList.contains('menu-open')) return;
+  if(e.key === 'Escape'){ e.preventDefault(); setMenu(false); return; }
+  if(e.key === 'Tab'){
+    const focusables = [burger, ...mobileMenu.querySelectorAll('a')];
+    const i = focusables.indexOf(document.activeElement);
+    if(e.shiftKey && (i === 0 || i === -1)){
+      e.preventDefault(); focusables[focusables.length - 1].focus();
+    } else if(!e.shiftKey && i === focusables.length - 1){
+      e.preventDefault(); focusables[0].focus();
+    }
+  }
+});
+
+/* ── Accordions (beliefs + FAQ) ───────────────────────── */
+function wireAccordion(rootSel, itemSel, bodySel){
+  document.querySelectorAll(rootSel + ' ' + itemSel).forEach(item => {
+    const btn = item.querySelector('button');
+    const body = item.querySelector(bodySel);
+    btn.addEventListener('click', () => {
+      const open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+      if(open){
+        body.style.maxHeight = body.scrollHeight + 'px';
+      } else {
+        // pin current height so the close animates even if max-height was 'none'
+        body.style.maxHeight = body.scrollHeight + 'px';
+        body.offsetHeight; // force reflow so the transition starts from the pinned height
+        body.style.maxHeight = '0px';
+      }
+    });
+    body.addEventListener('transitionend', () => {
+      if(item.classList.contains('open')) body.style.maxHeight = 'none';
+    });
+  });
+}
+wireAccordion('#beliefs', '.belief', '.b-body');
+wireAccordion('#visit', '.faq-item', '.f-body');
+
+/* ── Team cards: button toggles the facts overlay ─────── */
+document.querySelectorAll('.tcard').forEach(card => {
+  const btn = card.querySelector('.t-toggle');
+  btn.addEventListener('click', () => {
+    const open = card.classList.toggle('flipped');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+});
+
+/* ── Lite YouTube embeds ──────────────────────────────── */
+document.querySelectorAll('.yt').forEach(box => {
+  function activate(){
+    if(box.querySelector('iframe')) return;
+    const id = box.dataset.id;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    f.allowFullscreen = true;
+    f.title = box.dataset.title ? 'Sermon: ' + box.dataset.title : 'Arroyo Church sermon video';
+    box.appendChild(f);
+  }
+  box.addEventListener('click', activate);
+  box.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); activate(); } });
+});
+
+/* ── Countdown to Sunday 10:00 AM Pacific ─────────────── */
+const cdD = document.getElementById('cd-d'), cdH = document.getElementById('cd-h'),
+      cdM = document.getElementById('cd-m'), cdS = document.getElementById('cd-s'),
+      cdUnits = document.getElementById('cd-units'), cdLive = document.getElementById('cd-live');
+const laFmt = new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',
+  weekday:'short',hour:'numeric',minute:'numeric',second:'numeric',hour12:false});
+function laPartsAt(date){
+  const p = laFmt.formatToParts(date);
+  const get = t => p.find(x => x.type === t).value;
+  return {wd:get('weekday'), h:+get('hour')%24, mi:+get('minute'), s:+get('second')};
+}
+function tick(){
+  const la = laPartsAt(new Date());
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const dow = days.indexOf(la.wd);
+  const secNow = la.h*3600 + la.mi*60 + la.s;
+  const tenAM = 10*3600, elevenAM = 11*3600;
+  if(dow === 0 && secNow >= tenAM && secNow < elevenAM){
+    cdUnits.style.display = 'none'; cdLive.style.display = 'block'; return;
+  }
+  cdUnits.style.display = ''; cdLive.style.display = 'none';
+  let daysAhead;
+  if(dow === 0 && secNow < tenAM) daysAhead = 0;
+  else daysAhead = (7 - dow) % 7 || 7;
+  let total = daysAhead*86400 + tenAM - secNow;
+  if(total < 0) total += 7*86400;
+  // DST correction: local-clock arithmetic assumes 86400s days. Probe the
+  // target instant's LA wall clock and absorb any ±1h transition offset.
+  const probe = laPartsAt(new Date(Date.now() + total*1000));
+  const drift = tenAM - (probe.h*3600 + probe.mi*60 + probe.s);
+  if(drift !== 0 && Math.abs(drift) <= 7200) total += drift;
+  const d = Math.floor(total/86400), h = Math.floor(total%86400/3600),
+        m = Math.floor(total%3600/60), s = total%60;
+  cdD.textContent = d; cdH.textContent = String(h).padStart(2,'0');
+  cdM.textContent = String(m).padStart(2,'0'); cdS.textContent = String(s).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+/* ── Scroll-driven effects (rAF batched) ──────────────── */
+const progressBar = document.getElementById('river-progress');
+const story = document.getElementById('story');
+const riverPath = document.getElementById('river-path');
+let pathLen = 0;
+if(riverPath){
+  pathLen = riverPath.getTotalLength();
+  riverPath.style.strokeDasharray = pathLen;
+  riverPath.style.strokeDashoffset = pathLen;
+}
+let ticking = false;
+function onScroll(){
+  if(ticking) return; ticking = true;
+  requestAnimationFrame(() => {
+    ticking = false;
+    const sy = window.scrollY;
+    sweepReveals();
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (docH > 0 ? (sy/docH)*100 : 0) + '%';
+    nav.classList.toggle('scrolled', sy > 24);
+
+    if(story){
+      const r = story.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const t = Math.min(1, Math.max(0, (vh*0.75 - r.top) / (r.height*0.85)));
+      if(riverPath && !reduceMotion) riverPath.style.strokeDashoffset = pathLen * (1 - t);
+      if(verseWords.length){
+        const lit = Math.floor(Math.min(1, t*2.6) * verseWords.length);
+        verseWords.forEach((w,i) => w.classList.toggle('lit', i < lit));
+      }
+    }
+
+    const hero = document.getElementById('hero');
+    if(hero && !reduceMotion){
+      const hr = hero.getBoundingClientRect();
+      if(hr.bottom > 0){
+        const inner = hero.querySelector('.hero-inner');
+        inner.style.transform = 'translateY(' + (sy * 0.18) + 'px)';
+        inner.style.opacity = Math.max(0, 1 - sy / (vhCache * 0.85));
+      }
+    }
+  });
+}
+let vhCache = window.innerHeight;
+window.addEventListener('resize', () => { vhCache = window.innerHeight; }, {passive:true});
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+
+/* ── Hero water particle canvas ───────────────────────── */
+(function(){
+  if(reduceMotion) return;
+  const canvas = document.getElementById('water');
+  const ctx = canvas.getContext('2d');
+  let W, H, parts = [], running = false, mx = -9999, my = -9999, tPhase = 0;
+  function resize(){
+    const oW = W, oH = H;
+    W = canvas.width = canvas.offsetWidth * Math.min(devicePixelRatio, 2);
+    H = canvas.height = canvas.offsetHeight * Math.min(devicePixelRatio, 2);
+    // rescale existing particles so resizes (incl. mobile URL-bar) don't teleport them
+    if(parts.length && oW && oH && (oW !== W || oH !== H)){
+      parts.forEach(p => { p.x *= W/oW; p.y *= H/oH; });
+    }
+  }
+  function init(){
+    resize();
+    const n = Math.min(130, Math.floor(W*H/22000));
+    parts = Array.from({length:n}, () => ({
+      x: Math.random()*W, y: Math.random()*H,
+      r: 0.8 + Math.random()*2.2,
+      sp: 0.25 + Math.random()*0.7,
+      ph: Math.random()*Math.PI*2,
+      gold: Math.random() < 0.22
+    }));
+  }
+  function frame(){
+    if(!running) return;
+    tPhase += 0.004;
+    ctx.clearRect(0,0,W,H);
+    const dpr = Math.min(devicePixelRatio, 2);
+    parts.forEach(p => {
+      p.x += p.sp * (1 + 0.5*Math.sin(tPhase + p.ph));
+      p.y += Math.sin(tPhase*2 + p.ph + p.x*0.002) * 0.35;
+      const dx = p.x/dpr - mx, dy = p.y/dpr - my;
+      const dist2 = dx*dx + dy*dy;
+      if(dist2 < 14400){
+        const f = (1 - dist2/14400) * 1.6;
+        p.x += dx/Math.sqrt(dist2+0.01) * f;
+        p.y += dy/Math.sqrt(dist2+0.01) * f;
+      }
+      if(p.x > W + 10) p.x = -10;
+      if(p.y > H + 10) p.y = -10;
+      if(p.y < -10) p.y = H + 10;
+      const a = 0.25 + 0.2*Math.sin(tPhase*3 + p.ph);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r*dpr, 0, Math.PI*2);
+      ctx.fillStyle = p.gold ? 'rgba(227,189,106,' + a*0.8 + ')' : 'rgba(95,194,212,' + a + ')';
+      ctx.fill();
+    });
+    requestAnimationFrame(frame);
+  }
+  const heroIO = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if(e.isIntersecting && !running){ running = true; frame(); }
+      else if(!e.isIntersecting) running = false;
+    });
+  });
+  heroIO.observe(canvas);
+  window.addEventListener('resize', resize, {passive:true});
+  document.getElementById('hero').addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mx = e.clientX - rect.left; my = e.clientY - rect.top;
+  });
+  document.getElementById('hero').addEventListener('mouseleave', () => { mx = my = -9999; });
+  init();
+})();
+
+/* ── Custom cursor ────────────────────────────────────── */
+(function(){
+  if(!finePointer || reduceMotion) return;
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let x = -100, y = -100, rx = -100, ry = -100;
+  document.addEventListener('mousemove', e => { x = e.clientX; y = e.clientY; }, {passive:true});
+  (function loop(){
+    rx += (x - rx) * 0.16; ry += (y - ry) * 0.16;
+    dot.style.transform = 'translate(' + (x-3.5) + 'px,' + (y-3.5) + 'px)';
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button, .yt, .tcard').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+  });
+})();
+
+/* ── Magnetic buttons ─────────────────────────────────── */
+(function(){
+  if(!finePointer || reduceMotion) return;
+  document.querySelectorAll('.magnet').forEach(btn => {
+    btn.addEventListener('mouseenter', () => { btn.style.transition = 'transform .18s cubic-bezier(.16,1,.3,1)'; });
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width/2);
+      const dy = e.clientY - (r.top + r.height/2);
+      btn.style.transform = 'translate(' + dx*0.18 + 'px,' + dy*0.18 + 'px)';
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; btn.style.transition = ''; });
+  });
+})();
+
+/* ── 3D tilt cards ────────────────────────────────────── */
+(function(){
+  if(!finePointer || reduceMotion) return;
+  document.querySelectorAll('.tilt').forEach(card => {
+    card.addEventListener('mouseenter', () => { card.style.transition = 'transform .18s cubic-bezier(.16,1,.3,1)'; });
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const px = (e.clientX - r.left)/r.width - 0.5;
+      const py = (e.clientY - r.top)/r.height - 0.5;
+      card.style.transform = 'perspective(800px) rotateY(' + px*5 + 'deg) rotateX(' + (-py*5) + 'deg) translateY(-3px)';
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; card.style.transition = ''; });
+  });
+})();
+})();
+</script>
+</body>
+</html>
