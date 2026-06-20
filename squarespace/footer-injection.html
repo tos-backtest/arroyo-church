@@ -380,13 +380,30 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
 .faq-item .f-body-pad{padding:0 .2rem 1.4rem;color:rgba(22,36,43,.66);max-width:72ch}
 @media (max-width:920px){.visit-meta{grid-template-columns:1fr}.steps{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.ac-hero h1 .w>span{transform:none}.ac-hero-in .ac-eyebrow,.ac-hero-in .ac-sub,.ac-hero-in .ac-ctas,.ac-hero-in .ac-service{opacity:1;transform:none}}
+
+/* ════ READABILITY + POLISH FIXES (2026-06-20) ════ */
+/* 1: "About" matches the weight of the other nav items */
+.header .header-nav-folder-title{font-weight:600!important}
+/* 2: mobile — drop the Scroll cue lower so it doesn't collide with the hero text */
+@media(max-width:640px){.ac-scroll{bottom:.7rem}.ac-scroll i{height:34px}}
+/* 4,5,8,9,10: light, readable titles on the dark sections */
+.ac-about .belief .b-name{color:#f4efe4!important}
+.ac-about .belief .chev{color:#e3bd6a!important;border-color:rgba(227,189,106,.6)!important}
+.ac-about .belief.open .chev{color:#0a161c!important}
+.ac-about .vcard h3{color:#ffffff!important}
+#ac-team .tcard .t-name,#ac-team .tcard .t-facts h3{color:#ffffff!important}
+#ac-sermons .series-bar h3{color:#ffffff!important}
+#ac-connect .prayer-band h3{color:#ffffff!important}
+#ac-give .gcard h3{color:#ffffff!important}
+/* 6: restore card hover-lift (the scroll-reveal end-state was pinning transform:none) */
+.ac-mission .mcard:hover{transform:translateY(-5px)!important}
+#ac-give .gcard:hover{transform:translateY(-6px)!important}
+#ac-connect .min-card:hover{transform:translateY(-5px)!important}
+#ac-visit .step:hover{transform:translateY(-5px)!important}
 </style>
 <script>
 (function(){
-  /* single-page: redirect old standalone page URLs to the home anchors (until those pages are deleted, when the 301 URL-mappings take over) */
-  var __redir={'/about':'ac-mission','/team':'ac-team','/messages':'ac-sermons','/connect':'ac-connect','/give':'ac-give','/plan-your-visit':'ac-visit'};
-  var __rp=location.pathname.replace(/\/+$/,'').toLowerCase();
-  if(__redir[__rp]){ location.replace('/#'+__redir[__rp]); return; }
+  /* (single-page nav uses /#anchors; old pages kept live + indexed for SEO — no auto-redirect) */
   var fine=matchMedia('(pointer:fine)').matches, reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var HOME=function(){ return document.body.classList.contains('homepage'); };
 
@@ -567,7 +584,7 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
     function upd(){
       ticking=false;
       var r=story.getBoundingClientRect(), vh=window.innerHeight;
-      var t=Math.min(1,Math.max(0,(vh*0.75 - r.top)/(r.height*0.85)));
+      var t=Math.min(1,Math.max(0,(vh*0.98 - r.top)/(r.height*0.6)));
       if(path) path.style.strokeDashoffset=pathLen*(1-t);
       if(verseWords.length){ var lit=Math.floor(Math.min(1,t*2.6)*verseWords.length); for(var i=0;i<verseWords.length;i++){ verseWords[i].classList.toggle('lit', i<lit); } }
     }
@@ -689,7 +706,7 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
     var eHtml=elders.map(function(e){ return '<div class="ecard ac-rev"><div class="e-img"><img src="'+e[2]+'" alt="'+e[0]+'" loading="lazy"></div><h3>'+e[0]+'</h3><div class="role">'+e[1]+'</div></div>'; }).join('');
     var eld='Each member of our elder board meets the qualifications for elders found in Titus 1:5&ndash;9 and 1 Timothy 3:1&ndash;7. The elders shepherd the church body, steward its resources, and provide support and accountability for our Lead Pastor. Our elders also serve as the board of directors for Arroyo Church since every non-profit corporation is required by law to have a board of directors.';
     var sec=document.createElement('section'); sec.className='ac-sec'; sec.id='ac-team';
-    sec.innerHTML='<div class="wrap"><div class="team-head"><div><p class="eyebrow ac-rev">Our team</p><h2 class="h2 ac-rev">The people who <em>serve</em> you on Sundays.</h2></div><p class="ac-rev">Hover (or tap) a photo to get to know each person &mdash; family facts, fun facts and all.</p></div><div class="team-grid">'+sHtml+'</div><div class="elders"><p class="eyebrow ac-rev" style="color:#7d6228">Elder board</p><h2 class="h2 ac-rev" style="font-size:clamp(1.7rem,3.6vw,2.6rem)">Shepherds &amp; stewards.</h2><p class="lead ac-rev">'+eld+'</p><div class="elder-grid">'+eHtml+'</div></div></div>';
+    sec.innerHTML='<div class="wrap"><div class="team-head"><div><p class="eyebrow ac-rev">Our team</p><h2 class="h2 ac-rev">The people who <em>serve</em> you on Sundays.</h2></div><p class="ac-rev">Hover (or tap) a photo to get to know each person &mdash; family facts, fun facts and all.</p></div><div class="team-grid">'+sHtml+'</div><div class="elders"><p class="eyebrow ac-rev" style="color:#7d6228">Elder board</p><h2 class="h2 ac-rev" style="font-size:clamp(1.7rem,3.6vw,2.6rem)">Shepherds &amp; Stewards.</h2><p class="lead ac-rev">'+eld+'</p><div class="elder-grid">'+eHtml+'</div></div></div>';
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
     sec.querySelectorAll('.tcard .t-toggle').forEach(function(btn){ btn.addEventListener('click',function(){ var card=btn.closest('.tcard'); var open=card.classList.toggle('flipped'); btn.setAttribute('aria-expanded',String(open)); }); });
   }
