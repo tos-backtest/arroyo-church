@@ -405,8 +405,8 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
 .header .header-nav-folder-title{font-weight:600!important}
 /* 2: mobile — drop the Scroll cue lower so it doesn't collide with the hero text */
 @media(max-width:640px){.ac-scroll{bottom:.7rem}.ac-scroll i{height:34px}}
-/* 11: mobile — the hero is pulled up -100px behind the fixed header and its content is vertically centered; on tall phones (e.g. iPhone Pro) the taller content lifts the gold eyebrow up UNDER the logo/hamburger. Top-align on phones so it always clears the header. */
-@media(max-width:767px){html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top,0px) + 240px)}}
+/* 11: mobile — the hero is pulled up -100px behind the fixed header and its content is vertically centered; on tall phones (e.g. iPhone Pro) the taller content lifts the gold eyebrow up UNDER the logo/hamburger. Top-align on phones (fitHeroTop() sizes the exact padding at runtime; this is the no-JS fallback) AND tighten the inter-element rhythm so the address line doesn't collide with the Scroll cue at the bottom. */
+@media(max-width:767px){html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top,0px) + 230px)}.ac-hero .ac-eyebrow{margin-bottom:.6rem}.ac-hero .ac-sub{margin-top:.85rem}.ac-hero .ac-ctas{margin-top:1.2rem}.ac-hero .ac-service{margin-top:1.1rem}}
 /* 4,5,8,9,10: light, readable titles on the dark sections */
 .ac-about .belief .b-name{color:#f4efe4!important}
 .ac-about .belief .chev{color:#e3bd6a!important;border-color:rgba(227,189,106,.6)!important}
@@ -891,7 +891,7 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
       if((window.scrollY||0)>60) return; /* measure only at the top, where the header is full height */
       var hdr=document.querySelector('.header');
       var hH=hdr?Math.round(hdr.getBoundingClientRect().height):109;
-      hero.style.paddingTop=(hH+128)+'px'; /* 100 cancels the section's -100 margin, +28 gap */
+      hero.style.paddingTop=(hH+120)+'px'; /* 100 cancels the section's -100 margin, +20 gap */
     } else { hero.style.paddingTop=''; }
   }
   fitHeroTop(); setTimeout(fitHeroTop,400); setTimeout(fitHeroTop,1500);
