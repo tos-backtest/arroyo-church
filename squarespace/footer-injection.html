@@ -178,6 +178,48 @@ html.ac-footer-on #footer-sections{display:none!important}
 @media (max-width:560px){.ac-footer .foot-grid{grid-template-columns:1fr}}
 /* hide leftover native sermon-embed section on home */
 body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!important}
+
+/* ════ M6 /about: beliefs accordion + values sticky-stack ════ */
+.ac-about{background:#0d2530;color:#eef6f7;font-family:'Manrope',sans-serif}
+.ac-about .wrap{width:min(1100px,92vw);margin:0 auto}
+.ac-about .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.8rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;margin:0 0 1.2rem}
+.ac-about .eyebrow::before{content:"";width:36px;height:1.5px;background:currentColor;opacity:.6}
+.ac-about h2{font-family:'Fraunces',Georgia,serif;font-weight:360;letter-spacing:-.01em;font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.08;margin:0;color:#fff}
+.ac-about h2 em{font-style:italic;color:#5fc2d4}
+.aci{padding:clamp(4rem,9vh,7rem) 0 clamp(2rem,4vh,3rem);background:linear-gradient(180deg,#0d2530,#0a161c)}
+.aci .eyebrow{color:#e3bd6a}
+.aci p{max-width:60ch;margin:1.5rem 0 0;font-size:clamp(1.05rem,1.5vw,1.22rem);line-height:1.8;color:rgba(238,246,247,.78)}
+.acb{padding:clamp(4rem,9vh,7rem) 0;background:#0d2530}
+.acb .eyebrow{color:#5fc2d4}
+.acb-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:3rem}
+.acb-head p{max-width:48ch;color:rgba(238,246,247,.66);margin:0}
+.belief-list{display:grid;gap:.9rem}
+.belief{border:1px solid rgba(191,231,238,.14);border-radius:18px;overflow:hidden;background:rgba(17,48,61,.5);transition:border-color .3s,background .3s}
+.belief.open{border-color:rgba(200,154,62,.45);background:rgba(17,48,61,.85)}
+.belief .b-h{margin:0}
+.belief button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1.2rem;padding:1.45rem clamp(1.2rem,3vw,2rem);text-align:left;background:none;border:none;color:inherit;cursor:pointer;font-family:inherit}
+.belief .b-title{display:flex;align-items:baseline;gap:1.1rem}
+.belief .b-num{font-size:.78rem;font-weight:800;letter-spacing:.18em;color:#e3bd6a}
+.belief .b-name{font-family:'Fraunces',Georgia,serif;font-weight:430;font-size:clamp(1.2rem,2.4vw,1.65rem)}
+.belief .chev{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(191,231,238,.3);display:grid;place-items:center;transition:transform .45s cubic-bezier(.16,1,.3,1),background .3s,border-color .3s}
+.belief.open .chev{transform:rotate(45deg);background:#c89a3e;border-color:#c89a3e;color:#0a161c}
+.belief .b-body{max-height:0;overflow:hidden;visibility:hidden;transition:max-height .6s cubic-bezier(.16,1,.3,1),visibility 0s .6s}
+.belief.open .b-body{visibility:visible;transition:max-height .6s cubic-bezier(.16,1,.3,1),visibility 0s 0s}
+.belief .b-body-pad{padding:0 clamp(1.2rem,3vw,2rem) 1.7rem;color:rgba(238,246,247,.66);max-width:75ch;line-height:1.8}
+.acv{padding:0 0 clamp(5rem,11vh,9rem);background:#0d2530}
+.acv .eyebrow{color:#e3bd6a}
+.vstack{margin-top:2.6rem;display:grid;gap:1.2rem}
+.vcard{position:sticky;border-radius:24px;padding:clamp(1.8rem,4vw,3rem);display:grid;grid-template-columns:auto 1fr;gap:clamp(1.2rem,3vw,2.6rem);align-items:center;box-shadow:0 30px 60px -20px rgba(10,22,28,.5);border:1px solid rgba(255,255,255,.09);min-height:200px;color:#eef6f7}
+.vcard .v-num{font-family:'Fraunces',Georgia,serif;font-size:clamp(2.6rem,6vw,4.6rem);font-weight:300;line-height:1;opacity:.32}
+.vcard h3{font-family:'Fraunces',Georgia,serif;font-weight:480;font-size:clamp(1.4rem,3vw,2.1rem);margin:0 0 .5rem}
+.vcard .v-tag{font-size:1.02rem;font-weight:600;margin:0 0 .8rem}
+.vcard blockquote{font-style:italic;font-size:.95rem;opacity:.82;border-left:2.5px solid currentColor;padding-left:1rem;line-height:1.7;margin:0}
+.vcard:nth-child(1){background:linear-gradient(135deg,#15394a,#0e2a37);top:88px}
+.vcard:nth-child(2){background:linear-gradient(135deg,#7d6228,#5d4a20);top:102px}
+.vcard:nth-child(3){background:linear-gradient(135deg,#1d5a6b,#123c48);top:116px}
+.vcard:nth-child(4){background:linear-gradient(135deg,#274b3b,#16332a);top:130px}
+.vcard:nth-child(5){background:linear-gradient(135deg,#23445e,#152c3f);top:144px}
+@media(max-width:600px){.vcard{grid-template-columns:1fr;gap:.6rem;min-height:0}}
 @media (prefers-reduced-motion:reduce){.ac-hero h1 .w>span{transform:none}.ac-hero-in .ac-eyebrow,.ac-hero-in .ac-sub,.ac-hero-in .ac-ctas,.ac-hero-in .ac-service{opacity:1;transform:none}}
 </style>
 <script>
@@ -414,7 +456,55 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
     if(nf && nf.parentNode){ nf.parentNode.insertBefore(foot, nf.nextSibling); } else { document.body.appendChild(foot); }
     document.documentElement.classList.add('ac-footer-on');
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildTeasers(); buildCTA(); buildFooter(); fixAboutNav(); }
+  /* ---- per-page helpers (reused by M6-M11) ---- */
+  function pageIs(p){ return location.pathname.replace(/\/+$/,'')===p; }
+  function headerOffset(){ var h=document.querySelector('.header'); if(!h) return 0; var cs=getComputedStyle(h); return (cs.position==='fixed'||cs.position==='sticky')?Math.ceil(h.getBoundingClientRect().height):0; }
+  function hideNativeSections(wrap){ var ss=wrap.querySelectorAll(':scope > .page-section'); for(var i=0;i<ss.length;i++){ ss[i].style.display='none'; } }
+  function wireAccordion(root, itemSel, bodySel){
+    root.querySelectorAll(itemSel).forEach(function(item){
+      var btn=item.querySelector('button'), body=item.querySelector(bodySel);
+      if(!btn||!body) return;
+      btn.addEventListener('click',function(){
+        var open=item.classList.toggle('open'); btn.setAttribute('aria-expanded',String(open));
+        if(open){ body.style.maxHeight=body.scrollHeight+'px'; }
+        else { body.style.maxHeight=body.scrollHeight+'px'; body.offsetHeight; body.style.maxHeight='0px'; }
+      });
+      body.addEventListener('transitionend',function(){ if(item.classList.contains('open')) body.style.maxHeight='none'; });
+    });
+  }
+  /* ---- M6: /about beliefs + values ---- */
+  function buildAbout(){
+    if(!pageIs('/about')) return;
+    var wrap=document.getElementById('sections');
+    if(!wrap || document.getElementById('ac-about')) return;
+    var beliefs=[
+      ["01","The Gospel","We believe that the gospel is the good news that, &ldquo;God so loved the world that He gave His one and only Son, so that whoever believes in Him will not perish but have everlasting life.&rdquo; (John 3:16) All human beings have sinned against God, and the result is that we are separated from Him and are not a part of the family of God. The good news is that God did not want to stay separate from us. The Father sent Jesus Christ to die the death that we deserved on the cross and rose again three days later so that if we place our faith in Him we can be forgiven forever, and be adopted into the family of God. We are not saved from our sins by our good works, but by simply trusting in the good work that Christ did on the cross for us as our substitutionary sacrifice. We believe that Christ died for us because God &ldquo;SO&rdquo; loves us. This good news is meant to be believed, and then to be shared so that others may experience the free gift of God's forgiveness in their life. (Ephesians 2:8&ndash;10, John 3:16, 1 John 4:10, Romans 3:23)"],
+      ["02","The Trinity","We believe there is only one true God, who eternally exists as a Trinity of equally divine persons: Father, Son, and Holy Spirit. Each member of the Trinity thinks, acts, feels, speaks, and relates, because each is a person and not an impersonal force. Each member of the Trinity is equally God, sharing all the divine attributes. Because love and community flow from the Trinity to us through the Holy Spirit, we seek to live in loving community with God and others. (Genesis 1:26, Matthew 28:19, Luke 3:22, 1 Peter 1:2)"],
+      ["03","The Bible","We believe that God has supremely revealed Himself through Jesus Christ, who Himself was the Word that was made flesh. We believe that all sixty-six books of the Bible are divinely Holy Spirit inspired, inerrant, and authoritative. The Bible exists to reveal Jesus Christ to us so we can have a relationship with Him. Because God is a loving Father who speaks through His word, we seek to read, memorize, meditate on, and apply the truths found in the Bible. (John 1, 2 Timothy 3:16&ndash;17, John 17:17, Isaiah 40:8)"],
+      ["04","Humanity","We believe that all human beings are created in the image of God, and therefore, have intrinsic value. God created us in His image because we were created to be in His family as His children. We are also all sinners by both nature and choice. Because we have all sinned, we have all become separated from God. The result is that all people are spiritual orphans, unless we place our faith in Jesus. Once we place our faith in Jesus, we receive forgiveness and become a part of the family of God, just as it was originally intended. (Genesis 1:27, Romans 3:23, Isaiah 59:2)"],
+      ["05","Eternity","We believe that all people are created to exist forever. We will either exist eternally separated from God by sin in hell, or be eternally united with God through forgiveness and salvation in heaven. Hell is a place of conscious and eternal torment. God does not want anyone to go to hell, but people go there when they decide to decline His offer of love and relationship. Heaven is a perfect place where we get to be united forever with God, who is perfect. (Revelation 21:8, Revelation 21:1&ndash;27, Luke 16:1&ndash;31, John 14:2&ndash;3)"],
+      ["06","The Church","We believe that the local church is a community of people who confess Jesus Christ as Lord, and that the universal church is comprised of all God's people in all times and places. In obedience to Scripture, Christians organize under qualified leadership, gather regularly for preaching and worship, practice believer's baptism, regularly remember the cross through Communion, are unified by the Spirit in love, are corrected for holiness, and scatter to fulfill the great commandment and the great commission as missionaries to the world. Because we are members of God's universal church, we partner with other Christian local churches and ministries for Kingdom ministry and are devoted to building up our local church family. (Acts 2:36&ndash;41, Matthew 16:18, Acts 2:42, Matthew 2:11, Romans 13:1&ndash;7, Matthew 28)"]
+    ];
+    var values=[
+      ["01","Gospel Centered","It is all about who Jesus is and what He has done!","&ldquo;For what I received I passed on to you as of first importance: that Christ died for our sins according to the Scriptures.&rdquo; &mdash; 1 Corinthians 15:3"],
+      ["02","Grace &amp; Truth Together","Grace without truth is weak and truth without grace is harsh.","&ldquo;The Word became flesh and made his dwelling among us... full of grace and truth.&rdquo; &mdash; John 1:14"],
+      ["03","Bridging the Word to the World","We help others see how God's word is applicable to their daily lives.","&ldquo;I have become all things to all people so that by all possible means I might save some.&rdquo; &mdash; 1 Corinthians 9:22b"],
+      ["04","Real Community","Come as you are but refuse to stay as you are.","&ldquo;Confess your sins to each other and pray for each other so that you may be healed.&rdquo; &mdash; James 5:16"],
+      ["05","Sacrificial Service","We refuse to be spectators in the stands so we strive to sacrificially serve God and others.","&ldquo;Therefore, brothers and sisters, in view of God's mercies, offer your bodies as a living sacrifice, holy and pleasing to God &mdash; this is your true and proper worship.&rdquo; &mdash; Romans 12:1"]
+    ];
+    var plus='<svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 1v12M1 7h12"/></svg>';
+    var bHtml=beliefs.map(function(b){ return '<div class="belief ac-rev"><h3 class="b-h"><button aria-expanded="false"><span class="b-title"><span class="b-num">'+b[0]+'</span><span class="b-name">'+b[1]+'</span></span><span class="chev">'+plus+'</span></button></h3><div class="b-body"><div class="b-body-pad">'+b[2]+'</div></div></div>'; }).join('');
+    var vHtml=values.map(function(v){ return '<div class="vcard"><div class="v-num">'+v[0]+'</div><div><h3>'+v[1]+'</h3><p class="v-tag">'+v[2]+'</p><blockquote>'+v[3]+'</blockquote></div></div>'; }).join('');
+    var c=document.createElement('div'); c.id='ac-about'; c.className='ac-about'; c.style.paddingTop=headerOffset()+'px';
+    c.innerHTML=
+      '<section class="aci"><div class="wrap"><p class="eyebrow ac-rev">About Arroyo</p><h2 class="ac-rev">We exist to <em>know</em> and <em>show</em> the love of Jesus.</h2><p class="ac-rev">Arroyo Church is a non-denominational, Bible-teaching church in Livermore, California. An arroyo is a river in the desert &mdash; and we believe God has called us to bring the life of Jesus into the Bay Area, the most unchurched region in the United States, and beyond.</p></div></section>'+
+      '<section class="acb" id="beliefs"><div class="wrap"><div class="acb-head"><div><p class="eyebrow ac-rev">Our beliefs</p><h2 class="ac-rev">What anchors <em>everything</em> we do.</h2></div><p class="ac-rev">Six convictions, rooted in Scripture, that shape who we are. Tap any one to read more.</p></div><div class="belief-list">'+bHtml+'</div></div></section>'+
+      '<section class="acv"><div class="wrap"><p class="eyebrow ac-rev">Our values</p><h2 class="ac-rev">Five things we refuse to compromise on.</h2><div class="vstack">'+vHtml+'</div></div></section>';
+    wrap.insertBefore(c, wrap.firstChild);
+    hideNativeSections(wrap);
+    wireAccordion(c, '.belief', '.b-body');
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildTeasers(); buildCTA(); buildFooter(); buildAbout(); fixAboutNav(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
 
