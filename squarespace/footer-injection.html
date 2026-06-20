@@ -118,6 +118,24 @@ body.homepage [data-section-id="68533fde9bfaa374d9c67d68"]{display:none!importan
 html.ac-anim .ac-rev{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
 html.ac-anim .ac-rev.ac-in,html.ac-anim.ac-reveal-all .ac-rev{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){html.ac-anim .ac-rev{opacity:1!important;transform:none!important}}
+
+/* ════ M4 STORY: desert → river (homepage; JS inserts it after the mission) ════ */
+.ac-story{position:relative;z-index:4;color:#16242b;background:linear-gradient(180deg,#faf7f0 0%,#ece1cb 14%,#ece1cb 30%,#cdbf9f 46%,#6c9aa0 62%,#2e8fa3 74%,#11303d 88%,#0d2530 100%);padding:clamp(6rem,14vh,11rem) 0 clamp(7rem,16vh,12rem);overflow:clip;font-family:'Manrope',sans-serif}
+.ac-story .story-inner{position:relative;width:min(900px,92vw);margin:0 auto;text-align:center}
+.ac-story #ac-river-svg{position:absolute;top:-4%;left:50%;transform:translateX(-50%);height:108%;width:auto;z-index:0;pointer-events:none;opacity:.85}
+.ac-story #ac-river-svg path{stroke-linecap:round;fill:none}
+.ac-story .story-z{position:relative;z-index:1}
+.ac-story .story-kicker{font-size:.8rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:#6b5420}
+.ac-story .story-verse{font-family:'Fraunces',Georgia,serif;font-weight:350;font-style:italic;font-size:clamp(1.7rem,4.4vw,3.3rem);line-height:1.3;margin:1.6rem 0 .9rem}
+.ac-story .story-verse .vw{opacity:.45;transition:opacity .35s linear}
+.ac-story .story-verse .vw.lit{opacity:1}
+.ac-story .story-ref{font-size:.92rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:#6b5420}
+.ac-story .story-body{max-width:62ch;margin:4.5rem auto 0;font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.85}
+.ac-story .story-body strong{color:inherit;font-weight:800}
+.ac-story .story-stat{margin-top:3.6rem;display:inline-flex;flex-direction:column;gap:.3rem;align-items:center;padding:1.6rem 2.6rem;border-radius:20px;background:rgba(10,22,28,.35);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border:1px solid rgba(191,231,238,.22);color:#eef6f7}
+.ac-story .story-stat .big{font-family:'Fraunces',Georgia,serif;font-size:clamp(1.5rem,3.4vw,2.3rem);font-weight:400;line-height:1.2}
+.ac-story .story-stat .big em{color:#5fc2d4;font-style:italic}
+.ac-story .story-stat .small{font-size:.85rem;color:rgba(238,246,247,.66);max-width:42ch}
 @media (prefers-reduced-motion:reduce){.ac-hero h1 .w>span{transform:none}.ac-hero-in .ac-eyebrow,.ac-hero-in .ac-sub,.ac-hero-in .ac-ctas,.ac-hero-in .ac-service{opacity:1;transform:none}}
 </style>
 <script>
@@ -261,7 +279,55 @@ html.ac-anim .ac-rev.ac-in,html.ac-anim.ac-reveal-all .ac-rev{opacity:1;transfor
       '</div></div>';
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); fixAboutNav(); }
+  /* ---- M4: build the "Why Arroyo" story + river animation (homepage only) ---- */
+  function buildStory(){
+    if(!HOME()) return;
+    var anchor=document.getElementById('ac-mission') || document.getElementById('ac-cd');
+    if(!anchor || document.getElementById('ac-story')) return;
+    var sec=document.createElement('section'); sec.className='ac-story'; sec.id='ac-story';
+    sec.setAttribute('aria-label','Why the church is named Arroyo');
+    sec.innerHTML=
+      '<div class="story-inner">'+
+        '<svg id="ac-river-svg" viewBox="0 0 120 900" width="120" height="900" preserveAspectRatio="xMidYMin meet" aria-hidden="true">'+
+          '<defs><linearGradient id="acRiverGrad" x1="0" y1="0" x2="0" y2="1">'+
+            '<stop offset="0" stop-color="#c89a3e" stop-opacity=".0"/>'+
+            '<stop offset=".25" stop-color="#c89a3e" stop-opacity=".55"/>'+
+            '<stop offset=".6" stop-color="#5fc2d4"/>'+
+            '<stop offset="1" stop-color="#bfe7ee"/>'+
+          '</linearGradient></defs>'+
+          '<path id="ac-river-path" d="M60,0 C30,90 92,160 60,250 C30,335 88,400 60,490 C34,572 90,640 62,730 C40,800 76,850 60,900" stroke="url(#acRiverGrad)" stroke-width="3.5" fill="none"/>'+
+        '</svg>'+
+        '<div class="story-z">'+
+          '<p class="story-kicker ac-rev">Why is the church named Arroyo?</p>'+
+          '<blockquote class="story-verse" id="ac-verse">&ldquo;Remember not the former things, nor consider the things of old. Behold, I am doing a new thing; now it springs forth, do you not perceive it? I will make a way in the wilderness and rivers in the desert.&rdquo;</blockquote>'+
+          '<p class="story-ref ac-rev">&mdash; Isaiah 43:18&ndash;19</p>'+
+          '<p class="story-body ac-rev">An <strong>arroyo</strong> is a river in the desert. The Bay Area in many ways is a spiritual desert &mdash; it is the most unchurched area in the United States. We believe that God has called our church to be a river in the middle of this spiritual desert. <strong>We bring life into the desert by knowing and showing the love of Jesus to the Bay Area and beyond.</strong></p>'+
+          '<div class="story-stat ac-rev" style="--d:.1s"><span class="big">Life flows where the <em>river</em> runs.</span><span class="small">A church rooted in Livermore, bringing living water to the most unchurched region in America.</span></div>'+
+        '</div>'+
+      '</div>';
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+    initStoryAnim();
+  }
+  function initStoryAnim(){
+    var story=document.getElementById('ac-story'), path=document.getElementById('ac-river-path'), verseEl=document.getElementById('ac-verse');
+    if(!story) return;
+    var pathLen=0;
+    if(path){ try{ pathLen=path.getTotalLength(); }catch(e){ pathLen=0; } path.style.strokeDasharray=pathLen; path.style.strokeDashoffset=pathLen; }
+    var verseWords=[];
+    if(verseEl){ var words=verseEl.textContent.trim().split(/\s+/); verseEl.innerHTML=words.map(function(w){return '<span class="vw">'+w+'</span>';}).join(' '); verseWords=[].slice.call(verseEl.querySelectorAll('.vw')); }
+    if(reduce){ if(path) path.style.strokeDashoffset=0; verseWords.forEach(function(w){w.classList.add('lit');}); return; }
+    var ticking=false;
+    function upd(){
+      ticking=false;
+      var r=story.getBoundingClientRect(), vh=window.innerHeight;
+      var t=Math.min(1,Math.max(0,(vh*0.75 - r.top)/(r.height*0.85)));
+      if(path) path.style.strokeDashoffset=pathLen*(1-t);
+      if(verseWords.length){ var lit=Math.floor(Math.min(1,t*2.6)*verseWords.length); for(var i=0;i<verseWords.length;i++){ verseWords[i].classList.toggle('lit', i<lit); } }
+    }
+    function onScr(){ if(ticking) return; ticking=true; requestAnimationFrame(upd); }
+    addEventListener('scroll',onScr,{passive:true}); addEventListener('resize',onScr,{passive:true}); upd();
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); fixAboutNav(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
 
