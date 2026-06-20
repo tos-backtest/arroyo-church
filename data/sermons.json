@@ -1,0 +1,13 @@
+{
+  "series": {
+    "title": "Walk Faithfully",
+    "blurb": "A sermon series through the life of Samuel.",
+    "playlistUrl": "https://www.youtube.com/playlist?list=PLqCyakXjbp1OOesDkGS-yHXk6kpVInzvx"
+  },
+  "videos": [
+    { "id": "NPobibIv31w", "title": "Running the Wrong Way" },
+    { "id": "Ed-g0Dcev3I", "title": "How You Can Experience Radical Restoration" },
+    { "id": "xwzseLoIeWI", "title": "How Prayer Empowers You" }
+  ],
+  "updated": "2026-06-20"
+}
