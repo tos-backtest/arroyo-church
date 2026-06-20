@@ -79,6 +79,20 @@ html.ac-hero-on.ac-scrolled .header-announcement-bar-wrapper{padding-top:9px!imp
 .header-title-logo img{max-height:42px!important;transition:max-height .35s}
 html.ac-hero-on.ac-scrolled .header-title-logo img{max-height:34px!important}
 .header .header-actions .sqs-button-element--primary,.header-actions-action .sqs-button-element--primary{padding:.5rem 1.25rem!important;font-size:.78rem!important;letter-spacing:.04em}
+
+/* ════ M2 COUNTDOWN STRIP (homepage; JS inserts it right after the hero) ════ */
+.ac-cd{position:relative;z-index:5;background:linear-gradient(135deg,#0D2530 0%,#11303d 100%);border-top:1px solid rgba(95,194,212,.15);border-bottom:1px solid rgba(95,194,212,.15);padding:2.2rem clamp(1.2rem,5vw,4rem);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.4rem 3.5rem;overflow:hidden;font-family:'Manrope',sans-serif;color:#eef6f7}
+.ac-cd::before{content:"";position:absolute;inset:0;opacity:.5;pointer-events:none;background:radial-gradient(60% 130% at 80% 50%,rgba(46,143,163,.25),transparent 70%)}
+.ac-cd>*{position:relative;z-index:1}
+.ac-cd .cd-label{font-size:.8rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#5FC2D4}
+.ac-cd .cd-units{display:flex;gap:clamp(.9rem,3vw,2.2rem)}
+.ac-cd .cd-unit{text-align:center;min-width:62px}
+.ac-cd .cd-num{font-family:'Fraunces',serif;font-size:clamp(1.9rem,4vw,2.9rem);font-weight:430;line-height:1;font-variant-numeric:tabular-nums}
+.ac-cd .cd-word{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,246,247,.65);margin-top:.35rem}
+.ac-cd .cd-live{display:none;font-family:'Fraunces',serif;font-size:clamp(1.4rem,3vw,2rem);color:#E3BD6A}
+.ac-cd .cd-where{font-size:.92rem;color:rgba(238,246,247,.7)}
+.ac-cd .cd-where strong{color:#fff}
+@media(max-width:600px){.ac-cd{gap:1rem 1.5rem;padding:1.6rem 1.2rem}.ac-cd .cd-unit{min-width:48px}}
 @media (prefers-reduced-motion:reduce){.ac-hero h1 .w>span{transform:none}.ac-hero-in .ac-eyebrow,.ac-hero-in .ac-sub,.ac-hero-in .ac-ctas,.ac-hero-in .ac-service{opacity:1;transform:none}}
 </style>
 <script>
@@ -139,7 +153,53 @@ html.ac-hero-on.ac-scrolled .header-title-logo img{max-height:34px!important}
     hero.appendChild(ov);
     document.documentElement.classList.add('ac-hero-on'); /* only after overlay exists, so a failure never leaves a broken nav */
   }
-  if(document.readyState!=='loading')buildHero();else addEventListener('DOMContentLoaded',buildHero);
+  /* ---- M2: build the countdown strip right after the hero (homepage only) ---- */
+  function buildCountdown(){
+    if(!HOME()) return;
+    var hero=document.querySelector('[data-section-id="68533fde9bfaa374d9c67d61"]');
+    if(!hero || document.getElementById('ac-cd')) return;
+    var sec=document.createElement('div'); sec.className='ac-cd'; sec.id='ac-cd';
+    sec.setAttribute('role','timer'); sec.setAttribute('aria-label','Time until the next worship gathering');
+    sec.innerHTML=
+      '<span class="cd-label">Next worship gathering</span>'+
+      '<div class="cd-units" id="ac-cd-units">'+
+        '<div class="cd-unit"><div class="cd-num" id="ac-cd-d">&ndash;</div><div class="cd-word">Days</div></div>'+
+        '<div class="cd-unit"><div class="cd-num" id="ac-cd-h">&ndash;</div><div class="cd-word">Hours</div></div>'+
+        '<div class="cd-unit"><div class="cd-num" id="ac-cd-m">&ndash;</div><div class="cd-word">Minutes</div></div>'+
+        '<div class="cd-unit"><div class="cd-num" id="ac-cd-s">&ndash;</div><div class="cd-word">Seconds</div></div>'+
+      '</div>'+
+      '<div class="cd-live" id="ac-cd-live">We&rsquo;re gathered right now &mdash; come join us!</div>'+
+      '<span class="cd-where">Sundays <strong>10:00 AM</strong> &middot; the round building at <strong>945 Concannon Blvd</strong></span>';
+    hero.parentNode.insertBefore(sec, hero.nextSibling);
+    startCountdown();
+  }
+  function startCountdown(){
+    var d=document.getElementById('ac-cd-d'),h=document.getElementById('ac-cd-h'),
+        m=document.getElementById('ac-cd-m'),s=document.getElementById('ac-cd-s'),
+        units=document.getElementById('ac-cd-units'),live=document.getElementById('ac-cd-live');
+    if(!d) return;
+    var laFmt=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'short',hour:'numeric',minute:'numeric',second:'numeric',hour12:false});
+    function laPartsAt(date){var p=laFmt.formatToParts(date);function g(t){return p.find(function(x){return x.type===t;}).value;}return {wd:g('weekday'),h:(+g('hour'))%24,mi:+g('minute'),s:+g('second')};}
+    function tick(){
+      var la=laPartsAt(new Date());
+      var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],dow=days.indexOf(la.wd);
+      var secNow=la.h*3600+la.mi*60+la.s,tenAM=10*3600,elevenAM=11*3600;
+      if(dow===0&&secNow>=tenAM&&secNow<elevenAM){units.style.display='none';live.style.display='block';return;}
+      units.style.display='';live.style.display='none';
+      var daysAhead; if(dow===0&&secNow<tenAM)daysAhead=0;else daysAhead=(7-dow)%7||7;
+      var total=daysAhead*86400+tenAM-secNow; if(total<0)total+=7*86400;
+      var probe=laPartsAt(new Date(Date.now()+total*1000));
+      var drift=tenAM-(probe.h*3600+probe.mi*60+probe.s);
+      if(drift!==0&&Math.abs(drift)<=7200)total+=drift;
+      d.textContent=Math.floor(total/86400);
+      h.textContent=String(Math.floor(total%86400/3600)).padStart(2,'0');
+      m.textContent=String(Math.floor(total%3600/60)).padStart(2,'0');
+      s.textContent=String(total%60).padStart(2,'0');
+    }
+    tick(); setInterval(tick,1000);
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); }
+  if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
 
   /* ---- nav solid-on-scroll ---- */
   function navScroll(){ document.documentElement.classList.toggle('ac-scrolled', (window.scrollY||0)>40); }
