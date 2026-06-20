@@ -31,8 +31,10 @@ h1 em, h2 em, h3 em{
 }
 
 /* ── 2. BUTTONS: gold gradient, pill, gentle hover-lift ───────────
+   NOTE: verified-correct Squarespace 7.1 class is `.sqs-button-element--primary`
+   (NOT `.sqs-block-button-element--primary`). Confirmed live on the site.
    TUNE: change the two gradient hexes to adjust button color. */
-.sqs-block-button-element--primary{
+.sqs-button-element--primary{
   background: linear-gradient(135deg, var(--arroyo-gold-lt), var(--arroyo-gold)) !important;
   color: var(--arroyo-ink) !important;
   border: none !important;
@@ -42,8 +44,8 @@ h1 em, h2 em, h3 em{
   transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s !important;
   box-shadow: 0 8px 24px -8px rgba(200,154,62,.55);
 }
-.sqs-block-button-element--secondary,
-.sqs-block-button-element--tertiary{
+.sqs-button-element--secondary,
+.sqs-button-element--tertiary{
   border-radius: 999px !important;
   border-width: 1.5px !important;
   transition: transform .3s cubic-bezier(.16,1,.3,1), background .3s !important;
