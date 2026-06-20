@@ -93,6 +93,31 @@ html.ac-hero-on.ac-scrolled .header-title-logo img{max-height:34px!important}
 .ac-cd .cd-where{font-size:.92rem;color:rgba(238,246,247,.7)}
 .ac-cd .cd-where strong{color:#fff}
 @media(max-width:600px){.ac-cd{gap:1rem 1.5rem;padding:1.6rem 1.2rem}.ac-cd .cd-unit{min-width:48px}}
+
+/* ════ M3 MISSION (homepage; JS inserts it after the countdown) ════ */
+.ac-mission{position:relative;z-index:4;background:#faf7f0;color:#16242b;padding:clamp(5rem,11vh,9rem) 0;font-family:'Manrope',sans-serif}
+.ac-mission .wrap{width:min(1200px,92vw);margin:0 auto}
+.ac-mission .ms-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,5rem);align-items:start}
+.ac-mission .eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.8rem;font-weight:800;letter-spacing:.28em;text-transform:uppercase;margin:0 0 1.2rem;color:#1f6b7c}
+.ac-mission .eyebrow::before{content:"";width:36px;height:1.5px;background:currentColor;opacity:.6}
+.ac-mission h2{font-family:'Fraunces',Georgia,serif;font-weight:360;letter-spacing:-.01em;font-size:clamp(2.1rem,5vw,3.8rem);line-height:1.08;margin:0;color:#16242b}
+.ac-mission h2 em{font-style:italic;color:#2e8fa3}
+.ac-mission .lead{font-size:clamp(1.02rem,1.4vw,1.18rem);line-height:1.75;margin:1.3rem 0 0;color:rgba(22,36,43,.78)}
+.ac-mission .verse{margin:1.3rem 0 0;color:rgba(22,36,43,.66)}
+.ac-mission .verse em{font-style:italic}
+.ac-mission .ms-cards{display:grid;gap:1rem;margin-top:.4rem}
+.ac-mission .mcard{background:#fff;border:1px solid rgba(22,36,43,.08);border-radius:18px;padding:1.5rem 1.7rem;display:flex;gap:1.1rem;align-items:flex-start;box-shadow:0 6px 18px -12px rgba(22,36,43,.18);transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s}
+.ac-mission .mcard:hover{transform:translateY(-4px);box-shadow:0 18px 34px -16px rgba(22,36,43,.28)}
+.ac-mission .mcard .ic{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.14));color:#2e8fa3}
+.ac-mission .mcard h3{font-family:'Fraunces',Georgia,serif;font-weight:520;font-size:1.18rem;margin:0 0 .2rem;color:#16242b}
+.ac-mission .mcard p{font-size:.95rem;color:rgba(22,36,43,.66);margin:0}
+@media (max-width:920px){.ac-mission .ms-grid{grid-template-columns:1fr}}
+/* hide the duplicate native "Who we are" mission section on home */
+body.homepage [data-section-id="68533fde9bfaa374d9c67d68"]{display:none!important}
+/* reveal-on-scroll for injected sections (parallel to the .fe-block reveal) */
+html.ac-anim .ac-rev{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+html.ac-anim .ac-rev.ac-in,html.ac-anim.ac-reveal-all .ac-rev{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.ac-anim .ac-rev{opacity:1!important;transform:none!important}}
 @media (prefers-reduced-motion:reduce){.ac-hero h1 .w>span{transform:none}.ac-hero-in .ac-eyebrow,.ac-hero-in .ac-sub,.ac-hero-in .ac-ctas,.ac-hero-in .ac-service{opacity:1;transform:none}}
 </style>
 <script>
@@ -212,7 +237,31 @@ html.ac-hero-on.ac-scrolled .header-title-logo img{max-height:34px!important}
       }
     }
   }
-  function acInitSections(){ buildHero(); buildCountdown(); fixAboutNav(); }
+  /* ---- M3: build the mission section right after the countdown (homepage only) ---- */
+  function buildMission(){
+    if(!HOME()) return;
+    var cd=document.getElementById('ac-cd');
+    var anchor=cd || document.querySelector('[data-section-id="68533fde9bfaa374d9c67d61"]');
+    if(!anchor || document.getElementById('ac-mission')) return;
+    var sec=document.createElement('section'); sec.className='ac-mission'; sec.id='ac-mission';
+    sec.innerHTML=
+      '<div class="wrap"><div class="ms-grid">'+
+        '<div class="ms-copy">'+
+          '<p class="eyebrow ac-rev">Who we are</p>'+
+          '<h2 class="ac-rev" style="--d:.08s">We exist to <em>know</em> and <em>show</em> the love of Jesus in the Bay Area and beyond.</h2>'+
+          '<p class="lead ac-rev" style="--d:.16s">Love is not a feeling, but a sacrificial action done for the benefit of another. The most powerful demonstration of love in the history of humanity is when Jesus died on the cross in our place for our sins.</p>'+
+          '<p class="verse ac-rev" style="--d:.22s"><em>&ldquo;This is love, not that we loved God but that God loved us by sending His Son as the atoning sacrifice for our sins.&rdquo; &mdash; 1 John 4:10</em></p>'+
+        '</div>'+
+        '<div class="ms-cards">'+
+          '<div class="mcard ac-rev" style="--d:.05s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C10.9 4 12 4.8 12 4.8C12 4.8 13.1 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg></div><div><h3>The Love of Jesus</h3><p>The cross is the most powerful demonstration of love in history &mdash; Jesus died in our place, for our sins.</p></div></div>'+
+          '<div class="mcard ac-rev" style="--d:.12s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2.5"/></svg></div><div><h3>Knowing</h3><p>Jesus does not want you to merely know about His love intellectually but to experience His love personally.</p></div></div>'+
+          '<div class="mcard ac-rev" style="--d:.19s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 11L12 6L17 11M12 7V18"/><path d="M5 21H19"/></svg></div><div><h3>Showing</h3><p>We seek to love others with both our words and works, just like Jesus.</p></div></div>'+
+          '<div class="mcard ac-rev" style="--d:.26s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.7 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.7-4-9s1.5-6.4 4-9z"/></svg></div><div><h3>The Bay Area &amp; Beyond</h3><p>We are rooted in Livermore and reach people all over the Bay Area &mdash; with a heart for reaching the nations too.</p></div></div>'+
+        '</div>'+
+      '</div></div>';
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); fixAboutNav(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
 
@@ -225,7 +274,7 @@ html.ac-hero-on.ac-scrolled .header-title-logo img{max-height:34px!important}
     document.documentElement.classList.add('ac-anim');
     function reveal(){
       var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('ac-in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
-      document.querySelectorAll('.fe-block').forEach(function(el){io.observe(el);});
+      document.querySelectorAll('.fe-block,.ac-rev').forEach(function(el){io.observe(el);});
       setTimeout(function(){document.documentElement.classList.add('ac-reveal-all');},1600);
     }
     if(document.readyState!=='loading')reveal();else addEventListener('DOMContentLoaded',reveal);
