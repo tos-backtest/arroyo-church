@@ -57,10 +57,15 @@ html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{padding-to
 html.ac-hero-on .header{position:fixed!important;top:0;left:0;right:0;background:transparent!important;transition:background .4s,backdrop-filter .4s,box-shadow .4s}
 html.ac-hero-on .header .header-nav-item a,
 html.ac-hero-on .header .header-title-text a,
-html.ac-hero-on .header .header-actions a,
-html.ac-hero-on .header .burger-inner .top,
-html.ac-hero-on .header .burger-inner .middle,
-html.ac-hero-on .header .burger-inner .bottom{color:#fff!important}
+html.ac-hero-on .header .header-actions a{color:#fff!important}
+/* mobile hamburger: Squarespace colors the bars via background-color on .top-bun/.patty/.bottom-bun (NOT .top/.middle/.bottom), so lighten the background so it's visible over the dark hero */
+.header .burger-inner .top-bun,
+.header .burger-inner .patty,
+.header .burger-inner .bottom-bun{background-color:#fff!important}
+/* when the mobile menu is open the overlay is light → keep the close (X) dark so it stays visible */
+body.header--menu-open .header .burger-inner .top-bun,
+body.header--menu-open .header .burger-inner .patty,
+body.header--menu-open .header .burger-inner .bottom-bun{background-color:#0d2530!important}
 html.ac-hero-on .header .header-title-logo img{filter:brightness(0) invert(1)}
 html.ac-hero-on.ac-scrolled .header{background:transparent!important;box-shadow:0 1px 0 rgba(255,255,255,.06)}
 html.ac-hero-on .header-background-solid{background:transparent!important}
@@ -839,9 +844,28 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
     document.querySelectorAll('.header-nav-item').forEach(function(it){ var t=it.querySelector('.header-nav-folder-title'); if(t&&(t.textContent||'').trim().toLowerCase()==='about'){ var c=it.querySelector('.header-nav-folder-content'); if(c)c.style.display='none'; } });
     if(location.hash&&location.hash.length>1){ var hid=location.hash.slice(1); setTimeout(function(){ go(hid); },500); }
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); }
+  /* ---- mobile menu: kill the empty "About" folder (arrow + blank sub-panel); make every item smooth-scroll & close on tap ---- */
+  function wireMobileNav(){
+    var map={'about':'ac-mission','team':'ac-team','beliefs':'ac-beliefs','sermons':'ac-sermons','connect':'ac-connect','give':'ac-give'};
+    function mGo(id){ var el=document.getElementById(id); if(!el)return; var de=document.documentElement; de.style.setProperty('scroll-behavior','auto','important'); window.scrollTo(0, el.getBoundingClientRect().top+(window.scrollY||de.scrollTop)-72); }
+    function closeMenu(){ if(document.body.classList.contains('header--menu-open')){ var b=document.querySelector('.header-burger-btn'); if(b) b.click(); } }
+    var items=document.querySelectorAll('.header-menu-nav-item > a');
+    for(var i=0;i<items.length;i++){
+      var a=items[i];
+      if(a.getAttribute('data-ac-mnav')) continue;
+      var label=(a.textContent||'').replace(/folder:/i,'').trim().toLowerCase();
+      var id=map[label]; if(!id) continue; /* skip the Back control + anything unmapped */
+      var fresh=a.cloneNode(true); a.parentNode.replaceChild(fresh,a); a=fresh; /* clone strips Squarespace's native folder handler */
+      a.setAttribute('data-ac-mnav','1'); a.removeAttribute('data-folder-id'); a.setAttribute('href','/#'+id);
+      var content=a.querySelector('.header-menu-nav-item-content');
+      if(content){ content.classList.remove('header-menu-nav-item-content-folder'); var ar=content.querySelector('.header-dropdown-icon'); if(ar)ar.remove(); var sr=content.querySelector('.visually-hidden'); if(sr)sr.remove(); }
+      (function(tid){ a.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); closeMenu(); if(HOME()){ setTimeout(function(){ mGo(tid); },60); } else { window.location.href='/#'+tid; } }); })(id);
+    }
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
+  setTimeout(wireMobileNav,800); setTimeout(wireMobileNav,2200);
 
   /* ---- nav solid-on-scroll ---- */
   function navScroll(){ document.documentElement.classList.toggle('ac-scrolled', (window.scrollY||0)>40); }
