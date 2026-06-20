@@ -403,8 +403,8 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
 /* ════ READABILITY + POLISH FIXES (2026-06-20) ════ */
 /* 1: "About" matches the weight of the other nav items */
 .header .header-nav-folder-title{font-weight:600!important}
-/* 2: phones — hide the "Scroll" cue. On a phone's small (toolbar-shown) viewport the 90svh hero is short enough that the address line and the scroll cue fight for the same space; the cue is a desktop affordance (the next section already peeks below the hero), so drop it on phones to guarantee no overlap. */
-@media(max-width:767px){.ac-scroll{display:none!important}}
+/* 2: phones — keep the Scroll cue but SMALLER, and give the hero a touch more height (100svh) so the cue sits well clear below the address instead of overlapping it. */
+@media(max-width:767px){html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"]{min-height:100svh!important}.ac-hero .ac-scroll{display:flex!important;bottom:1.1rem;font-size:.56rem;letter-spacing:.22em;gap:.35rem}.ac-hero .ac-scroll i{height:20px}}
 /* 11: mobile — the hero is pulled up -100px behind the fixed header and its content is vertically centered; on tall phones (e.g. iPhone Pro) the taller content lifts the gold eyebrow up UNDER the logo/hamburger. Top-align on phones (fitHeroTop() sizes the exact padding at runtime; this is the no-JS fallback) AND tighten the inter-element rhythm so the address line doesn't collide with the Scroll cue at the bottom. */
 @media(max-width:767px){html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top,0px) + 230px)}.ac-hero .ac-eyebrow{margin-bottom:.6rem}.ac-hero .ac-sub{margin-top:.85rem}.ac-hero .ac-ctas{margin-top:1.2rem}.ac-hero .ac-service{margin-top:1.1rem}}
 /* 4,5,8,9,10: light, readable titles on the dark sections */
@@ -897,6 +897,16 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
   fitHeroTop(); setTimeout(fitHeroTop,400); setTimeout(fitHeroTop,1500);
   addEventListener('resize',fitHeroTop,{passive:true});
   addEventListener('orientationchange',function(){ setTimeout(fitHeroTop,300); });
+
+  /* ---- hero background video: keep it auto-playing (iOS can leave the muted Squarespace/Plyr bg video paused, which makes iOS draw its native play button). Muted+playsinline lets us start it without a gesture; first touch/scroll is the fallback if the initial autoplay was blocked. ---- */
+  function playHeroVideo(){
+    var v=document.querySelector('.sqs-video-background-native video'); if(!v) return;
+    v.muted=true; v.setAttribute('muted',''); v.playsInline=true; v.setAttribute('playsinline',''); v.setAttribute('webkit-playsinline','');
+    var p=v.play(); if(p&&p.catch) p.catch(function(){});
+  }
+  playHeroVideo(); setTimeout(playHeroVideo,500); setTimeout(playHeroVideo,1600);
+  ['touchstart','pointerdown','click','scroll'].forEach(function(ev){ addEventListener(ev,function(){ playHeroVideo(); },{once:true,passive:true}); });
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden) playHeroVideo(); });
 
   /* ---- nav solid-on-scroll ---- */
   function navScroll(){ document.documentElement.classList.toggle('ac-scrolled', (window.scrollY||0)>40); }
