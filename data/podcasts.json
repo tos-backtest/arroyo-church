@@ -1,10 +1,30 @@
 {
   "playlistUrl": "https://www.youtube.com/playlist?list=PLqCyakXjbp1M974oafBq-gB2Nywu0liuX",
   "videos": [
-    { "id": "RGFj3CopCQ0", "title": "Pastor Asks College Students About Jesus (Powerful Conversations)" },
-    { "id": "-nED4vgUEI8", "title": "What does the Bible REALLY say about the end times?" },
-    { "id": "dn509_C_j8A", "title": "Do lukewarm Christians go to heaven?" },
-    { "id": "1casv_QOmrc", "title": "Answering Hard Questions Part Two" }
+    {
+      "id": "RGFj3CopCQ0",
+      "title": "Pastor Asks College Students About Jesus (Powerful Conversations)"
+    },
+    {
+      "id": "-nED4vgUEI8",
+      "title": "What does the Bible REALLY say about the end times?"
+    },
+    {
+      "id": "dn509_C_j8A",
+      "title": "Do lukewarm Christians go to heaven?"
+    },
+    {
+      "id": "1casv_QOmrc",
+      "title": "Answering Hard Questions Part Two"
+    },
+    {
+      "id": "d-7hW6V50NE",
+      "title": "Answering Hard Questions Part One"
+    },
+    {
+      "id": "LzG57MZuVPo",
+      "title": "How Christians Should Talk to Muslims (Honest Conversation)"
+    }
   ],
   "updated": "2026-06-20"
 }
