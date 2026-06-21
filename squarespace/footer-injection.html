@@ -523,7 +523,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       '<p class="ac-eyebrow">Arroyo Church &middot; Livermore, CA</p>'+
       '<h1>A river in the <em>desert.</em></h1>'+
       '<p class="ac-sub">Know and show the love of Jesus in the Bay Area and beyond. Wherever you are on your journey, you are welcome here.</p>'+
-      '<div class="ac-ctas"><a class="ac-btn ac-btn-gold" href="/plan-your-visit">Plan Your Visit</a>'+
+      '<div class="ac-ctas"><a class="ac-btn ac-btn-gold" href="/#ac-visit-form" data-ac-scroll>Plan Your Visit</a>'+
       '<a class="ac-btn ac-btn-ghost" href="/messages">Watch a Sermon</a></div>'+
       '<div class="ac-service"><strong>Sundays &middot; 10:00 AM</strong> &middot; 945 Concannon Blvd, Livermore, CA 94550</div>'+
       '<div class="ac-scroll"><span>Scroll</span><i></i></div>';
@@ -605,8 +605,8 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
           '<p class="verse ac-rev" style="--d:.22s"><em>&ldquo;This is love, not that we loved God but that God loved us by sending His Son as the atoning sacrifice for our sins.&rdquo; &mdash; 1 John 4:10</em></p>'+
         '</div>'+
         '<div class="ms-cards">'+
-          '<div class="mcard ac-rev" style="--d:.05s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C10.9 4 12 4.8 12 4.8C12 4.8 13.1 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg></div><div><h3>The Love of Jesus</h3><p>The cross is the most powerful demonstration of love in history &mdash; Jesus died in our place, for our sins.</p></div></div>'+
-          '<div class="mcard ac-rev" style="--d:.12s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2.5"/></svg></div><div><h3>Knowing</h3><p>Jesus does not want you to merely know about His love intellectually but to experience His love personally.</p></div></div>'+
+          '<div class="mcard ac-rev" style="--d:.05s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v19M6.5 8.5h11"/></svg></div><div><h3>The Love of Jesus</h3><p>The cross is the most powerful demonstration of love in history &mdash; Jesus died in our place, for our sins.</p></div></div>'+
+          '<div class="mcard ac-rev" style="--d:.12s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C10.9 4 12 4.8 12 4.8C12 4.8 13.1 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg></div><div><h3>Knowing</h3><p>Jesus does not want you to merely know about His love intellectually but to experience His love personally.</p></div></div>'+
           '<div class="mcard ac-rev" style="--d:.19s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 11L12 6L17 11M12 7V18"/><path d="M5 21H19"/></svg></div><div><h3>Showing</h3><p>We seek to love others with both our words and works, just like Jesus.</p></div></div>'+
           '<div class="mcard ac-rev" style="--d:.26s"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 4 5.7 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.7-4-9s1.5-6.4 4-9z"/></svg></div><div><h3>The Bay Area &amp; Beyond</h3><p>We are rooted in Livermore and reach people all over the Bay Area &mdash; with a heart for reaching the nations too.</p></div></div>'+
         '</div>'+
@@ -686,7 +686,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     var anchor=document.getElementById('ac-visit')||document.getElementById('ac-give')||document.getElementById('ac-story');
     if(!anchor || document.getElementById('ac-cta')) return;
     var sec=document.createElement('section'); sec.className='ac-cta'; sec.id='ac-cta';
-    sec.innerHTML='<div class="wrap"><h2 class="ac-rev">Come find life<br>at the <em>river.</em></h2><p class="ac-rev" style="--d:.08s">No matter where you are on your journey, you are welcome to join us this Sunday at 10 AM.</p><div class="ctas ac-rev" style="--d:.16s"><a class="ac-btn ac-btn-gold" href="/plan-your-visit">Plan Your Visit</a><a class="ac-btn ac-btn-ghost" href="https://www.youtube.com/@arroyochurch" target="_blank" rel="noopener">Watch Online</a></div></div>';
+    sec.innerHTML='<div class="wrap"><h2 class="ac-rev">Come find life<br>at the <em>river.</em></h2><p class="ac-rev" style="--d:.08s">No matter where you are on your journey, you are welcome to join us this Sunday at 10 AM.</p><div class="ctas ac-rev" style="--d:.16s"><a class="ac-btn ac-btn-gold" href="/#ac-visit-form" data-ac-scroll>Plan Your Visit</a><a class="ac-btn ac-btn-ghost" href="https://www.youtube.com/@arroyochurch" target="_blank" rel="noopener">Watch Online</a></div></div>';
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
   }
   /* ---- M5: custom footer (ALL pages); replaces native #footer-sections ---- */
@@ -776,7 +776,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     var eHtml=elders.map(function(e){ return '<div class="ecard ac-rev"><div class="e-img"><img src="'+e[2]+'" alt="'+e[0]+'" loading="lazy"></div><h3>'+e[0]+'</h3><div class="role">'+e[1]+'</div></div>'; }).join('');
     var eld='Each member of our elder board meets the qualifications for elders found in Titus 1:5&ndash;9 and 1 Timothy 3:1&ndash;7. The elders shepherd the church body, steward its resources, and provide support and accountability for our Lead Pastor. Our elders also serve as the board of directors for Arroyo Church since every non-profit corporation is required by law to have a board of directors.';
     var sec=document.createElement('section'); sec.className='ac-sec'; sec.id='ac-team';
-    sec.innerHTML='<div class="wrap"><div class="team-head"><div><p class="eyebrow ac-rev">Our team</p><h2 class="h2 ac-rev">The people who <em>serve</em> you on Sundays.</h2></div><p class="ac-rev">Hover (or tap) a photo to get to know each person &mdash; family facts, fun facts and all.</p></div><div class="team-grid">'+sHtml+'</div><div class="elders"><p class="eyebrow ac-rev" style="color:#7d6228">Elder board</p><h2 class="h2 ac-rev" style="font-size:clamp(1.7rem,3.6vw,2.6rem)">Shepherds &amp; Stewards.</h2><p class="lead ac-rev">'+eld+'</p><div class="elder-grid">'+eHtml+'</div></div></div>';
+    sec.innerHTML='<div class="wrap"><div class="team-head"><div><p class="eyebrow ac-rev">Our team</p><h2 class="h2 ac-rev">Leaders that <em>Serve</em>.</h2></div><p class="ac-rev">Hover (or tap) a photo to get to know each person &mdash; family facts, fun facts and all.</p></div><div class="team-grid">'+sHtml+'</div><div class="elders"><p class="eyebrow ac-rev" style="color:#7d6228">Elder board</p><h2 class="h2 ac-rev" style="font-size:clamp(1.7rem,3.6vw,2.6rem)">Shepherds &amp; Stewards.</h2><p class="lead ac-rev">'+eld+'</p><div class="elder-grid">'+eHtml+'</div></div></div>';
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
     sec.querySelectorAll('.tcard .t-toggle').forEach(function(btn){ btn.addEventListener('click',function(){ var card=btn.closest('.tcard'); var open=card.classList.toggle('flipped'); btn.setAttribute('aria-expanded',String(open)); }); });
   }
@@ -874,16 +874,6 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
   }
   /* ---- plan-your-visit on-site form: AJAX -> Web3Forms emails Josh, stays on the page ---- */
   function wireVisitForm(sec){
-    var de=document.documentElement;
-    /* descent final-caption button + any data-ac-scroll trigger -> jump to the form (instant; smooth-scroll is overridden !important elsewhere and breaks scrollTo) */
-    [].forEach.call(sec.querySelectorAll('[data-ac-scroll]'),function(b){
-      b.addEventListener('click',function(e){ e.preventDefault();
-        de.style.setProperty('scroll-behavior','auto','important');
-        var el=document.getElementById('ac-visit-form'); if(!el) return;
-        window.scrollTo(0, el.getBoundingClientRect().top+(window.scrollY||de.scrollTop)-80);
-        var inp=el.querySelector('input[name=name]'); if(inp) setTimeout(function(){ inp.focus(); },140);
-      });
-    });
     var wrap=sec.querySelector('#ac-visit-form'); if(!wrap) return;
     var form=wrap.querySelector('form'); if(!form) return;
     form.addEventListener('submit',function(e){
@@ -941,7 +931,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     function go(id){ var el=document.getElementById(id); if(!el)return; var de=document.documentElement; de.style.setProperty('scroll-behavior','auto','important'); window.scrollTo(0, el.getBoundingClientRect().top+(window.scrollY||de.scrollTop)-72); }
     function hook(el,id){ if(!id||el.getAttribute('data-ac-nav'))return; el.setAttribute('data-ac-nav','1'); if(el.tagName==='A')el.setAttribute('href','/#'+id); el.style.cursor='pointer'; el.addEventListener('click',function(e){ e.preventDefault(); if(HOME())go(id); else window.location.href='/#'+id; }); }
     document.querySelectorAll('.header-nav-item a, .header-nav-folder-title').forEach(function(el){ hook(el,map[(el.textContent||'').trim().toLowerCase()]); });
-    document.querySelectorAll('.header-actions a, .header-actions-action a, .header .sqs-button-element--primary').forEach(function(el){ var t=(el.textContent||'').trim().toLowerCase(); if(t.indexOf('plan')>=0||t.indexOf('visit')>=0) hook(el,'ac-visit'); });
+    document.querySelectorAll('.header-actions a, .header-actions-action a, .header .sqs-button-element--primary').forEach(function(el){ var t=(el.textContent||'').trim().toLowerCase(); if(t.indexOf('plan')>=0||t.indexOf('visit')>=0) hook(el,'ac-visit-form'); });
     document.querySelectorAll('.header-nav-item').forEach(function(it){ var t=it.querySelector('.header-nav-folder-title'); if(t&&(t.textContent||'').trim().toLowerCase()==='about'){ var c=it.querySelector('.header-nav-folder-content'); if(c)c.style.display='none'; } });
     if(location.hash&&location.hash.length>1){ var hid=location.hash.slice(1); setTimeout(function(){ go(hid); },500); }
   }
@@ -977,11 +967,26 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       +'<a class="b-ghost" href="/#ac-sermons">Watch a Sermon</a></div></div>';
     host.appendChild(sec);
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); }
+  /* wire every [data-ac-scroll] (hero CTA, final CTA, descent button) to instant-scroll to the on-site visit form; smooth-scroll is !important elsewhere and breaks native anchor jumps */
+  function wireScrollLinks(){
+    if(!HOME()) return;
+    var de=document.documentElement;
+    document.querySelectorAll('[data-ac-scroll]').forEach(function(b){
+      if(b.getAttribute('data-ac-sw')) return; b.setAttribute('data-ac-sw','1');
+      b.addEventListener('click',function(e){ e.preventDefault();
+        de.style.setProperty('scroll-behavior','auto','important');
+        var el=document.getElementById('ac-visit-form'); if(!el) return;
+        window.scrollTo(0, el.getBoundingClientRect().top+(window.scrollY||de.scrollTop)-80);
+        var inp=el.querySelector('input[name=name]'); if(inp) setTimeout(function(){ inp.focus(); },160);
+      });
+    });
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); wireScrollLinks(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(buildPageCTA,600); setTimeout(buildPageCTA,1800);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
   setTimeout(wireMobileNav,800); setTimeout(wireMobileNav,2200);
+  setTimeout(wireScrollLinks,800); setTimeout(wireScrollLinks,2200);
 
   /* ---- hero top-padding: size it to the REAL header height on phones so the gold eyebrow always clears the fixed logo/hamburger (section is pulled up -100px behind the header) ---- */
   function fitHeroTop(){
