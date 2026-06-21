@@ -382,6 +382,30 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
 .vm p{font-weight:700;font-size:1.02rem;margin:.2rem 0 0}
 .vm p a{color:inherit}.vm p a:hover{color:#2e8fa3}
 .visit-ctas{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2.6rem}
+.visit-form{background:#fff;border:1px solid rgba(22,36,43,.08);border-radius:22px;padding:clamp(1.4rem,3.2vw,2.4rem);box-shadow:0 14px 40px -22px rgba(22,36,43,.28);margin-top:2.6rem}
+.visit-form .vf-head{margin-bottom:1.6rem}
+.visit-form .vf-head .eyebrow{margin:0}
+.visit-form .vf-head h3{font-family:'Fraunces',Georgia,serif;font-weight:460;font-size:clamp(1.5rem,3vw,2rem);margin:.45rem 0 .35rem}
+.visit-form .vf-sub{color:rgba(22,36,43,.62);font-size:.95rem;margin:0;max-width:52ch}
+.vf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem 1.2rem}
+.vf-field{display:flex;flex-direction:column;gap:.4rem}
+.vf-field>span{font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#1f6b7c}
+.vf-field.vf-full{grid-column:1 / -1}
+.vf-field input,.vf-field select,.vf-field textarea{font-family:'Manrope',sans-serif;font-size:16px;color:#16242b;background:#fbf9f4;border:1px solid rgba(22,36,43,.16);border-radius:12px;padding:.78rem .95rem;width:100%;transition:border-color .2s,box-shadow .2s,background .2s;-webkit-appearance:none;appearance:none}
+.vf-field textarea{resize:vertical;min-height:84px}
+.vf-field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none' stroke='%2316242b' stroke-width='1.7' stroke-linecap='round'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .95rem center;padding-right:2.4rem}
+.vf-field input::placeholder,.vf-field textarea::placeholder{color:rgba(22,36,43,.38)}
+.vf-field input:focus,.vf-field select:focus,.vf-field textarea:focus{outline:none;border-color:#2e8fa3;box-shadow:0 0 0 3px rgba(46,143,163,.16);background:#fff}
+.vf-actions{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.6rem;align-items:center}
+.vf-actions button[type=submit]{cursor:pointer}
+.vf-actions button[disabled]{opacity:.6;cursor:default;transform:none!important}
+.vf-err{color:#b3402e;font-size:.9rem;font-weight:600}
+.vf-err:not(:empty){margin-top:1rem}
+.vf-done{text-align:center;padding:1.6rem .5rem}
+.vf-done .vf-check{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;margin:0 auto 1rem;background:linear-gradient(135deg,#5fc2d4,#2e8fa3);color:#fff;font-size:1.7rem}
+.vf-done h3{font-family:'Fraunces',Georgia,serif;font-weight:460;font-size:clamp(1.5rem,3.2vw,2.1rem);margin:0 0 .55rem;outline:none}
+.vf-done p{color:rgba(22,36,43,.66);margin:0 auto 1.4rem;max-width:46ch}
+@media (max-width:560px){.vf-grid{grid-template-columns:1fr}.vf-actions{flex-direction:column;align-items:stretch}.vf-actions .btn{width:100%;justify-content:center}}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:4.2rem}
 .step{background:#fff;border-radius:20px;padding:1.9rem 1.7rem;border:1px solid rgba(22,36,43,.08);box-shadow:0 8px 20px -14px rgba(22,36,43,.18);position:relative;transition:transform .35s,box-shadow .35s}
 .step:hover{transform:translateY(-5px);box-shadow:0 20px 38px -18px rgba(22,36,43,.28)}
@@ -819,7 +843,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     if(!HOME()) return;
     var anchor=document.getElementById('ac-give')||document.getElementById('ac-connect');
     if(!anchor || document.getElementById('ac-visit')) return;
-    var mailto='mailto:josh@arroyochurch.com?subject=I%27m%20planning%20to%20visit%20this%20Sunday!&body=Hi%20Arroyo%20Church%2C%0A%0AI%27m%20planning%20to%20join%20you%20this%20Sunday%20at%2010am.%0A%0AName%3A%20%0ANumber%20of%20people%20coming%3A%20%0AKids%20joining%3F%20%0A%0ASee%20you%20soon!';
+    var W3KEY='__WEB3FORMS_KEY__'; /* public Web3Forms access key (safe in page source); created from josh@arroyochurch.com inbox */
     var faqs=[
       ['Do you have child care during the worship service?','Yes, we provide children&rsquo;s ministry for kids from nursery age to 5th grade. We prioritize creating a safe and fun environment for your kids to learn about Jesus!'],
       ['What is the address for the church?','945 Concannon Blvd, Livermore, CA 94550. The worship center is the round building.'],
@@ -839,13 +863,48 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     var dframes=['aerial_1.jpg','aerial_2.jpg','aerial_3.jpg','aerial_4.jpg','aerial_5.jpg','interior_wide.jpg','seat_view.jpg'];
     var fHtml=dframes.map(function(f,i){return '<div class="d-frame'+(i===6?' seat':'')+'" data-f="'+i+'"><img src="'+DB+f+'" alt="" loading="lazy"></div>';}).join('');
     var dcaps=[['Wherever you&rsquo;re coming from&hellip;','The Bay Area'],['&hellip;find your way to Livermore.','The Tri-Valley &middot; California'],['Head to the south side of town.','Concannon Blvd &amp; Holmes St'],['945 Concannon Blvd.','Plenty of parking on site'],['Look for the round building.','You can&rsquo;t miss it'],['Step inside.','Sundays &middot; 10:00 AM'],['We saved you a seat.','Sundays &middot; 10:00 AM &middot; 55 minutes']];
-    var cHtml=dcaps.map(function(c,i){return '<div class="d-cap'+(i===6?' final':'')+'" data-c="'+i+'"><div class="big">'+c[0]+'</div><div class="small">'+c[1]+'</div>'+(i===6?'<a class="btn btn-gold" href="'+mailto+'">Let Us Know You&rsquo;re Coming</a>':'')+'</div>';}).join('');
+    var cHtml=dcaps.map(function(c,i){return '<div class="d-cap'+(i===6?' final':'')+'" data-c="'+i+'"><div class="big">'+c[0]+'</div><div class="small">'+c[1]+'</div>'+(i===6?'<button type="button" class="btn btn-gold" data-ac-scroll>Let Us Know You&rsquo;re Coming</button>':'')+'</div>';}).join('');
     var descent='<div class="ac-descent" id="ac-descent"><div class="descent-sticky">'+fHtml+'<div class="d-vignette"></div><div class="d-pin"></div>'+cHtml+'<div class="d-attrib">Imagery &copy; Esri &middot; Maxar &middot; Earthstar Geographics</div></div></div>';
     var sec=document.createElement('section'); sec.className='ac-sec'; sec.id='ac-visit';
-    sec.innerHTML='<div class="wrap visit-intro"><p class="eyebrow ac-rev">Plan your visit</p><h2 class="h2 ac-rev">This Sunday. <em>Save you a seat?</em></h2><p class="lead ac-rev">Join us for our 10:00 AM worship service this Sunday. Gatherings run about 55 minutes &mdash; come as you are, dress is casual, and your kids will love it here.</p></div>'+descent+'<div class="wrap"><div class="visit-meta">'+meta+'</div><div class="visit-ctas ac-rev"><a class="btn btn-gold" href="'+mailto+'">Let Us Know You&rsquo;re Coming</a><a class="btn btn-ghost-dark" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a></div><div class="steps">'+steps+'</div><div class="faq"><h3 class="faq-h ac-rev">Frequently asked questions</h3>'+faqHtml+'</div></div>';
+    sec.innerHTML='<div class="wrap visit-intro"><p class="eyebrow ac-rev">Plan your visit</p><h2 class="h2 ac-rev">This Sunday. <em>Save you a seat?</em></h2><p class="lead ac-rev">Join us for our 10:00 AM worship service this Sunday. Gatherings run about 55 minutes &mdash; come as you are, dress is casual, and your kids will love it here.</p></div>'+descent+'<div class="wrap"><div class="visit-meta">'+meta+'</div><div class="visit-form ac-rev" id="ac-visit-form"><div class="vf-head"><p class="eyebrow">Let us know you&rsquo;re coming</p><h3>We&rsquo;ll save you a seat</h3><p class="vf-sub">Tell us a little about your visit so we can welcome you well &mdash; takes about 20 seconds.</p></div><form novalidate><input type="hidden" name="access_key" value="'+W3KEY+'"><input type="hidden" name="from_name" value="Arroyo Church — Plan Your Visit"><input type="hidden" name="subject" value="New Plan Your Visit request"><input type="checkbox" name="botcheck" tabindex="-1" aria-hidden="true" style="display:none"><div class="vf-grid"><label class="vf-field"><span>Your name *</span><input type="text" name="name" required autocomplete="name"></label><label class="vf-field"><span>Email *</span><input type="email" name="email" required autocomplete="email"></label><label class="vf-field"><span>Phone (optional)</span><input type="tel" name="phone" autocomplete="tel"></label><label class="vf-field"><span>Which Sunday?</span><select name="which_sunday"><option>This Sunday</option><option>Next Sunday</option><option>Just exploring for now</option></select></label><label class="vf-field"><span>How many coming?</span><input type="text" name="party_size" inputmode="numeric" placeholder="e.g. 2"></label><label class="vf-field"><span>Bringing kids? (ages)</span><input type="text" name="kids" placeholder="e.g. yes &mdash; 4 &amp; 7"></label><label class="vf-field vf-full"><span>Anything we should know? (questions, prayer, accessibility)</span><textarea name="message" rows="3"></textarea></label></div><div class="vf-err" role="alert" aria-live="polite"></div><div class="vf-actions"><button type="submit" class="btn btn-gold">Save my seat</button><a class="btn btn-ghost-dark" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a></div></form></div><div class="steps">'+steps+'</div><div class="faq"><h3 class="faq-h ac-rev">Frequently asked questions</h3>'+faqHtml+'</div></div>';
     anchor.parentNode.insertBefore(sec, anchor.nextSibling);
     wireAccordion(sec, '.faq-item', '.f-body');
     initDescent();
+    wireVisitForm(sec);
+  }
+  /* ---- plan-your-visit on-site form: AJAX -> Web3Forms emails Josh, stays on the page ---- */
+  function wireVisitForm(sec){
+    var de=document.documentElement;
+    /* descent final-caption button + any data-ac-scroll trigger -> jump to the form (instant; smooth-scroll is overridden !important elsewhere and breaks scrollTo) */
+    [].forEach.call(sec.querySelectorAll('[data-ac-scroll]'),function(b){
+      b.addEventListener('click',function(e){ e.preventDefault();
+        de.style.setProperty('scroll-behavior','auto','important');
+        var el=document.getElementById('ac-visit-form'); if(!el) return;
+        window.scrollTo(0, el.getBoundingClientRect().top+(window.scrollY||de.scrollTop)-80);
+        var inp=el.querySelector('input[name=name]'); if(inp) setTimeout(function(){ inp.focus(); },140);
+      });
+    });
+    var wrap=sec.querySelector('#ac-visit-form'); if(!wrap) return;
+    var form=wrap.querySelector('form'); if(!form) return;
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      var btn=form.querySelector('button[type=submit]'), orig=btn.textContent;
+      var err=form.querySelector('.vf-err'); if(err) err.textContent='';
+      btn.disabled=true; btn.textContent='Sending…';
+      var data={}; new FormData(form).forEach(function(v,k){ data[k]=v; });
+      fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){ return r.json(); })
+        .then(function(j){
+          if(j&&j.success){
+            var name=(data.name||'').trim();
+            wrap.innerHTML='<div class="vf-done"><div class="vf-check">&#10003;</div><h3 tabindex="-1">Thanks, <span class="vf-name"></span>!</h3><p>We saved you a seat. Josh will reach out soon to say hi and help you plan your visit.</p><a class="btn btn-ghost-dark" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a></div>';
+            wrap.querySelector('.vf-name').textContent = name || 'friend'; /* textContent, never innerHTML, so a name can't inject markup */
+            var h=wrap.querySelector('h3'); if(h) h.focus();
+          } else { throw new Error((j&&j.message)||'failed'); }
+        })
+        .catch(function(){ btn.disabled=false; btn.textContent=orig; if(err) err.textContent="Sorry — something went wrong on our end. Please email josh@arroyochurch.com or call (925) 694-0426 and we'll save you a seat."; });
+    });
   }
   /* ---- the fly-in: scroll-scrubbed descent from the Bay Area to a seat ---- */
   function initDescent(){
