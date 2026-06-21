@@ -423,6 +423,26 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
 #ac-give .gcard:hover{transform:translateY(-6px)!important}
 #ac-connect .min-card:hover{transform:translateY(-5px)!important}
 #ac-visit .step:hover{transform:translateY(-5px)!important}
+
+/* ════ STANDALONE (interior) PAGE POLISH — /about /team /messages /connect /give /plan-your-visit; never the home page ════ */
+/* tame oversized native page titles (e.g. /about H1 was ~101px) */
+body.collection-type-page:not(.homepage) h1{font-size:clamp(2.4rem,5.2vw,3.6rem)!important;line-height:1.12!important;letter-spacing:-.01em}
+/* native Squarespace BUTTON BLOCKS use .sqs-block-button-element--primary (not the .sqs-button-element--primary the home gold rule targets), so they render dark — make them gold to match home */
+body.collection-type-page:not(.homepage) .sqs-block-button-element--primary{background:linear-gradient(135deg,#E3BD6A,#C89A3E)!important;color:#0A161C!important;border:none!important;border-radius:999px!important;font-family:'Manrope',sans-serif!important;font-weight:700!important;letter-spacing:.02em;box-shadow:0 8px 24px -8px rgba(200,154,62,.55);transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s}
+body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hover{transform:translateY(-3px);box-shadow:0 14px 34px -8px rgba(200,154,62,.7)}
+/* appended Plan-a-Visit CTA band (JS adds .ac-page-cta at the bottom of each interior page) */
+.ac-page-cta{background:linear-gradient(135deg,#0D2530,#11303d);color:#eef6f7;padding:clamp(3rem,7vw,5rem) clamp(1.5rem,6vw,4rem);margin-top:clamp(2rem,5vw,4rem);text-align:center;font-family:'Manrope',sans-serif}
+.ac-page-cta .wrap{max-width:760px;margin:0 auto}
+.ac-page-cta .eyebrow{display:inline-block;font-size:.78rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:#5FC2D4;margin:0 0 1rem}
+.ac-page-cta h2{font-family:'Fraunces',Georgia,serif;font-weight:360;font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.12;margin:0 0 1rem;color:#fff}
+.ac-page-cta h2 em{font-style:italic;color:#5fc2d4}
+.ac-page-cta p{font-size:1.05rem;line-height:1.6;color:rgba(238,246,247,.82);margin:0 auto 2rem;max-width:48ch}
+.ac-page-cta .ac-cta-btns{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.ac-page-cta .ac-cta-btns a{display:inline-flex;align-items:center;font-weight:700;font-size:.95rem;letter-spacing:.02em;padding:.9rem 1.8rem;border-radius:999px;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .3s,border-color .3s}
+.ac-page-cta .b-gold{background:linear-gradient(135deg,#E3BD6A,#C89A3E);color:#0A161C;box-shadow:0 8px 24px -8px rgba(200,154,62,.55)}
+.ac-page-cta .b-gold:hover{transform:translateY(-3px);box-shadow:0 14px 34px -8px rgba(200,154,62,.7)}
+.ac-page-cta .b-ghost{border:1.5px solid rgba(255,255,255,.45);color:#fff}
+.ac-page-cta .b-ghost:hover{transform:translateY(-3px);border-color:#7fd0e0;background:rgba(95,194,212,.12)}
 </style>
 <script>
 (function(){
@@ -881,8 +901,23 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
       (function(tid){ a.addEventListener('click',function(e){ e.preventDefault(); e.stopPropagation(); closeMenu(); if(HOME()){ setTimeout(function(){ mGo(tid); },60); } else { window.location.href='/#'+tid; } }); })(id);
     }
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); }
+  /* ---- standalone (interior) pages: append a consistent Plan-a-Visit CTA band at the bottom (never the home page) ---- */
+  function buildPageCTA(){
+    var b=document.body;
+    if(!b.classList.contains('collection-type-page') || b.classList.contains('homepage')) return;
+    if(document.querySelector('.ac-page-cta')) return;
+    var host=document.querySelector('#sections')||document.querySelector('main')||document.querySelector('#page');
+    if(!host) return;
+    var onVisit=/\/plan-your-visit\/?$/.test(location.pathname);
+    var sec=document.createElement('section'); sec.className='ac-page-cta';
+    sec.innerHTML='<div class="wrap"><p class="eyebrow">Visit Arroyo</p><h2>We&rsquo;d love to <em>save you a seat.</em></h2><p>Join us this Sunday at 10:00&nbsp;AM &mdash; 945 Concannon Blvd, Livermore. Come as you are.</p><div class="ac-cta-btns">'
+      +(onVisit?'<a class="b-gold" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a>':'<a class="b-gold" href="/plan-your-visit">Plan Your Visit</a>')
+      +'<a class="b-ghost" href="/#ac-sermons">Watch a Sermon</a></div></div>';
+    host.appendChild(sec);
+  }
+  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
+  setTimeout(buildPageCTA,600); setTimeout(buildPageCTA,1800);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
   setTimeout(wireMobileNav,800); setTimeout(wireMobileNav,2200);
 
