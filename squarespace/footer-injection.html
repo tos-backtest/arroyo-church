@@ -474,6 +474,8 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
 .ac-page-cta .ac-cta-btns a{display:inline-flex;align-items:center;font-weight:700;font-size:.95rem;letter-spacing:.02em;padding:.9rem 1.8rem;border-radius:999px;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s,background .3s,border-color .3s}
 .ac-page-cta .b-gold{background:linear-gradient(135deg,#E3BD6A,#C89A3E);color:#0A161C;box-shadow:0 8px 24px -8px rgba(200,154,62,.55)}
 .ac-page-cta .b-gold:hover{transform:translateY(-3px);box-shadow:0 14px 34px -8px rgba(200,154,62,.7)}
+.ac-pv-cta{margin:1.5rem 0}
+.ac-pv-cta p{margin:0 0 1rem;color:rgba(22,36,43,.72)}
 .ac-page-cta .b-ghost{border:1.5px solid rgba(255,255,255,.45);color:#fff}
 .ac-page-cta .b-ghost:hover{transform:translateY(-3px);border-color:#7fd0e0;background:rgba(95,194,212,.12)}
 </style>
@@ -599,7 +601,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
   function buildMission(){
     if(!HOME()) return;
     var cd=document.getElementById('ac-cd');
-    var anchor=cd || document.querySelector('[data-section-id="68533fde9bfaa374d9c67d61"]');
+    var anchor=document.getElementById('ac-sermons') || cd || document.querySelector('[data-section-id="68533fde9bfaa374d9c67d61"]');
     if(!anchor || document.getElementById('ac-mission')) return;
     var sec=document.createElement('section'); sec.className='ac-mission'; sec.id='ac-mission';
     sec.innerHTML=
@@ -789,7 +791,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
   /* ---- SERMONS (home section) ---- */
   function buildSermons(){
     if(!HOME()) return;
-    var anchor=document.getElementById('ac-team')||document.getElementById('ac-bv');
+    var anchor=document.getElementById('ac-cd')||document.getElementById('ac-team');
     if(!anchor || document.getElementById('ac-sermons')) return;
     function esc(t){ return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
     function yt(id,title){ var t=esc(title); return '<div class="yt" data-id="'+esc(id)+'" role="button" tabindex="0" aria-label="Play: '+t+'"><img class="thumb" src="https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg" onerror="this.src=\'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg\'" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></div>'; }
@@ -820,7 +822,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
   /* ---- CONNECT (home section) ---- */
   function buildConnect(){
     if(!HOME()) return;
-    var anchor=document.getElementById('ac-sermons')||document.getElementById('ac-team');
+    var anchor=document.getElementById('ac-team')||document.getElementById('ac-bv');
     if(!anchor || document.getElementById('ac-connect')) return;
     var i1='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.9-4.6 5.5-4.6S13.9 16 14.5 19"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.6 14.1c2.7-.4 4.7 1.3 5.1 4"/></svg>';
     var i2='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3l1.9 4.4L18.5 8l-3.3 3.1.8 4.6L12 13.6l-4 2.1.8-4.6L5.5 8l4.6-.6z"/></svg>';
@@ -997,10 +999,11 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     var host=document.querySelector('#sections')||document.querySelector('main')||document.querySelector('#page');
     if(!host) return;
     var onVisit=/\/plan-your-visit\/?$/.test(location.pathname);
+    if(onVisit){var ofb=document.querySelector('.sqs-block-form');if(ofb && !document.querySelector('.ac-pv-cta')){var blk=ofb.closest('.sqs-block')||ofb;blk.style.display='none';var pv=document.createElement('div');pv.className='ac-pv-cta';pv.innerHTML='<p>Let us know you&rsquo;re coming &mdash; we&rsquo;ll save you a seat this Sunday.</p><a class="btn btn-gold" href="/#ac-visit-form">Plan Your Visit</a>';blk.parentNode.insertBefore(pv,blk);}}
     var sec=document.createElement('section'); sec.className='ac-page-cta';
     sec.innerHTML='<div class="wrap"><p class="eyebrow">Visit Arroyo</p><h2>We&rsquo;d love to <em>save you a seat.</em></h2><p>Join us this Sunday at 10:00&nbsp;AM &mdash; 945 Concannon Blvd, Livermore. Come as you are.</p><div class="ac-cta-btns">'
-      +(onVisit?'<a class="b-gold" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a>':'<a class="b-gold" href="/plan-your-visit">Plan Your Visit</a>')
-      +'<a class="b-ghost" href="/#ac-sermons">Watch a Sermon</a></div></div>';
+      +(onVisit?'<a class="b-gold" href="/#ac-visit-form">Plan Your Visit</a><a class="b-ghost" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a>':'<a class="b-gold" href="/plan-your-visit">Plan Your Visit</a><a class="b-ghost" href="/#ac-sermons">Watch a Sermon</a>')
+      +'</div></div>';
     host.appendChild(sec);
   }
   /* wire every [data-ac-scroll] (hero CTA, final CTA, descent button) to instant-scroll to the on-site visit form; smooth-scroll is !important elsewhere and breaks native anchor jumps */
@@ -1017,7 +1020,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       });
     });
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildSermons(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); wireScrollLinks(); }
+  function acInitSections(){ buildHero(); buildCountdown(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); wireScrollLinks(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(buildPageCTA,600); setTimeout(buildPageCTA,1800);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
