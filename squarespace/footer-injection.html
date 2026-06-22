@@ -591,10 +591,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       if(!title || (title.textContent||'').trim()!=='About') continue;
       if(it.querySelectorAll('.header-nav-folder-content a, .header-nav-folder-item a').length>0) continue; /* a real (non-empty) folder: leave alone */
       var content=it.querySelector('.header-nav-folder-content'); if(content) content.style.display='none';
-      if(!title.getAttribute('data-ac-about')){
-        title.setAttribute('data-ac-about','1'); title.style.cursor='pointer';
-        title.addEventListener('click',function(e){ e.preventDefault(); window.location.href='/about'; });
-      }
+      /* NOTE: do NOT navigate About to /about here — wireNav() scrolls About to #ac-mission on the single-page home; a navigate handler here double-fired (scroll, then redirect to /about) */
     }
   }
   /* ---- M3: build the mission section right after the countdown (homepage only) ---- */
