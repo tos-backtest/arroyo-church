@@ -89,28 +89,20 @@ def fetch_transcript(vid: str) -> str:
             continue
     return ""
 
-# ---- pick the LATEST captioned sermon clip; skip full-service / worship livestreams
-#      (those have no usable transcript and aren't sermon-only content) ----
-SKIP_RE = re.compile(r"worship|full[ -]?service|live ?stream", re.I)
-v = None
-transcript = ""
-for cand in videos[:8]:
-    if SKIP_RE.search(cand.get("title", "")):
-        continue
-    t = fetch_transcript(cand["id"])
-    if len(t) >= 400:
-        v, transcript = cand, t
-        break
-
-if not v:
-    sys.exit("no recent captioned sermon clip found (latest is likely an un-captioned full-service video) -- nothing to do")
-
+# ---- always target the LATEST sermon (videos[0]). If it isn't captioned yet,
+#      WAIT (abort) instead of falling back to an older sermon -- the daily run
+#      retries until YouTube finishes auto-captioning it. ----
+v = videos[0]
 video_id = v["id"]
 video_url = f"https://www.youtube.com/watch?v={video_id}"
 
 if already_done(video_id):
     print(f'Draft already exists for {video_id} ("{v.get("title")}") -- nothing to do.')
     sys.exit(0)
+
+transcript = fetch_transcript(video_id)
+if len(transcript) < 400:
+    sys.exit(f'Latest sermon "{v.get("title")}" ({video_id}) not captioned yet -- waiting for YouTube; will retry next run.')
 
 # ---- generate with Claude (Opus 4.8, structured output) ----
 SCHEMA = {

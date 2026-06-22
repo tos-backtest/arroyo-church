@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!-- Weekly sermon-blog generator. Install:
-       cp scripts/com.arroyo.blog-weekly.plist ~/Library/LaunchAgents/
-       launchctl load ~/Library/LaunchAgents/com.arroyo.blog-weekly.plist
-     Runs Mondays 9:15am. If the Mac is asleep then, launchd runs it on next wake. -->
+<!-- Daily sermon-blog generator. Runs every day at 9:15am and generates a draft for
+     the LATEST sermon as soon as YouTube has captioned it (idempotent: one draft per
+     sermon). If the Mac is asleep/off at 9:15, launchd runs the missed job on next wake.
+     Install:
+       cp scripts/com.arroyo.blog.plist ~/Library/LaunchAgents/
+       launchctl load ~/Library/LaunchAgents/com.arroyo.blog.plist -->
 <plist version="1.0">
 <dict>
   <key>Label</key>
-  <string>com.arroyo.blog-weekly</string>
+  <string>com.arroyo.blog</string>
 
   <key>ProgramArguments</key>
   <array>
     <string>/bin/bash</string>
-    <string>/Users/dakotayates/ai-os/ventures/arroyo-church-redesign/scripts/run-blog-weekly.sh</string>
+    <string>/Users/dakotayates/ai-os/ventures/arroyo-church-redesign/scripts/run-blog.sh</string>
   </array>
 
   <key>StartCalendarInterval</key>
   <dict>
-    <key>Weekday</key><integer>1</integer>
     <key>Hour</key><integer>9</integer>
     <key>Minute</key><integer>15</integer>
   </dict>

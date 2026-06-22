@@ -1,9 +1,10 @@
 #!/bin/bash
-# Weekly sermon-blog runner — invoked by launchd (com.arroyo.blog-weekly).
+# Daily sermon-blog runner — invoked by launchd (com.arroyo.blog).
 #
 # Runs on Dakota's Mac (residential IP) because YouTube blocks yt-dlp transcript
-# downloads from datacenter IPs. Pulls the latest sermon data, generates a blog
-# draft with Claude, and pushes the draft to GitHub for review/publishing.
+# downloads from datacenter IPs. Runs daily; generate_blog.py targets the LATEST
+# sermon and only writes a draft once it's captioned (idempotent: one per sermon),
+# then pushes it to GitHub for review/publishing.
 #
 # API key lives OUTSIDE the repo at ~/.config/arroyo/anthropic.env (chmod 600)
 # so it is never committed. Logs go to ~/Library/Logs/arroyo-blog.log.
