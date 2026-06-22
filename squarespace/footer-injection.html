@@ -688,8 +688,8 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     function upd(){
       ticking=false;
       var r=story.getBoundingClientRect(), vh=window.innerHeight;
-      /* draw spans the ENTIRE time the section is on screen (entry->exit) so the river tip grows slowly the whole scroll, beige start -> cyan end */
-      var t=Math.min(1,Math.max(0,(vh - r.top)/(vh + r.height)));
+      /* draw spans ~(section height + half a viewport) of scroll = midway between the old fast finish (r.height) and the full entry->exit (vh+r.height); moderate pace, beige -> cyan */
+      var t=Math.min(1,Math.max(0,(vh - r.top)/(r.height + vh*0.5)));
       if(path) path.style.strokeDashoffset=pathLen*(1-t);
       if(verseWords.length){ var lit=Math.floor(Math.min(1,t*2.6)*verseWords.length); for(var i=0;i<verseWords.length;i++){ verseWords[i].classList.toggle('lit', i<lit); } }
     }
