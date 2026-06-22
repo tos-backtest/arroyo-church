@@ -32,7 +32,7 @@ html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{padding-to
 .ac-hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(10,22,28,.66) 0%,rgba(10,22,28,.42) 45%,rgba(10,22,28,.82) 100%)}
 /* robust entrance: visible by default, CSS keyframe auto-plays (no class gating = can't get stuck hidden) */
 .ac-hero>*{animation:acRise .9s cubic-bezier(.16,1,.3,1) both}
-.ac-eyebrow{animation-delay:.05s}.ac-hero h1{animation-delay:.16s}.ac-sub{animation-delay:.46s}.ac-ctas{animation-delay:.64s}.ac-service{animation-delay:.82s}
+.ac-eyebrow{animation-delay:.05s}.ac-hero h1{animation-delay:.16s}.ac-sub{animation-delay:.46s}.ac-ctas{animation-delay:.64s}.ac-reassure{animation-delay:.74s}.ac-service{animation-delay:.86s}
 @keyframes acRise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .ac-eyebrow{display:inline-flex;align-items:center;gap:.7rem;font-size:.82rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#E3BD6A;margin:0 0 1.3rem}
 .ac-eyebrow::before{content:"";width:42px;height:1.5px;background:#E3BD6A;display:inline-block}
@@ -46,6 +46,7 @@ html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{padding-to
 .ac-btn-ghost{border:1.5px solid rgba(255,255,255,.45);color:#fff}
 .ac-btn-ghost:hover{transform:translateY(-3px);border-color:#7fd0e0;background:rgba(95,194,212,.12)}
 .ac-service{margin-top:2.6rem;font-size:.95rem;font-weight:600;color:rgba(255,255,255,.72)}
+.ac-reassure{margin:1.3rem 0 0;font-size:.82rem;font-weight:600;letter-spacing:.01em;color:rgba(238,246,247,.8)}
 .ac-service strong{color:#fff;font-weight:800}
 .ac-scroll{position:absolute;bottom:clamp(3rem,8vh,6rem);left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-size:.7rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.6);z-index:6;animation:acFade 1s 1.1s both}
 @keyframes acFade{from{opacity:0}to{opacity:1}}
@@ -117,6 +118,16 @@ html.ac-hero-on.ac-scrolled .header-title-logo img{max-height:34px!important}
 .ac-mission .mcard h3{font-family:'Fraunces',Georgia,serif;font-weight:520;font-size:1.18rem;margin:0 0 .2rem;color:#16242b}
 .ac-mission .mcard p{font-size:.95rem;color:rgba(22,36,43,.66);margin:0}
 @media (max-width:920px){.ac-mission .ms-grid{grid-template-columns:1fr}}
+.ac-expect .xp-head{text-align:center;max-width:60ch;margin:0 auto}
+.ac-expect .xp-head .eyebrow{justify-content:center}
+.ac-expect .xp-head .lead{color:rgba(22,36,43,.7);margin:1.1rem auto 0}
+.ac-expect .xp-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem;margin-top:3rem}
+.xp-card{background:#fff;border:1px solid rgba(22,36,43,.08);border-radius:18px;padding:1.7rem 1.6rem;display:flex;gap:1rem;align-items:flex-start;box-shadow:0 8px 20px -14px rgba(22,36,43,.18)}
+.xp-card .xp-num{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:'Fraunces',serif;font-weight:500;background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.14));color:#2e8fa3}
+.xp-card h3{font-family:'Fraunces',Georgia,serif;font-weight:520;font-size:1.12rem;margin:0 0 .3rem;color:#16242b}
+.xp-card p{font-size:.93rem;color:rgba(22,36,43,.66);margin:0;line-height:1.6}
+.xp-cta{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2.6rem}
+@media (max-width:920px){.ac-expect .xp-cards{grid-template-columns:1fr}}
 /* hide the duplicate native "Who we are" mission section on home */
 body.homepage [data-section-id="68533fde9bfaa374d9c67d68"]{display:none!important}
 /* reveal-on-scroll for injected sections (parallel to the .fe-block reveal) */
@@ -438,7 +449,7 @@ body.homepage [data-section-id="6853420a6e3e3715dbe5285d"]{display:none!importan
 /* on genuinely SHORT viewports (small phones like the SE, or any phone in landscape) the hero content + cue can't both fit even at 100svh — drop the cue there so it never overlaps the address. Normal/tall phones (iPhone Pro etc.) keep it. */
 @media(max-height:680px){.ac-hero .ac-scroll{display:none!important}}
 /* 11: mobile — the hero is pulled up -100px behind the fixed header and its content is vertically centered; on tall phones (e.g. iPhone Pro) the taller content lifts the gold eyebrow up UNDER the logo/hamburger. Top-align on phones (fitHeroTop() sizes the exact padding at runtime; this is the no-JS fallback) AND tighten the inter-element rhythm so the address line doesn't collide with the Scroll cue at the bottom. */
-@media(max-width:767px){html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top,0px) + 230px)}.ac-hero .ac-eyebrow{margin-bottom:.6rem}.ac-hero .ac-sub{margin-top:.85rem}.ac-hero .ac-ctas{margin-top:1.1rem}.ac-hero .ac-service{margin-top:.8rem}}
+@media(max-width:767px){html.ac-hero-on [data-section-id="68533fde9bfaa374d9c67d61"] .ac-hero{justify-content:flex-start;padding-top:calc(env(safe-area-inset-top,0px) + 230px)}.ac-hero .ac-eyebrow{margin-bottom:.6rem}.ac-hero .ac-sub{margin-top:.85rem}.ac-hero .ac-ctas{margin-top:1.1rem}.ac-hero .ac-reassure{margin-top:.8rem;font-size:.74rem}.ac-hero .ac-service{margin-top:.8rem}}
 /* 4,5,8,9,10: light, readable titles on the dark sections */
 .ac-about .belief .b-name{color:#f4efe4!important}
 .ac-about .belief .chev{color:#e3bd6a!important;border-color:rgba(227,189,106,.6)!important}
@@ -528,11 +539,12 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     if(hero.querySelector('.ac-hero')) return;
     var ov=document.createElement('div'); ov.className='ac-hero';
     ov.innerHTML =
-      '<p class="ac-eyebrow">Arroyo Church &middot; Livermore, CA</p>'+
-      '<h1>A river in the <em>desert.</em></h1>'+
-      '<p class="ac-sub">Know and show the love of Jesus in the Bay Area and beyond. Wherever you are on your journey, you are welcome here.</p>'+
+      '<p class="ac-eyebrow">A river in the desert</p>'+
+      '<h1>Come as you are.<br>You <em>belong</em> here.</h1>'+
+      '<p class="ac-sub">A Bible-teaching church in Livermore for the whole Tri-Valley &mdash; whatever your background or beliefs. Join us this Sunday at 10am: casual, friendly, and your kids will love it.</p>'+
       '<div class="ac-ctas"><a class="ac-btn ac-btn-gold" href="/#ac-visit-form" data-ac-scroll>Plan Your Visit</a>'+
       '<a class="ac-btn ac-btn-ghost" href="/messages">Watch a Sermon</a></div>'+
+      '<p class="ac-reassure">Come as you are &middot; Plenty of parking &middot; Kids welcome &middot; You won&rsquo;t be singled out</p>'+
       '<div class="ac-service"><strong>Sundays &middot; 10:00 AM</strong> &middot; 945 Concannon Blvd, Livermore, CA 94550</div>'+
       '<div class="ac-scroll"><span>Scroll</span><i></i></div>';
     hero.appendChild(ov);
@@ -593,6 +605,21 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       var content=it.querySelector('.header-nav-folder-content'); if(content) content.style.display='none';
       /* NOTE: do NOT navigate About to /about here — wireNav() scrolls About to #ac-mission on the single-page home; a navigate handler here double-fired (scroll, then redirect to /about) */
     }
+  }
+  /* ---- "What to expect" teaser right after the countdown: reduces first-visit fear + drives to the form (homepage only) ---- */
+  function buildVisitTeaser(){
+    if(!HOME()) return;
+    var anchor=document.getElementById('ac-cd');
+    if(!anchor || document.getElementById('ac-expect')) return;
+    var cards=[
+      ['Come as you are','Dress is casual and no one gets put on the spot. Walk in, grab a coffee, and a friendly face will help you find your way.'],
+      ['About 55 minutes','A few worship songs and a clear, practical message from the Bible &mdash; for wherever you are on your journey.'],
+      ['Your kids will love it','Safe, fun children&rsquo;s ministry from nursery through 5th grade, so you can engage while they have a blast.']
+    ];
+    var cHtml=cards.map(function(c,i){ return '<div class="xp-card ac-rev"><div class="xp-num">'+(i+1)+'</div><div><h3>'+c[0]+'</h3><p>'+c[1]+'</p></div></div>'; }).join('');
+    var sec=document.createElement('section'); sec.className='ac-sec ac-expect'; sec.id='ac-expect';
+    sec.innerHTML='<div class="wrap"><div class="xp-head"><p class="eyebrow ac-rev">New here?</p><h2 class="h2 ac-rev">What to expect <em>on Sunday.</em></h2><p class="lead ac-rev">First time at church &mdash; or just at Arroyo? Here&rsquo;s exactly what your Sunday looks like, so you can walk in knowing what to expect.</p></div><div class="xp-cards">'+cHtml+'</div><div class="xp-cta ac-rev"><a class="btn btn-gold" href="/#ac-visit-form" data-ac-scroll>Plan Your Visit</a><a class="btn btn-ghost-dark" href="https://www.google.com/maps/dir/?api=1&destination=945+Concannon+Blvd,+Livermore,+CA+94550" target="_blank" rel="noopener">Get Directions</a></div></div>';
+    anchor.parentNode.insertBefore(sec, anchor.nextSibling);
   }
   /* ---- M3: build the mission section right after the countdown (homepage only) ---- */
   function buildMission(){
@@ -788,7 +815,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
   /* ---- SERMONS (home section) ---- */
   function buildSermons(){
     if(!HOME()) return;
-    var anchor=document.getElementById('ac-cd')||document.getElementById('ac-team');
+    var anchor=document.getElementById('ac-expect')||document.getElementById('ac-cd')||document.getElementById('ac-team');
     if(!anchor || document.getElementById('ac-sermons')) return;
     function esc(t){ return (t||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
     function yt(id,title){ var t=esc(title); return '<div class="yt" data-id="'+esc(id)+'" role="button" tabindex="0" aria-label="Play: '+t+'"><img class="thumb" src="https://i.ytimg.com/vi/'+id+'/maxresdefault.jpg" onerror="this.src=\'https://i.ytimg.com/vi/'+id+'/hqdefault.jpg\'" alt="" loading="lazy"><span class="play" aria-hidden="true"></span></div>'; }
@@ -1017,7 +1044,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       });
     });
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); wireScrollLinks(); }
+  function acInitSections(){ buildHero(); buildCountdown(); buildVisitTeaser(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); wireScrollLinks(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(buildPageCTA,600); setTimeout(buildPageCTA,1800);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
