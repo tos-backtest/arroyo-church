@@ -563,7 +563,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     var sec=document.createElement('div'); sec.className='ac-cd'; sec.id='ac-cd';
     sec.setAttribute('role','timer'); sec.setAttribute('aria-label','Time until the next worship gathering');
     sec.innerHTML=
-      '<span class="cd-label">Next worship gathering</span>'+
+      '<span class="cd-label" id="ac-cd-label">Next worship gathering</span>'+
       '<div class="cd-units" id="ac-cd-units">'+
         '<div class="cd-unit"><div class="cd-num" id="ac-cd-d">&ndash;</div><div class="cd-word">Days</div></div>'+
         '<div class="cd-unit"><div class="cd-num" id="ac-cd-h">&ndash;</div><div class="cd-word">Hours</div></div>'+
@@ -578,7 +578,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
   function startCountdown(){
     var d=document.getElementById('ac-cd-d'),h=document.getElementById('ac-cd-h'),
         m=document.getElementById('ac-cd-m'),s=document.getElementById('ac-cd-s'),
-        units=document.getElementById('ac-cd-units'),live=document.getElementById('ac-cd-live');
+        units=document.getElementById('ac-cd-units'),live=document.getElementById('ac-cd-live'),label=document.getElementById('ac-cd-label');
     if(!d) return;
     var laFmt=new Intl.DateTimeFormat('en-US',{timeZone:'America/Los_Angeles',weekday:'short',hour:'numeric',minute:'numeric',second:'numeric',hour12:false});
     function laPartsAt(date){var p=laFmt.formatToParts(date);function g(t){return p.find(function(x){return x.type===t;}).value;}return {wd:g('weekday'),h:(+g('hour'))%24,mi:+g('minute'),s:+g('second')};}
@@ -586,8 +586,8 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       var la=laPartsAt(new Date());
       var days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],dow=days.indexOf(la.wd);
       var secNow=la.h*3600+la.mi*60+la.s,tenAM=10*3600,liveEnd=11*3600+30*60;
-      if(dow===0&&secNow>=tenAM&&secNow<liveEnd){units.style.display='none';live.style.display='block';return;}
-      units.style.display='';live.style.display='none';
+      if(dow===0&&secNow>=tenAM&&secNow<liveEnd){units.style.display='none';live.style.display='block';label.style.display='none';return;}
+      units.style.display='';live.style.display='none';label.style.display='';
       var daysAhead; if(dow===0&&secNow<tenAM)daysAhead=0;else daysAhead=(7-dow)%7||7;
       var total=daysAhead*86400+tenAM-secNow; if(total<0)total+=7*86400;
       var probe=laPartsAt(new Date(Date.now()+total*1000));
