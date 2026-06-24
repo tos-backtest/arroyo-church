@@ -548,7 +548,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       '<h1>Come as you are.<br>You <em>belong</em> here.</h1>'+
       '<p class="ac-sub">A warm, welcoming church in Livermore &mdash; gospel-centered, full of grace and truth, and built on real community. No matter where you are on your journey, you belong here.</p>'+
       '<div class="ac-ctas"><a class="ac-btn ac-btn-gold" href="/#ac-visit-form" data-ac-scroll>Plan Your Visit</a>'+
-      '<a class="ac-btn ac-btn-ghost" href="/messages">Watch a Sermon</a></div>'+
+      '<a class="ac-btn ac-btn-ghost" href="/#ac-sermons" data-ac-scroll="ac-sermons">Watch a Sermon</a></div>'+
       '<p class="ac-reassure">Plenty of parking &middot; Safe &amp; fun children&rsquo;s ministry &middot; Donuts &amp; coffee</p>'+
       '<div class="ac-service"><strong>Sundays &middot; 10:00 AM</strong> &middot; 945 Concannon Blvd, Livermore, CA 94550</div>'+
       '<div class="ac-scroll"><span>Scroll</span><i></i></div>';
@@ -1043,10 +1043,11 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     document.querySelectorAll('[data-ac-scroll]').forEach(function(b){
       if(b.getAttribute('data-ac-sw')) return; b.setAttribute('data-ac-sw','1');
       b.addEventListener('click',function(e){ e.preventDefault();
+        var target=b.getAttribute('data-ac-scroll')||'ac-visit-form'; /* default = the visit form; e.g. data-ac-scroll="ac-sermons" jumps to the sermons section */
+        var el=document.getElementById(target); if(!el) return;
         de.style.setProperty('scroll-behavior','auto','important');
-        var el=document.getElementById('ac-visit-form'); if(!el) return;
         window.scrollTo(0, el.getBoundingClientRect().top+(window.scrollY||de.scrollTop)-80);
-        var inp=el.querySelector('input[name=name]'); if(inp) setTimeout(function(){ inp.focus(); },160);
+        if(target==='ac-visit-form'){ var inp=el.querySelector('input[name=name]'); if(inp) setTimeout(function(){ inp.focus(); },160); }
       });
     });
   }
