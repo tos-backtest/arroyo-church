@@ -495,6 +495,77 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
 .ac-pv-cta p{margin:0 0 1rem;color:rgba(22,36,43,.72)}
 .ac-page-cta .b-ghost{border:1.5px solid rgba(255,255,255,.45);color:#fff}
 .ac-page-cta .b-ghost:hover{transform:translateY(-3px);border-color:#7fd0e0;background:rgba(95,194,212,.12)}
+/* ════ CONNECT-TAG: NFC chair-tap "digital connect card" (interior collection 68b739b2…) ════ */
+/* hide the native two link-out buttons (off-domain, no indexed prose); belt + suspenders */
+body.collection-68b739b28750bd7e337593bd [data-section-id="68b739bd066e364b7dc44bc6"]{display:none!important}
+body.collection-68b739b28750bd7e337593bd #sections .sqs-block-button{display:none!important}
+.ac-ct{padding:0;font-family:'Manrope',sans-serif;background:#faf7f0}
+.ac-ct .ct-card{max-width:600px;margin:0 auto;min-height:100svh;display:flex;flex-direction:column}
+.ac-ct .ct-screen{display:flex;flex-direction:column;flex:1}
+.ac-ct .ct-screen[hidden]{display:none}
+.ac-ct .ct-band{position:relative;background:linear-gradient(160deg,#0d2530,#11303d);color:#eef6f7;padding:clamp(2.6rem,8vw,3.6rem) clamp(1.4rem,5vw,2.2rem) clamp(2rem,6vw,2.8rem);overflow:hidden;border-radius:0 0 28px 28px}
+.ac-ct .ct-river{position:absolute;top:0;left:0;width:100%;height:44px;display:block}
+.ac-ct .ct-river-path{fill:none;stroke-width:3}
+.ac-ct .ct-eyebrow{font-size:.74rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:#e3bd6a;margin:1rem 0 .7rem}
+.ac-ct .ct-h1{font-family:'Fraunces',Georgia,serif;font-weight:360;font-size:clamp(1.95rem,7vw,2.6rem);line-height:1.08;margin:0}
+.ac-ct .ct-h1 em{font-style:italic;color:#7fd0e0}
+.ac-ct .ct-sub{font-size:1rem;line-height:1.55;color:rgba(238,246,247,.82);margin:.9rem 0 0;max-width:34ch}
+.ac-ct .ct-menu{padding:clamp(1.3rem,5vw,1.9rem) clamp(1.1rem,5vw,1.6rem) .3rem;display:flex;flex-direction:column;gap:.6rem}
+.ac-ct .ct-opt{display:flex;align-items:center;gap:.8rem;width:100%;text-align:left;min-height:58px;padding:.8rem .95rem;border-radius:16px;background:rgba(95,194,212,.10);border:1.5px solid rgba(95,194,212,.30);color:#15323a;font-family:'Manrope',sans-serif;font-size:1rem;font-weight:600;cursor:pointer;transition:transform .12s,border-color .2s,background .2s,box-shadow .2s}
+.ac-ct .ct-opt:active{transform:scale(.985)}
+.ac-ct .ct-opt-ic{flex:0 0 auto;width:28px;height:28px;color:#2e8fa3;display:grid;place-items:center}
+.ac-ct .ct-opt-ic svg{width:24px;height:24px}
+.ac-ct .ct-opt-txt{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+.ac-ct .ct-opt-txt small{font-weight:500;font-size:.8rem;color:rgba(22,36,43,.58);margin-top:.12rem}
+.ac-ct .ct-check{flex:0 0 auto;width:23px;height:23px;border-radius:50%;border:1.5px solid rgba(46,143,163,.4);display:grid;place-items:center;color:#fff;font-size:.8rem;opacity:0;transform:scale(.6);transition:opacity .2s,transform .2s,background .2s,border-color .2s}
+.ac-ct .ct-opt[aria-pressed="true"]{background:rgba(95,194,212,.2);border-color:#2e8fa3;box-shadow:0 0 0 3px rgba(46,143,163,.14)}
+.ac-ct .ct-opt[aria-pressed="true"] .ct-check{opacity:1;transform:scale(1);background:#2e8fa3;border-color:#2e8fa3}
+.ac-ct .ct-opt:focus-visible{outline:none;border-color:#2e8fa3;box-shadow:0 0 0 3px rgba(46,143,163,.28)}
+.ac-ct .ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.ac-ct .ct-grid .ct-opt{min-height:62px;font-size:.95rem}
+.ac-ct .ct-opt-decision{background:linear-gradient(135deg,rgba(227,189,106,.2),rgba(200,154,62,.1));border-color:rgba(200,154,62,.55);min-height:66px}
+.ac-ct .ct-opt-decision .ct-opt-ic{color:#6b481a}
+.ac-ct .ct-opt-decision .ct-check{border-color:rgba(200,154,62,.5)}
+.ac-ct .ct-opt-decision[aria-pressed="true"]{background:linear-gradient(135deg,rgba(227,189,106,.36),rgba(200,154,62,.2));border-color:#c89a3e;box-shadow:0 0 0 3px rgba(200,154,62,.18)}
+.ac-ct .ct-opt-decision[aria-pressed="true"] .ct-check{background:#c89a3e;border-color:#c89a3e}
+.ac-ct .ct-actions{padding:1rem clamp(1.1rem,5vw,1.6rem) .3rem;display:flex;flex-direction:column;gap:.7rem;align-items:center;margin-top:auto}
+.ac-ct .ct-continue{width:100%;justify-content:center;font-size:1.02rem;padding:.95rem 1.7rem}
+.ac-ct .ct-nudge{color:#b3402e;font-size:.88rem;font-weight:600;text-align:center}
+.ac-ct .ct-nudge:empty{display:none}
+.ac-ct .ct-give{font-weight:700;font-size:.92rem;color:#1f6b7c;text-decoration:none;letter-spacing:.01em}
+.ac-ct .ct-give:hover{color:#0d2530}
+.ac-ct .ct-text{text-align:center;font-size:.86rem;color:rgba(22,36,43,.55);padding:.7rem 1rem 1.6rem;margin:0}
+.ac-ct .ct-text a{color:#1f6b7c;font-weight:700;text-decoration:none}
+.ac-ct .ct-s2{padding:clamp(1.2rem,5vw,1.8rem)}
+.ac-ct .ct-form{margin-top:0}
+.ac-ct .ct-fields{display:flex;flex-direction:column;gap:.9rem}
+.ac-ct .ct-cond{margin-top:.9rem}
+.ac-ct .ct-cond[hidden]{display:none}
+.ac-ct .ct-form .vf-actions{justify-content:space-between;gap:.8rem}
+.ac-ct .vf-done .ct-momentum{display:flex;flex-direction:column;gap:.55rem;align-items:center;margin-top:.4rem}
+.ac-ct .vf-done .ct-momentum a{font-weight:700;font-size:.92rem;color:#1f6b7c;text-decoration:none}
+@keyframes ctRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.ac-ct .ct-anim-in{animation:ctRise .42s cubic-bezier(.16,1,.3,1) both}
+.ac-ct .ct-s2.ct-anim-in{animation:ctRise .24s cubic-bezier(.16,1,.3,1) both}
+@media (min-width:620px){.ac-ct{padding:clamp(1.5rem,4vw,3rem) 1rem;background:linear-gradient(180deg,#eceff0,#faf7f0)}.ac-ct .ct-card{min-height:0;background:#fff;border-radius:28px;box-shadow:0 30px 70px -34px rgba(13,37,48,.45);overflow:hidden}}
+@media (prefers-reduced-motion:reduce){.ac-ct .ct-anim-in{animation:none}.ac-ct .ct-river-path{stroke-dashoffset:0!important}}
+/* ════ GIVE page (interior collection 685d8cf…): branded "ways to give" layer injected above the native blocks ════ */
+.ac-give-page{font-family:'Manrope',sans-serif;background:linear-gradient(180deg,#0d2530,#11303d);color:#eef6f7;padding:clamp(3rem,8vw,5.5rem) clamp(1.4rem,6vw,4rem) clamp(2.6rem,6vw,4rem)}
+.ac-give-page .wrap{max-width:1100px;margin:0 auto}
+.ac-give-page .gp-head{text-align:center;max-width:62ch;margin:0 auto clamp(2rem,5vw,3rem)}
+.ac-give-page .eyebrow{display:inline-block;font-size:.76rem;font-weight:800;letter-spacing:.26em;text-transform:uppercase;color:#e3bd6a;margin:0 0 1rem}
+.ac-give-page h2{font-family:'Fraunces',Georgia,serif;font-weight:360;font-size:clamp(2rem,5vw,3.2rem);line-height:1.08;margin:0 0 1rem;color:#fff}
+.ac-give-page h2 em{font-style:italic;color:#7fd0e0}
+.ac-give-page .gp-lead{font-size:1.05rem;line-height:1.6;color:rgba(238,246,247,.8);margin:0 auto;max-width:54ch}
+.ac-give-page .gp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+.ac-give-page .gcard h3{color:#fff}
+.ac-give-page .gp-primary{grid-column:1/-1;flex-direction:row;align-items:center;gap:1.4rem;background:linear-gradient(135deg,rgba(227,189,106,.16),rgba(17,48,61,.55));border-color:rgba(200,154,62,.5)}
+.ac-give-page .gp-primary .ic{margin:0}
+.ac-give-page .gp-primary .gp-pbody{flex:1}
+.ac-give-page .gp-primary p{color:rgba(238,246,247,.9)}
+.ac-give-page .gp-monthly{margin:1.6rem auto 0;text-align:center;color:rgba(238,246,247,.72);font-size:.96rem;max-width:60ch}
+.ac-give-page .gp-monthly strong{color:#e3bd6a;font-weight:700}
+@media(max-width:820px){.ac-give-page .gp-grid{grid-template-columns:1fr}.ac-give-page .gp-primary{flex-direction:column;align-items:flex-start;gap:.7rem}}
 </style>
 <script>
 (function(){
@@ -882,7 +953,7 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       var token=(window.turnstile&&tsId!==null)?window.turnstile.getResponse(tsId):'';
       if(!token){ if(err) err.textContent='Please complete the verification just above the button.'; return; }
       var btn=form.querySelector('button[type=submit]'), orig=btn.textContent; btn.disabled=true; btn.textContent='Sending…';
-      var data={}; new FormData(form).forEach(function(v,k){ data[k]=v; }); data.turnstileToken=token;
+      var data={}; new FormData(form).forEach(function(v,k){ data[k]=v; }); data.turnstileToken=token; data.nextSteps=['10558272']; /* explicit next-step contract; worker also has a {group}-only fallback */
       fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
         .then(function(r){ return r.json(); })
         .then(function(j){ if(j&&j.success){ var name=(data.first||'').trim();
@@ -1022,6 +1093,143 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
     }
   }
   /* ---- standalone (interior) pages: append a consistent Plan-a-Visit CTA band at the bottom (never the home page) ---- */
+  /* ---- CONNECT-TAG: the NFC chair-tap "digital connect card" (interior page) ---- */
+  function buildConnectTag(){
+    if(!document.body.classList.contains('collection-68b739b28750bd7e337593bd')) return;
+    if(document.getElementById('ac-ct')) return;
+    var host=document.querySelector('#sections')||document.querySelector('main')||document.querySelector('#page');
+    if(!host) return;
+    var KEY='0x4AAAAAADo6c47j8dehqH9-', WORKER='https://arroyo-connect.dakota-fac.workers.dev';
+    /* lazy-load Turnstile api.js (buildConnect normally injects this, but it's home-gated) */
+    if(!document.getElementById('ac-ts-script')){var tss=document.createElement('script');tss.id='ac-ts-script';tss.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';tss.async=true;tss.defer=true;document.head.appendChild(tss);}
+    /* forward the chair-tap attribution onto the Give route-out */
+    var giveURL=(function(){ var u='https://donate.overflow.co/arroyochurch/cash'; try{ var p=new URLSearchParams(location.search), q=[]; if(p.get('utm_source'))q.push('utm_source='+encodeURIComponent(p.get('utm_source'))); if(p.get('tap_device_id'))q.push('tap_device_id='+encodeURIComponent(p.get('tap_device_id'))); if(q.length)u+='?'+q.join('&'); }catch(e){} return u; })();
+    var groupOpts='<option value="">Not sure yet &mdash; help me find one</option><option value="10558346">Couples &mdash; Mondays 7pm</option><option value="10558347">Men &mdash; Tuesdays 6:30pm</option><option value="10558348">Women &mdash; Wednesdays 6pm</option><option value="10558349">Moms &mdash; monthly, Sundays after church</option><option value="10558350">RecConnect &mdash; various times</option><option value="10558351">Young Adults &mdash; Thursdays 7pm</option><option value="10558352">Students</option>';
+    var icSpark='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.7 5.6L19 10l-5.3 1.4L12 17l-1.7-5.6L5 10l5.3-1.4z"/></svg>';
+    var icNew='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01M8.5 14.5a4.5 4.5 0 007 0"/></svg>';
+    var icPray='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.7-7-9.6A4.4 4.4 0 0112 7a4.4 4.4 0 017 3.4C19 15.3 12 20 12 20z"/></svg>';
+    var icGroup='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.9-4.6 5.5-4.6S13.9 16 14.5 19"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.6 14.1c2.7-.4 4.7 1.3 5.1 4"/></svg>';
+    var icServe='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13V6.5a1.5 1.5 0 013 0V12M10 12V5.2a1.5 1.5 0 013 0V12M13 12V7a1.5 1.5 0 013 0v6.6c0 3.2-2.4 5.9-5.6 5.9-1.9 0-3.3-.8-4.4-2.2L4 16"/></svg>';
+    var icDrop='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.3 6 10.3a6 6 0 01-12 0C6 9.3 12 3 12 3z"/></svg>';
+    function opt(step,ic,label,sub,cls){ return '<button type="button" class="ct-opt'+(cls?' '+cls:'')+'" data-step="'+step+'" aria-pressed="false"><span class="ct-opt-ic">'+ic+'</span><span class="ct-opt-txt">'+label+(sub?'<small>'+sub+'</small>':'')+'</span><span class="ct-check">&#10003;</span></button>'; }
+    var s1='<div class="ct-screen ct-s1 ct-anim-in" id="ac-ct-s1">'
+      +'<div class="ct-band"><svg class="ct-river" viewBox="0 0 600 44" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="ctRiverGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c89a3e"/><stop offset=".5" stop-color="#5fc2d4"/><stop offset="1" stop-color="#bfe7ee"/></linearGradient></defs><path class="ct-river-path" d="M0,30 C70,12 140,38 210,24 C285,9 350,38 430,22 C510,8 560,30 600,20" stroke="url(#ctRiverGrad)"/></svg>'
+        +'<p class="ct-eyebrow">You found us</p><h1 class="ct-h1">We&rsquo;re so glad you&rsquo;re <em>here.</em></h1><p class="ct-sub">Thanks for tapping. What brought you in today? Pick anything below.</p></div>'
+      +'<div class="ct-menu">'
+        +opt('10625856',icSpark,'I made a decision for Jesus today','We&rsquo;d love to celebrate with you.','ct-opt-decision')
+        +'<div class="ct-grid">'
+          +opt('10558271',icNew,'I&rsquo;m new here','')
+          +opt('prayer',icPray,'I need prayer','')
+          +opt('10558272',icGroup,'Join a group','')
+          +opt('10558273',icServe,'Start serving','')
+          +opt('10648022',icDrop,'Get baptized','')
+        +'</div>'
+      +'</div>'
+      +'<div class="ct-actions"><div class="ct-nudge" role="alert" aria-live="polite"></div><button type="button" class="btn btn-gold ct-continue" id="ac-ct-continue">Continue &rarr;</button><a class="ct-give" id="ac-ct-give" href="'+giveURL+'">Just here to give &rarr;</a></div>'
+      +'<p class="ct-text">Prefer to talk? Text or call us at <a href="sms:+19256940426">(925) 694-0426</a></p>'
+    +'</div>';
+    var s2='<div class="ct-screen ct-s2" id="ac-ct-s2" hidden>'
+      +'<div class="visit-form ct-form"><div class="vf-head"><p class="eyebrow">Almost there</p><h3 id="ac-ct-fh" tabindex="-1">Where can we reach you?</h3><p class="vf-sub" id="ac-ct-fsub">So a real person from our team can follow up this week.</p></div>'
+      +'<form novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">'
+      +'<div class="ct-fields">'
+        +'<label class="vf-field"><span>First name *</span><input type="text" name="first" required autocomplete="given-name"></label>'
+        +'<label class="vf-field"><span>Last name *</span><input type="text" name="last" required autocomplete="family-name"></label>'
+        +'<label class="vf-field" id="ac-ct-emailf"><span>Email *</span><input type="email" name="email" required inputmode="email" autocomplete="email"></label>'
+        +'<label class="vf-field"><span>Mobile phone *</span><input type="tel" name="phone" required inputmode="tel" autocomplete="tel"></label>'
+      +'</div>'
+      +'<div class="ct-cond" id="ac-ct-groupf" hidden><label class="vf-field"><span>Which group interests you?</span><select name="group">'+groupOpts+'</select></label></div>'
+      +'<label class="vf-field ct-msg" style="margin-top:.9rem"><span id="ac-ct-msglabel">Anything we should know? (optional)</span><textarea name="message" rows="3"></textarea></label>'
+      +'<div id="ac-ct-turnstile" class="jg-ts"></div>'
+      +'<div class="vf-err" role="alert" aria-live="polite"></div>'
+      +'<div class="vf-actions"><button type="button" class="btn btn-ghost-dark" id="ac-ct-back">&larr; Back</button><button type="submit" class="btn btn-gold" id="ac-ct-submit">Send my next step &rarr;</button></div>'
+      +'</form></div>'
+    +'</div>';
+    var sec=document.createElement('section'); sec.className='ac-sec ac-ct'; sec.id='ac-ct';
+    sec.innerHTML='<div class="ct-card">'+s1+s2+'</div>';
+    host.insertBefore(sec, host.firstChild);
+    /* one-time horizontal river draw (fresh timed draw; respects reduced-motion) */
+    (function(){ var p=sec.querySelector('.ct-river-path'); if(!p) return; var len=0; try{ len=p.getTotalLength(); }catch(e){} if(!len) return; p.style.strokeDasharray=len; if(reduce){ p.style.strokeDashoffset=0; return; } p.style.strokeDashoffset=len; requestAnimationFrame(function(){ requestAnimationFrame(function(){ p.style.transition='stroke-dashoffset .95s cubic-bezier(.16,1,.3,1)'; p.style.strokeDashoffset=0; }); }); })();
+    wireConnectTag(sec, WORKER, KEY);
+  }
+  function wireConnectTag(sec, WORKER, KEY){
+    var s1=sec.querySelector('#ac-ct-s1'), s2=sec.querySelector('#ac-ct-s2');
+    var cont=sec.querySelector('#ac-ct-continue'), nudge=sec.querySelector('.ct-nudge');
+    var opts=[].slice.call(sec.querySelectorAll('.ct-opt'));
+    var form=s2.querySelector('form'), tsId=null, tsTries=0;
+    opts.forEach(function(b){ b.addEventListener('click',function(){ var on=b.getAttribute('aria-pressed')==='true'; b.setAttribute('aria-pressed',on?'false':'true'); if(nudge) nudge.textContent=''; }); });
+    function selectedSteps(){ return opts.filter(function(b){return b.getAttribute('aria-pressed')==='true';}).map(function(b){return b.getAttribute('data-step');}); }
+    function renderTs(){ if(tsId!==null||tsTries++>25) return; if(window.turnstile){ try{ tsId=window.turnstile.render('#ac-ct-turnstile',{sitekey:KEY}); }catch(e){} } else { setTimeout(renderTs,300); } } /* cap polling at ~7.5s so a failed api.js doesn't loop forever */
+    function setupS2(steps){
+      var hasDecision=steps.indexOf('10625856')>-1, hasJoin=steps.indexOf('10558272')>-1, hasPrayer=steps.indexOf('prayer')>-1;
+      var onlyPrayer=steps.length===1 && hasPrayer;
+      var fh=s2.querySelector('#ac-ct-fh'), fsub=s2.querySelector('#ac-ct-fsub'), submit=s2.querySelector('#ac-ct-submit');
+      var emailIn=s2.querySelector('input[name=email]'), emailLab=s2.querySelector('#ac-ct-emailf>span');
+      var groupf=s2.querySelector('#ac-ct-groupf'), msgArea=s2.querySelector('textarea[name=message]'), msgLab=s2.querySelector('#ac-ct-msglabel');
+      if(onlyPrayer){ fh.textContent='How can we pray for you?'; fsub.textContent='Share as much or as little as you like — our prayer team will lift you up this week.'; }
+      else if(hasDecision){ fh.textContent='Where can we reach you?'; fsub.textContent="We'd love to celebrate this with you — a pastor will reach out personally this week."; }
+      else { fh.textContent='Where can we reach you?'; fsub.textContent='So a real person from our team can follow up this week.'; }
+      if(onlyPrayer){ emailIn.required=false; emailLab.textContent='Email (optional)'; } else { emailIn.required=true; emailLab.textContent='Email *'; }
+      groupf.hidden=!hasJoin;
+      if(onlyPrayer){ msgArea.required=true; msgLab.textContent='What can we pray for? *'; }
+      else { msgArea.required=false; msgLab.textContent=hasPrayer?'What can we pray for? (optional)':'Anything we should know? (optional)'; }
+      submit.innerHTML=hasDecision?'Tell my pastor &rarr;':'Send my next step &rarr;';
+    }
+    function toS2(){
+      var steps=selectedSteps();
+      if(!steps.length){ if(nudge) nudge.textContent='Pick one above — or tap the give link below.'; return; }
+      setupS2(steps);
+      s1.hidden=true; s2.hidden=false;
+      s2.classList.remove('ct-anim-in'); void s2.offsetWidth; s2.classList.add('ct-anim-in');
+      renderTs(); /* render Turnstile only AFTER screen 2 is visible — it fails inside display:none */
+      setTimeout(function(){ var fn=form.querySelector('input[name=first]'); if(fn){ try{ fn.focus({preventScroll:true}); }catch(e){ document.documentElement.style.setProperty('scroll-behavior','auto','important'); fn.focus(); } } },80);
+    }
+    cont.addEventListener('click',toS2);
+    var back=s2.querySelector('#ac-ct-back'); if(back) back.addEventListener('click',function(){ s2.hidden=true; s1.hidden=false; });
+    form.addEventListener('submit',function(e){ e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      var err=form.querySelector('.vf-err'); if(err) err.textContent='';
+      var token=(window.turnstile&&tsId!==null)?window.turnstile.getResponse(tsId):'';
+      if(!token){ if(err) err.textContent='Almost there — finishing a quick security check. Tap Send again in a moment, or text us at (925) 694-0426.'; renderTs(); return; }
+      var steps=selectedSteps();
+      var nextSteps=steps.filter(function(s){return /^[0-9]+$/.test(s);});
+      var hasJoin=nextSteps.indexOf('10558272')>-1;
+      var fd=new FormData(form);
+      var data={first:(fd.get('first')||'').trim(),last:(fd.get('last')||'').trim(),email:(fd.get('email')||'').trim(),phone:(fd.get('phone')||'').trim(),message:(fd.get('message')||'').trim(),group:hasJoin?(fd.get('group')||''):'',nextSteps:nextSteps,team:[],website:fd.get('website')||'',turnstileToken:token};
+      var hasDecision=steps.indexOf('10625856')>-1;
+      var btn=form.querySelector('#ac-ct-submit'), orig=btn.innerHTML; btn.disabled=true; btn.textContent='Sending…';
+      fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){ return r.json(); })
+        .then(function(j){ if(j&&j.success){ showDone(data.first, hasDecision); } else { throw new Error('failed'); } })
+        .catch(function(){ btn.disabled=false; btn.innerHTML=orig; if(window.turnstile&&tsId!==null){ try{ window.turnstile.reset(tsId); }catch(e){} } if(err) err.textContent="Sorry — something went wrong. Please text or call us at (925) 694-0426 and we'll take care of it."; });
+    });
+    function showDone(first, decision){
+      var card=s2.querySelector('.ct-form');
+      var giveA=sec.querySelector('#ac-ct-give'); var giveHref=giveA?giveA.getAttribute('href'):'https://donate.overflow.co/arroyochurch/cash';
+      var head=decision?'Welcome to the family, ':'Thanks, ';
+      var body=decision?'A pastor will personally reach out this week — and there&rsquo;s a place for you here.':'Someone from our team will reach out this week.';
+      var mom='<div class="ct-momentum"><a href="/#ac-sermons">Watch this week&rsquo;s message &rarr;</a>'+(decision?'<a href="/plan-your-visit">Plan your next visit &rarr;</a>':'')+'<a href="'+giveHref+'">Give &rarr;</a></div>';
+      card.innerHTML='<div class="vf-done"><div class="vf-check">&#10003;</div><h3 tabindex="-1">'+head+'<span class="vf-name"></span>!</h3><p>'+body+'</p>'+mom+'</div>';
+      card.querySelector('.vf-name').textContent=(first||'').trim()||'friend';
+      var h=card.querySelector('h3'); if(h){ try{ h.focus(); }catch(e){} }
+    }
+  }
+  /* ---- GIVE page: inject a branded "ways to give" layer above the native blocks (SEO-safe; native content kept) ---- */
+  function buildGivePage(){
+    if(!document.body.classList.contains('collection-685d8cfddd4a9b0a1c37e779')) return;
+    if(document.getElementById('ac-give-page')) return;
+    var host=document.querySelector('#sections')||document.querySelector('main')||document.querySelector('#page');
+    if(!host) return;
+    var arr='<svg width="14" height="14" viewBox="0 0 15 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 7.5h11M8.5 3L13 7.5 8.5 12"/></svg>';
+    var ic1='<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="12" rx="2.5"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5h.01M17.5 14.5h.01"/></svg>';
+    var ic2='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V5M4 19h16"/><path d="M7 14l4-4 3 3 5-6"/></svg>';
+    var ic3='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 7.5h3.2a2 2 0 110 4H9.5h3.7a2 2 0 110 4H9.5M11 5.8v1.7M11 15.5v1.7"/></svg>';
+    var primary='<a class="gcard gp-primary ac-rev" href="https://donate.overflow.co/arroyochurch/cash" target="_blank" rel="noopener"><div class="ic">'+ic1+'</div><div class="gp-pbody"><h3>Give now</h3><p>Make a one-time or recurring gift securely online &mdash; cards, bank transfer, Apple&nbsp;Pay &amp; Google&nbsp;Pay. The simplest way to support the mission.</p><span class="g-link">Give now '+arr+'</span></div></a>';
+    var secondary='<a class="gcard ac-rev" href="https://donate.overflow.co/arroyochurch/stock/select-flow" target="_blank" rel="noopener"><div class="ic">'+ic2+'</div><h3>Stock</h3><p>Donate appreciated stock directly &mdash; often the most tax-efficient way to give.</p><span class="g-link">Give stock '+arr+'</span></a>'
+      +'<a class="gcard ac-rev" href="https://donate.overflow.co/arroyochurch/crypto" target="_blank" rel="noopener"><div class="ic">'+ic3+'</div><h3>Crypto</h3><p>Give Bitcoin, Ethereum, and other digital assets through our giving partner.</p><span class="g-link">Give crypto '+arr+'</span></a>';
+    var sec=document.createElement('section'); sec.className='ac-give-page'; sec.id='ac-give-page';
+    sec.innerHTML='<div class="wrap"><div class="gp-head"><p class="eyebrow">Generosity</p><h2>Ways to <em>give</em>.</h2><p class="gp-lead">We give because He gave. Your generosity fuels everything God is doing through Arroyo &mdash; here in Livermore and beyond. Thank you for giving cheerfully.</p></div><div class="gp-grid">'+primary+secondary+'</div><p class="gp-monthly"><strong>Make it monthly.</strong> Recurring gifts give us a steady foundation to plan, serve, and reach more people all year long.</p></div>';
+    host.insertBefore(sec, host.firstChild);
+  }
   function buildPageCTA(){
     var b=document.body;
     if(!b.classList.contains('collection-type-page') || b.classList.contains('homepage')) return;
@@ -1051,9 +1259,11 @@ body.collection-type-page:not(.homepage) .sqs-block-button-element--primary:hove
       });
     });
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildVisitTeaser(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildPageCTA(); wireScrollLinks(); }
+  function acInitSections(){ buildHero(); buildCountdown(); buildVisitTeaser(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildConnectTag(); buildGivePage(); buildPageCTA(); wireScrollLinks(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(buildPageCTA,600); setTimeout(buildPageCTA,1800);
+  setTimeout(buildConnectTag,600); setTimeout(buildConnectTag,1800);
+  setTimeout(buildGivePage,600); setTimeout(buildGivePage,1800);
   setTimeout(fixAboutNav,800); setTimeout(fixAboutNav,2200);
   setTimeout(wireMobileNav,800); setTimeout(wireMobileNav,2200);
   setTimeout(wireScrollLinks,800); setTimeout(wireScrollLinks,2200);
