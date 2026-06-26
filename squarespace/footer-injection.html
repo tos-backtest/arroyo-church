@@ -577,6 +577,25 @@ body.collection-68b739b28750bd7e337593bd .ac-page-cta{display:none!important}
 .ac-give-page .gp-monthly{margin:1.6rem auto 0;text-align:center;color:rgba(238,246,247,.72);font-size:.96rem;max-width:60ch}
 .ac-give-page .gp-monthly strong{color:#e3bd6a;font-weight:700}
 @media(max-width:820px){.ac-give-page .gp-grid{grid-template-columns:1fr}.ac-give-page .gp-primary{flex-direction:column;align-items:flex-start;gap:.7rem}}
+/* ════ CONNECT CLASS (home section, inserted before Connect Groups) ════ */
+.ac-cc .cc-head{max-width:66ch}
+.ac-cc .cc-head .lead{margin:1.2rem 0 0;color:rgba(22,36,43,.66)}
+.ac-cc .cc-head .btn{margin-top:1.9rem}
+.ac-cc .cc-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:3.2rem}
+.ac-cc .cc-card{background:#fff;border-radius:20px;padding:1.9rem 1.7rem;border:1px solid rgba(22,36,43,.08);box-shadow:0 8px 20px -14px rgba(22,36,43,.2);transition:transform .35s,box-shadow .35s}
+.ac-cc .cc-card:hover{transform:translateY(-5px);box-shadow:0 22px 40px -18px rgba(22,36,43,.3)}
+.ac-cc .cc-card .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(46,143,163,.14),rgba(200,154,62,.16));color:#2e8fa3;margin-bottom:1.1rem}
+.ac-cc .cc-card h3{font-family:'Fraunces',Georgia,serif;font-weight:520;font-size:1.25rem;margin:0 0 .45rem}
+.ac-cc .cc-card p{font-size:.93rem;color:rgba(22,36,43,.66);margin:0}
+.ac-cc .cc-member{margin-top:1.6rem;font-size:.96rem;color:rgba(22,36,43,.6)}
+.ac-cc .cc-member strong{color:#1f6b7c;font-weight:700}
+.ac-cc .cc-opt{margin-top:1.3rem}
+.ac-cc .cc-opt-label{display:block;font-family:'Manrope',sans-serif;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#1f6b7c;margin-bottom:.6rem}
+.ac-cc .cc-steps{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.ac-cc .cc-steps label{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:#16242b;background:#fbf9f4;border:1px solid rgba(22,36,43,.16);border-radius:10px;padding:.6rem .8rem;cursor:pointer;box-sizing:border-box}
+.ac-cc .cc-steps input{width:18px;height:18px;flex:0 0 auto;accent-color:#2e8fa3;margin:0}
+@media(max-width:920px){.ac-cc .cc-pillars{grid-template-columns:1fr}}
+@media(max-width:560px){.ac-cc .cc-steps{grid-template-columns:1fr}}
 </style>
 <script>
 (function(){
@@ -974,6 +993,55 @@ body.collection-68b739b28750bd7e337593bd .ac-page-cta{display:none!important}
         .catch(function(){ btn.disabled=false; btn.textContent=orig; if(window.turnstile&&tsId!==null){ try{ window.turnstile.reset(tsId); }catch(e){} } if(err) err.textContent="Sorry — something went wrong. Please email josh@arroyochurch.com or call (925) 694-0426 and we'll get you connected."; });
     });
   }
+  /* ---- CONNECT CLASS (home section, before Connect Groups) -> Worker -> Planning Center (next-step 10558271) ---- */
+  function buildConnectClass(){
+    if(!HOME()) return;
+    if(document.getElementById('ac-connect-class')) return;
+    var connectEl=document.getElementById('ac-connect'), teamEl=document.getElementById('ac-team');
+    if(!connectEl && !teamEl) return;
+    if(!document.getElementById('ac-ts-script')){var tss=document.createElement('script');tss.id='ac-ts-script';tss.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';tss.async=true;tss.defer=true;document.head.appendChild(tss);}
+    var icGod='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v19M6.5 8.5h11"/></svg>';
+    var icOthers='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c.6-3 2.9-4.6 5.5-4.6S13.9 16 14.5 19"/><circle cx="17" cy="9.5" r="2.4"/><path d="M15.6 14.1c2.7-.4 4.7 1.3 5.1 4"/></svg>';
+    var icGifts='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8.5" width="18" height="12.5" rx="1.5"/><path d="M3 12.5h18M12 8.5V21M12 8.5S10.6 4.5 8 4.5a2 2 0 000 4zM12 8.5s1.4-4 4-4a2 2 0 010 4z"/></svg>';
+    var pillars='<div class="cc-card ac-rev"><div class="ic">'+icGod+'</div><h3>Connect to God</h3><p>The good news of Jesus, baptism, our mission, and what we believe.</p></div>'
+      +'<div class="cc-card ac-rev"><div class="ic">'+icOthers+'</div><h3>Connect to others</h3><p>Find real community and get into a weeknight Connect Group.</p></div>'
+      +'<div class="cc-card ac-rev"><div class="ic">'+icGifts+'</div><h3>Connect to your gifts</h3><p>Discover your God-given S.H.A.P.E. and where you can serve.</p></div>';
+    var ccForm='<div class="jg-wrap" id="ac-cc-wrap"><div><div class="visit-form" id="ac-cc-form"><div class="vf-head"><p class="eyebrow">Connect Class</p><h3>Save your spot</h3><p class="vf-sub">Sign up and we&rsquo;ll reach out with the next class date and all the details &mdash; takes about 30 seconds.</p></div><form novalidate><input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0"><div class="vf-grid"><label class="vf-field"><span>First name *</span><input type="text" name="first" required autocomplete="given-name"></label><label class="vf-field"><span>Last name *</span><input type="text" name="last" required autocomplete="family-name"></label><label class="vf-field"><span>Email *</span><input type="email" name="email" required autocomplete="email"></label><label class="vf-field"><span>Phone *</span><input type="tel" name="phone" required autocomplete="tel"></label></div><div class="cc-opt"><span class="cc-opt-label">I&rsquo;m also interested in&hellip; (optional)</span><div class="cc-steps"><label><input type="checkbox" name="nextSteps" value="10625856">I began following Jesus</label><label><input type="checkbox" name="nextSteps" value="10558272">Joining a Connect Group</label><label><input type="checkbox" name="nextSteps" value="10558273">Joining a serve team</label><label><input type="checkbox" name="nextSteps" value="10648022">Getting baptized</label></div></div><label class="vf-field vf-full" style="margin-top:1rem"><span>Anything we should know? (optional)</span><textarea name="message" rows="3"></textarea></label><div id="ac-cc-turnstile" class="jg-ts"></div><div class="vf-err" role="alert" aria-live="polite"></div><div class="vf-actions"><button type="submit" class="btn btn-gold">Save my spot</button><button type="button" class="btn btn-ghost-dark" id="ac-cc-cancel">Cancel</button></div></form></div></div></div>';
+    var sec=document.createElement('section'); sec.className='ac-sec ac-cc'; sec.id='ac-connect-class';
+    sec.innerHTML='<div class="wrap"><div class="cc-head"><p class="eyebrow ac-rev">Your next step</p><h2 class="h2 ac-rev">Get connected at the <em>Connect Class.</em></h2><p class="lead ac-rev">The best place to start at Arroyo. In one class we&rsquo;ll help you connect to God, others, and your gifts &mdash; you&rsquo;ll hear our mission and beliefs, learn about baptism and Connect Groups, discover how God has wired you to serve, and find out how to become a member of the family.</p><p class="cc-member ac-rev">Ready to take a next step? <strong>It all starts here.</strong></p><button type="button" class="btn btn-gold ac-rev" id="ac-cc-toggle" aria-expanded="false" aria-controls="ac-cc-wrap">Save my spot</button></div><div class="cc-pillars">'+pillars+'</div>'+ccForm+'</div>';
+    if(connectEl) connectEl.parentNode.insertBefore(sec, connectEl);
+    else teamEl.parentNode.insertBefore(sec, teamEl.nextSibling);
+    wireConnectClassForm(sec);
+  }
+  function wireConnectClassForm(sec){
+    var KEY='0x4AAAAAADo6c47j8dehqH9-', WORKER='https://arroyo-connect.dakota-fac.workers.dev';
+    var toggle=sec.querySelector('#ac-cc-toggle'), wrap=sec.querySelector('#ac-cc-wrap'), card=sec.querySelector('#ac-cc-form');
+    if(!toggle||!wrap||!card) return;
+    var form=card.querySelector('form'), tsId=null, tsTries=0;
+    function renderTs(){ if(tsId!==null||tsTries++>25) return; if(window.turnstile){ try{ tsId=window.turnstile.render('#ac-cc-turnstile',{sitekey:KEY}); }catch(e){} } else { setTimeout(renderTs,300); } }
+    function openForm(){ wrap.classList.add('open'); toggle.setAttribute('aria-expanded','true'); renderTs(); setTimeout(function(){ card.scrollIntoView({block:'center'}); var f=card.querySelector('input[name=first]'); if(f) f.focus(); },220); }
+    function closeForm(){ wrap.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); }
+    toggle.addEventListener('click',function(){ wrap.classList.contains('open')?closeForm():openForm(); });
+    var cancel=card.querySelector('#ac-cc-cancel'); if(cancel) cancel.addEventListener('click',closeForm);
+    form.addEventListener('submit',function(e){ e.preventDefault();
+      if(!form.checkValidity()){ form.reportValidity(); return; }
+      var err=form.querySelector('.vf-err'); if(err) err.textContent='';
+      var token=(window.turnstile&&tsId!==null)?window.turnstile.getResponse(tsId):'';
+      if(!token){ if(err) err.textContent='Please complete the verification just above the button.'; renderTs(); return; }
+      var btn=form.querySelector('button[type=submit]'), orig=btn.textContent; btn.disabled=true; btn.textContent='Sending…';
+      var fd=new FormData(form);
+      var steps=fd.getAll('nextSteps').map(String);
+      if(steps.indexOf('10558271')<0) steps.unshift('10558271'); /* signing up always = Connect Class next-step */
+      var data={first:(fd.get('first')||'').trim(),last:(fd.get('last')||'').trim(),email:(fd.get('email')||'').trim(),phone:(fd.get('phone')||'').trim(),message:(fd.get('message')||'').trim(),nextSteps:steps,team:[],website:fd.get('website')||'',turnstileToken:token};
+      fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){ return r.json(); })
+        .then(function(j){ if(j&&j.success){ var name=(data.first||'').trim();
+            card.innerHTML='<div class="vf-done"><div class="vf-check">&#10003;</div><h3 tabindex="-1">You&rsquo;re in, <span class="vf-name"></span>!</h3><p>Thanks for signing up for the Connect Class. Someone from our team will reach out soon with the next date and all the details.</p></div>';
+            card.querySelector('.vf-name').textContent=name||'friend'; var h=card.querySelector('h3'); if(h) h.focus();
+          } else { throw new Error((j&&j.message)||'failed'); } })
+        .catch(function(){ btn.disabled=false; btn.textContent=orig; if(window.turnstile&&tsId!==null){ try{ window.turnstile.reset(tsId); }catch(e){} } if(err) err.textContent="Sorry — something went wrong. Please email josh@arroyochurch.com or call (925) 694-0426 and we'll get you signed up."; });
+    });
+  }
   /* ---- GIVE (home section) ---- */
   function buildGive(){
     if(!HOME()) return;
@@ -1277,7 +1345,7 @@ body.collection-68b739b28750bd7e337593bd .ac-page-cta{display:none!important}
       });
     });
   }
-  function acInitSections(){ buildHero(); buildCountdown(); buildVisitTeaser(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildConnectTag(); buildGivePage(); buildPageCTA(); wireScrollLinks(); }
+  function acInitSections(){ buildHero(); buildCountdown(); buildVisitTeaser(); buildSermons(); buildMission(); buildStory(); buildBeliefsValues(); buildTeam(); buildConnect(); buildConnectClass(); buildGive(); buildVisit(); buildCTA(); buildFooter(); wireNav(); wireMobileNav(); buildConnectTag(); buildGivePage(); buildPageCTA(); wireScrollLinks(); }
   if(document.readyState!=='loading')acInitSections();else addEventListener('DOMContentLoaded',acInitSections);
   setTimeout(buildPageCTA,600); setTimeout(buildPageCTA,1800);
   setTimeout(buildConnectTag,600); setTimeout(buildConnectTag,1800);
