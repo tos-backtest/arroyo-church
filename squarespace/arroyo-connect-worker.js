@@ -112,12 +112,15 @@ export default {
     if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return json({ success: false, error: "email" }, 422, origin);
 
     const values = [{ form_field_id: F_PHONE, value: phone }];
-    steps.forEach((id) => values.push({ form_field_id: F_NEXT, value: id }));
+    // Multi-select checkbox field: send all selected option ids as ONE entry with an array value
+    // (PC rejects repeated form_field_id entries for the same checkbox field).
+    if (steps.length) values.push({ form_field_id: F_NEXT, value: steps });
     if (steps.includes(NEXT_STEP_JOIN) && b.group && GROUP_OPTIONS.has(String(b.group))) {
       values.push({ form_field_id: F_GROUP, value: String(b.group) });
     }
     if (steps.includes(NEXT_STEP_SERVE) && Array.isArray(b.team)) {
-      b.team.map(String).forEach((t) => { if (TEAM_OPTIONS.has(t)) values.push({ form_field_id: F_TEAM, value: t }); });
+      const teams = b.team.map(String).filter((t) => TEAM_OPTIONS.has(t));
+      if (teams.length) values.push({ form_field_id: F_TEAM, value: teams });
     }
     if (message) values.push({ form_field_id: F_MESSAGE, value: message.slice(0, 2000) });
 
